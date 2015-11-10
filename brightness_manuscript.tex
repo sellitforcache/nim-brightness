@@ -65,6 +65,7 @@
 %% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
 %% for the whole article with \linenumbers after \end{frontmatter}.
 \usepackage{lineno}
+\usepackage{enumitem}
 
 %% natbib.sty is loaded by default. However, natbib options can be
 %% provided with \biboptions{...} command. Following options are
@@ -169,13 +170,7 @@ The brightness measurement was conducted on July XXX 2014 in the ICON beamline a
 \section{Experimental Setup}
 \label{sec:setup}
 
-The experimental setup used to measure the brightness of the cold source consisted of:
-
-\begin{enumerate}
-  \item Steel chopper wheel at 30 Hz
-  \item Two 
-  \item The third etc
-\end{enumerate}
+The layout of the experimental is shown in Figure \ref{geom}, which is a horizonal cut of the MCNP model geometry.  The target and moderators are shown furthest to the right.  The vertical line is the shielding monolith boundary, which is mostly steel blocks.  The ICON bunker is to the left of the monolith, the walls of which are made of heavy concrete and are shown as retangular blocks.  
 
 \begin{figure}[h!] 
   \centering
@@ -183,10 +178,33 @@ The experimental setup used to measure the brightness of the cold source consist
      \caption{Geometry \label{geom} }
 \end{figure}
 
+The principle components in the neutron path, listed in increasing distance from the detector, were:
+
+\begin{center} \underline{In-bunker components}\end{center}
+\begin{enumerate}
+  \item Spherical $^3$He detector, 3.30 cm $\oslash$, sorrounded by 1 mm cadmium sheets on all sides except towards the pinhole collimator
+  \item Iron pinhole collimator, surrounded by heavy concrete and polyethylene shielding
+  \item Cadmium aperture, 1 mm $\oslash$, at end of pinhole collimator, xxx cm form detector
+  \item Sapphire crystals, XXX cm total thickness, within the heavy concrete and polyethylene shielding
+  \item Evacuated flight tubes with XXX mm thick aluminum faces, total length 
+  \item Lead and heavy concrete collimator, XXxXX mm aperature at xxx cm from detector
+\end{enumerate}
+\begin{center}\underline{In-pile components}\end{center}
+\begin{enumerate}[resume]
+  \item Moveable Gd aperature wheel
+  \item High energy shutters
+  \item D$_2$O moderator tank
+  \item Low pressure nozzle
+  \item Liquid deuterium cold source
+  \item Lead spallation target
+\end{enumerate}
+
 
 \section{MCNP Simulation}
 \label{sec:sim}
 
+
+\cite{sapp}
 
 
 \section{Results}

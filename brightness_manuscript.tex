@@ -134,7 +134,17 @@
 \cortext[rmb]{Corresponding author. Tel.: +41.56.310.56.12.}
 
 \author{Masako Yamada}
-\ead{masako.yamada@psi.ch}
+%\ead{masako.yamada@psi.ch}
+
+
+\author{Tibor Reiss}
+%\ead{tibor.reiss@psi.ch}
+
+\author{Michael Wohlmuther}
+%\ead{michael.wohlmuther@psi.ch}
+
+\author{Uwe Filges}
+%\ead{uwe.filges@psi.ch}
 
 
 
@@ -165,7 +175,7 @@ The Swiss Spallation Neutron Source (SINQ) is a spallation neutron source driven
 
 There is an extended shutdown of SINQ ambitiously planned for 2018 which will provide an opportunity for changes to be made to the cold neutron source \cite{rueegg_icans}.  Any changes will require a large amount of calculations done to minimize risk and ensure good the proposed changes will benifit the facility and its users.  The brightness measureemtn presented in this paper is the first step in validating the computational models reuqired to carry out a sucessful upgrade.  
 
-The brightness measurement was conducted on July XXX 2014 in the ICON beamline at SINQ.  ICON is the cold neutron imaging facility at the neutron spallation source SINQ. The beamline offers an aperture wheel to change beam intensity and collimation ratio, as well as large evaculated flight tubes to minimize losses from scattering in the air \cite{icon}.  ICON was chosen since it does not incorporate any neutron optics, has good collimation, and looks directly on the surface of the cold source.  This removes additional uncertainty associated with the current state of the neutron guides and the physics involved with neutron-refecltive surfaces.
+The brightness measurement was conducted on July 21, 2014 in the ICON beamline at SINQ.  ICON is the cold neutron imaging facility at the neutron spallation source SINQ. The beamline offers an aperture wheel to change beam intensity and collimation ratio, as well as large evaculated flight tubes to minimize losses from scattering in the air \cite{icon}.  ICON was chosen since it does not incorporate any neutron optics, has good collimation, and looks directly on the surface of the cold source.  This removes additional uncertainty associated with the current state of the neutron guides and the physics involved with neutron-refecltive surfaces.
 
 \section{Experimental Setup}
 \label{sec:setup}
@@ -183,15 +193,15 @@ The principle components in the neutron path, listed in increasing distance from
 \begin{center} \underline{In-bunker components}\end{center}
 \begin{enumerate}
   \item Spherical $^3$He detector, 3.30 cm $\oslash$, sorrounded by 1 mm cadmium sheets on all sides except towards the pinhole collimator
-  \item Iron pinhole collimator, surrounded by heavy concrete and polyethylene shielding
+  \item Iron pinhole collimator, surrounded by heavy concrete, lead, and polyethylene shielding
   \item Cadmium aperture, 1 mm $\oslash$, at end of pinhole collimator, xxx cm form detector
-  \item Sapphire crystals, XXX cm total thickness, within the heavy concrete and polyethylene shielding
+  \item Sapphire crystals, 20x20mm faces, 80 mm total thickness, within the heavy concrete, lead, and polyethylene shielding
   \item Evacuated flight tubes with XXX mm thick aluminum faces, total length 
-  \item Lead and heavy concrete collimator, XXxXX mm aperature at xxx cm from detector
+  \item Steel collimator, 50x50 mm aperature at xxx cm from detector
 \end{enumerate}
 \begin{center}\underline{In-pile components}\end{center}
 \begin{enumerate}[resume]
-  \item Moveable Gd aperature wheel
+  \item Moveable Gd aperature wheel, set to the largest opening of 80 mm $\oslash$
   \item High energy shutters
   \item D$_2$O moderator tank
   \item Low pressure nozzle
@@ -199,16 +209,42 @@ The principle components in the neutron path, listed in increasing distance from
   \item Lead spallation target
 \end{enumerate}
 
+The pinhole collimator and cadmium sheet restricts the solid angle visible to the detector to XXX steradians.  Five measurements were done in total: centered in the beam port, +20 mm away from center (towards the target), -20 mm away from center (away from the target), centered with beryllium at 77 K in the beamline to show the 4 \AA bin, and without sapphire or beryllium.
 
-\section{MCNP Simulation}
+
+
+\section{Simulations}
 \label{sec:sim}
+ 
 
 
-\cite{sapp}
+\subsection{MCNP}
+\label{subsec:mcnp}
+
+Simulations were done with MCNP6.1 and with ENDF/B-VII.1 data.  Thermal scattering data for the room temperature sapphire crystals were used \cite{sapp}, as were 77 K thermal scattering data for beryllium, 19 K data for ortho-/para-deuterium, 273 K data for heavy water, 273 K data for light water \cite{mcnp6}, and 25 K data for aluminum, and 25 K data for zirconium \cite{IKE}.  The aliumun and zirconium data are important for accurately simulating the transmission through the various hulls surrounding the deuterium in the cold source.  The model geometry of has already been shown in Figure \ref{geom}, and was created to be as true-to-life as possible.
 
 
-\section{Results}
+\subsection{Detector Efficiency}
+\label{subsec:eff}
+
+The efficiency curve of the helium detector was also measured and compared to calculated curves.  Curves were calculated using a 1D model and 1/v cross sections as well as with a detailed MCNP model of the helium detector \cite{bonner_manual}.  The 1D model equations are shown in Eq. \ref{eqn:eff}
+
+\begin{gather}
+ \label{eqn:eff}
+    \epsilon = \exp \left(-\Sigma_{\textrm{stl}}(\lambda) x_{\textrm{stl}}\right)[1-\exp(-\Sigma_{\textrm{He}}(\lambda) x_{\textrm{He}})] \\
+    \Sigma(\lambda) = a\lambda+b
+\end{gather}
+
+\begin{figure}[h!] 
+  \centering
+    \includegraphics[width=\textwidth]{graphics/eff.eps}
+     \caption{Geometry \label{geom} }
+\end{figure}
+
+\section{Measured Brightness}
 \label{sec:results}
+
+
 
 
 
@@ -227,9 +263,8 @@ The principle components in the neutron path, listed in increasing distance from
 
 This work was supported by Swiss National Science Foundation grant 200021\_150048/1
 
-\section*{Disclaimer}
-\label{sec:disc}
 
+\section*{References}
 \bibliographystyle{elsarticle-num-names.bst}
 \bibliography{references}
 

@@ -180,12 +180,12 @@ The brightness measurement was conducted on July 21, 2014 in the ICON beamline a
 \section{Experimental Setup}
 \label{sec:setup}
 
-The layout of the experimental is shown in Figure \ref{geom}, which is a horizonal cut of the MCNP model geometry.  The target and moderators are shown furthest to the right.  The vertical line is the shielding monolith boundary, which is mostly steel blocks.  The ICON bunker is to the left of the monolith, the walls of which are made of heavy concrete and are shown as retangular blocks.  
+The layout of the experimental is shown in Figure \ref{fig:geom}, which is a horizonal cut of the MCNP model geometry.  The target and moderators are shown furthest to the right.  The vertical line is the shielding monolith boundary, which is mostly steel blocks.  The ICON bunker is to the left of the monolith, the walls of which are made of heavy concrete and are shown as retangular blocks.  
 
 \begin{figure}[h!] 
   \centering
     \includegraphics[width=\textwidth]{graphics/geom_bw_labels.eps}
-     \caption{Geometry \label{geom} }
+     \caption{Geometry \label{fig:geom} }
 \end{figure}
 
 The principle components in the neutron path, listed in increasing distance from the detector, were:
@@ -209,7 +209,13 @@ The principle components in the neutron path, listed in increasing distance from
   \item Lead spallation target
 \end{enumerate}
 
-The pinhole collimator and cadmium sheet restricts the solid angle visible to the detector to XXX steradians.  Five measurements were done in total: centered in the beam port, +20 mm away from center (towards the target), -20 mm away from center (away from the target), centered with beryllium at 77 K in the beamline to show the 4 \AA bin, and without sapphire or beryllium.
+The pinhole collimator and cadmium sheet restricts the solid angle visible to the detector to XXX steradians.  Five measurements were done in total: centered in the beam port, +20 mm away from center (towards the target), -20 mm away from center (away from the target), centered with beryllium at 77 K in the beamline to show the 4 \AA bin, and without sapphire or beryllium.Figure \ref{fig:det} shows a photograph of the $^3$He detector with the iron pinhole collimator positioned in front of it before the large shielding blocks and sapphire crystals were positioned.
+
+\begin{figure}[h!] 
+  \centering
+    \includegraphics[width=\textwidth]{graphics/det.eps}
+     \caption{$^3$He detector with iron collimator. \label{fig:det}}
+\end{figure}
 
 
 
@@ -221,24 +227,23 @@ The pinhole collimator and cadmium sheet restricts the solid angle visible to th
 \subsection{MCNP}
 \label{subsec:mcnp}
 
-Simulations were done with MCNP6.1 and with ENDF/B-VII.1 data.  Thermal scattering data for the room temperature sapphire crystals were used \cite{sapp}, as were 77 K thermal scattering data for beryllium, 19 K data for ortho-/para-deuterium, 273 K data for heavy water, 273 K data for light water \cite{mcnp6}, and 25 K data for aluminum, and 25 K data for zirconium \cite{IKE}.  The aliumun and zirconium data are important for accurately simulating the transmission through the various hulls surrounding the deuterium in the cold source.  The model geometry of has already been shown in Figure \ref{geom}, and was created to be as true-to-life as possible.
+Simulations were done with MCNP6.1 and with ENDF/B-VII.1 data.  Thermal scattering data for the room temperature sapphire crystals were used \cite{sapp}, as were 77 K thermal scattering data for beryllium, 19 K data for ortho-/para-deuterium, 273 K data for heavy water, 273 K data for light water \cite{mcnp6}, and 25 K data for aluminum, and 25 K data for zirconium \cite{IKE}.  The aliumun and zirconium data are important for accurately simulating the transmission through the various hulls surrounding the deuterium in the cold source.  The model geometry of has already been shown in Figure \ref{fig:geom}, and was created to be as true-to-life as possible.
 
 
-\subsection{Detector Efficiency}
+\subsection{Detector \& Efficiency}
 \label{subsec:eff}
 
-The efficiency curve of the helium detector was also measured and compared to calculated curves.  Curves were calculated using a 1D model and 1/v cross sections as well as with a detailed MCNP model of the helium detector \cite{bonner_manual}.  The 1D model equations are shown in Eq. \ref{eqn:eff}
+The efficiency curve of the helium detector was also measured and compared to calculated curves.  Curves were calculated using a 1D model and 1/v cross sections as well as with a detailed MCNP model of the helium detector \cite{bonner_manual}.  The 1D model efficiency is shown in Eq. \ref{eqn:eff1}, where $\Sigma_{\textrm{stl}}$ is the stainless steel total macroscopic cross section, $\Sigma_{\textrm{He}}$ is the $^3$He absorbtion macroscopic cross section, $x_{\textrm{stl}}$ is the thickness of the detector's stainless steel shell, and  $D_{\textrm{stl}}$ is the diameter $^3$He volume.  The cross section wavelength dependence is shown in Eq. \ref{eqn:eff2}, where $a$ and $b$ are linear fit coefficients derived from cross section data.  
 
 \begin{gather}
- \label{eqn:eff}
-    \epsilon = \exp \left(-\Sigma_{\textrm{stl}}(\lambda) x_{\textrm{stl}}\right)[1-\exp(-\Sigma_{\textrm{He}}(\lambda) x_{\textrm{He}})] \\
-    \Sigma(\lambda) = a\lambda+b
+     \label{eqn:eff1} \epsilon = \exp \left(-\Sigma_{\textrm{stl}}(\lambda) x_{\textrm{stl}}\right)[1-\exp(-\Sigma_{\textrm{He}}(\lambda) D_{\textrm{He}})] \\
+     \label{eqn:eff2} \Sigma_i(\lambda) = a_i\lambda+b_i
 \end{gather}
 
 \begin{figure}[h!] 
   \centering
     \includegraphics[width=\textwidth]{graphics/eff.eps}
-     \caption{Geometry \label{geom} }
+     \caption{The efficiency curves. \label{geom} }
 \end{figure}
 
 \section{Measured Brightness}

@@ -193,8 +193,8 @@ The principle components in the neutron path, listed in increasing distance from
 \begin{center} \underline{In-bunker components}\end{center}
 \begin{enumerate}
   \item Spherical $^3$He detector, 3.30 cm $\oslash$, sorrounded by 1 mm cadmium sheets on all sides except towards the pinhole collimator
-  \item Iron pinhole collimator, surrounded by heavy concrete, lead, and polyethylene shielding
-  \item Cadmium aperture, 1 mm $\oslash$, at end of pinhole collimator, xxx cm form detector
+  \item Cadmium aperture, 1 mm $\oslash$, 1 mm thick, 2 mm from the detector surface
+  \item Iron pinhole collimator, immediately after the cadmium aperture, surrounded by heavy concrete, lead, and polyethylene shielding
   \item Sapphire crystals, 20x20mm faces, 80 mm total thickness, within the heavy concrete, lead, and polyethylene shielding
   \item Evacuated flight tubes with XXX mm thick aluminum faces, total length 
   \item Steel collimator, 50x50 mm aperature at xxx cm from detector
@@ -209,7 +209,7 @@ The principle components in the neutron path, listed in increasing distance from
   \item Lead spallation target
 \end{enumerate}
 
-The pinhole collimator and cadmium sheet restricts the solid angle visible to the detector to XXX steradians.  Five measurements were done in total: centered in the beam port, +20 mm away from center (towards the target), -20 mm away from center (away from the target), centered with beryllium at 77 K in the beamline to show the 4 \AA bin, and without sapphire or beryllium.Figure \ref{fig:det} shows a photograph of the $^3$He detector with the iron pinhole collimator positioned in front of it before the large shielding blocks and sapphire crystals were positioned.
+The pinhole collimator and cadmium sheet restricts the solid angle visible to the detector to $6.92\times10^{-4}$ steradians.  Five measurements were done in total: centered in the beam port, +20 mm away from center (towards the target), -20 mm away from center (away from the target), centered with beryllium at 77 K in the beamline to show the 4 \AA bin, and without sapphire or beryllium.Figure \ref{fig:det} shows a photograph of the $^3$He detector with the iron pinhole collimator positioned in front of it before the large shielding blocks and sapphire crystals were positioned.
 
 \begin{figure}[h!] 
   \centering
@@ -227,8 +227,13 @@ The pinhole collimator and cadmium sheet restricts the solid angle visible to th
 \subsection{MCNP}
 \label{subsec:mcnp}
 
-Simulations were done with MCNP6.1 and with ENDF/B-VII.1 data.  Thermal scattering data for the room temperature sapphire crystals were used \cite{sapp}, as were 77 K thermal scattering data for beryllium, 19 K data for ortho-/para-deuterium, 273 K data for heavy water, 273 K data for light water \cite{mcnp6}, and 25 K data for aluminum, and 25 K data for zirconium \cite{IKE}.  The aliumun and zirconium data are important for accurately simulating the transmission through the various hulls surrounding the deuterium in the cold source.  The model geometry of has already been shown in Figure \ref{fig:geom}, and was created to be as true-to-life as possible.
+Simulations were done with MCNP6.1 and with ENDF/B-VII.1 data.  Thermal scattering data for the room temperature sapphire crystals were used \cite{sapp}, as were 77 K thermal scattering data for beryllium, 19 K data for ortho-/para-deuterium, 273 K data for heavy water, 273 K data for light water \cite{mcnp6}, and 25 K data for aluminum, and 25 K data for zirconium \cite{IKE}.  The aliumun and zirconium data are important for accurately simulating the transmission through the various hulls surrounding the deuterium in the cold source.  The model geometry of has already been shown in Figure \ref{fig:geom}, and was created to be as true-to-life as possible.  The target in use during the measurement was ``target 10'', which is shown in Figure \ref{fig:target}. This target had a hemisphereical beam entrance window, STIP samples, and some light water contamination in the inner cooling loop.  These features were modelled in the MCNP simulation \cite{target10}.
 
+\begin{figure}[h!] 
+  \centering
+    \includegraphics[width=\textwidth]{graphics/target.eps}
+     \caption{Vertical cross section of the target MCNP model geometry. \label{fig:target}}
+\end{figure}
 
 \subsection{Detector \& Efficiency}
 \label{subsec:eff}
@@ -236,22 +241,27 @@ Simulations were done with MCNP6.1 and with ENDF/B-VII.1 data.  Thermal scatteri
 The efficiency curve of the helium detector was also measured and compared to calculated curves.  Curves were calculated using a 1D model and 1/v cross sections as well as with a detailed MCNP model of the helium detector \cite{bonner_manual}.  The 1D model efficiency is shown in Eq. \ref{eqn:eff1}, where $\Sigma_{\textrm{stl}}$ is the stainless steel total macroscopic cross section, $\Sigma_{\textrm{He}}$ is the $^3$He absorbtion macroscopic cross section, $x_{\textrm{stl}}$ is the thickness of the detector's stainless steel shell, and  $D_{\textrm{stl}}$ is the diameter $^3$He volume.  The cross section wavelength dependence is shown in Eq. \ref{eqn:eff2}, where $a$ and $b$ are linear fit coefficients derived from cross section data.  
 
 \begin{gather}
-     \label{eqn:eff1} \epsilon = \exp \left(-\Sigma_{\textrm{stl}}(\lambda) x_{\textrm{stl}}\right)[1-\exp(-\Sigma_{\textrm{He}}(\lambda) D_{\textrm{He}})] \\
+     \label{eqn:eff1} \epsilon(\lambda) = \exp \left(-\Sigma_{\textrm{stl}}(\lambda) x_{\textrm{stl}}\right)[1-\exp(-\Sigma_{\textrm{He}}(\lambda) D_{\textrm{He}})] \\
      \label{eqn:eff2} \Sigma_i(\lambda) = a_i\lambda+b_i
 \end{gather}
+
+The MCNP
 
 \begin{figure}[h!] 
   \centering
     \includegraphics[width=\textwidth]{graphics/eff.eps}
-     \caption{The efficiency curves. \label{geom} }
+     \caption{The efficiency curves. \label{fig:geom} }
 \end{figure}
 
 \section{Measured Brightness}
 \label{sec:results}
 
 
-
-
+\begin{figure}[h!] 
+  \centering
+    \includegraphics[width=\textwidth]{graphics/brightness.eps}
+     \caption{Measured and simulated source brightness at ICON. \label{fig:brightness} }
+\end{figure}
 
 \section{Discussion}
 \label{sec:discussion}

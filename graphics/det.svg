@@ -30,8 +30,8 @@
      id="namedview2899"
      showgrid="false"
      inkscape:zoom="0.47676768"
-     inkscape:cx="380.51547"
-     inkscape:cy="647.98154"
+     inkscape:cx="954.49907"
+     inkscape:cy="555.91568"
      inkscape:window-x="180"
      inkscape:window-y="25"
      inkscape:window-maximized="0"
@@ -171,7 +171,7 @@
    style="fill:none;stroke:#ff0000;stroke-width:5.11999989;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-mid:none;marker-end:url(#Arrow2Mendl)"
    sodipodi:nodetypes="cc" /><path
    id="path2915-9-6"
-   d="m 864.6032,351.72593 -243.30512,5.0339"
+   d="m 190.06083,299.70898 186.2542,53.69492"
    style="fill:none;stroke:#ff0000;stroke-width:5.11999989;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-mid:none;marker-end:url(#Arrow2Mendl)"
    sodipodi:nodetypes="cc" /><text
    xml:space="preserve"
@@ -196,23 +196,25 @@
      style="font-size:44.79999923999999822px;font-weight:bold;fill:#ff0000;font-family:CM Roman;-inkscape-font-specification:CM Roman;stroke-width:0.56;stroke-miterlimit:0;stroke-dasharray:none;stroke:#000000;stroke-opacity:1"
      id="tspan4641">Detector </tspan></text>
 
+
 <text
    xml:space="preserve"
-   style="font-size:12.80000019000000044px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:CM Sans;-inkscape-font-specification:CM Sans;stroke-width:0.48;stroke-miterlimit:3.20000005;stroke-dasharray:none"
-   x="651.97363"
-   y="-426.95688"
+   style="font-size:12.80000019px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:CM Sans;-inkscape-font-specification:CM Sans"
+   x="22.736351"
+   y="-376.61792"
    id="text4584-2"
    transform="scale(1,-1)"><tspan
      sodipodi:role="line"
-     x="651.97363"
-     y="-426.95688"
-     style="font-size:44.79999923999999822px;font-weight:bold;fill:#ff0000;font-family:CM Roman;-inkscape-font-specification:CM Roman;stroke:#000000;stroke-opacity:1;stroke-width:0.48;stroke-miterlimit:3.20000005;stroke-dasharray:none"
+     x="22.736351"
+     y="-376.61792"
+     style="font-size:44.79999924px;font-weight:bold;fill:#ff0000;stroke:#000000;stroke-width:0.47999999;stroke-miterlimit:3.20000005;stroke-opacity:1;stroke-dasharray:none;font-family:CM Roman;-inkscape-font-specification:CM Roman"
      id="tspan4588-1">1 mm Cd </tspan><tspan
      sodipodi:role="line"
-     x="651.97363"
-     y="-370.95688"
-     style="font-size:44.79999923999999822px;font-weight:bold;fill:#ff0000;font-family:CM Roman;-inkscape-font-specification:CM Roman;stroke:#000000;stroke-opacity:1;stroke-width:0.48;stroke-miterlimit:3.20000005;stroke-dasharray:none"
+     x="22.736351"
+     y="-320.61792"
+     style="font-size:44.79999924px;font-weight:bold;fill:#ff0000;stroke:#000000;stroke-width:0.47999999;stroke-miterlimit:3.20000005;stroke-opacity:1;stroke-dasharray:none;font-family:CM Roman;-inkscape-font-specification:CM Roman"
      id="tspan4637">Aperture </tspan></text>
+
 
 <text
    xml:space="preserve"
@@ -231,6 +233,7 @@
      y="-589.09241"
      style="font-size:44.79999923999999822px;font-weight:bold;fill:#ff0000;font-family:CM Roman;-inkscape-font-specification:CM Roman;stroke:#000000;stroke-opacity:1;stroke-width:0.56;stroke-miterlimit:0;stroke-dasharray:none"
      id="tspan4633">Collimator </tspan></text>
+
 
 <path
    id="path2915-9-6-5"
@@ -253,5 +256,6 @@
      y="-93.314529"
      style="font-size:44.79999923999999822px;font-weight:bold;fill:#ff0000;font-family:CM Roman;-inkscape-font-specification:CM Roman;stroke:#000000;stroke-opacity:1;stroke-width:0.47999997;stroke-miterlimit:0;stroke-dasharray:none"
      id="tspan4703">Cold Source</tspan></text>
+
 
 </g></svg>

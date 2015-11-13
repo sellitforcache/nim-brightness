@@ -163,6 +163,23 @@ def make_steps(ax,bins_in,avg_in,values_in,options=['log'],label='',ylim=False,c
 			else:
 				ax.semilogx(x,y,label=label,linewidth=linewidth)
 
+
+def get_view_sa(a=0.05,b=0,l=0,thk=0):
+	import numpy
+	### finite detector, far side of collimator
+	la = l/(b/a+1.0)
+	cosa = la/numpy.sqrt(la*la+a*a)
+	sa_finite_d = 2.0*numpy.pi*(1.0-cosa)
+
+	### collimator self-limit
+	cosa = (thk/2.0)/numpy.sqrt(thk*thk/4.0+b*b)
+	sa_collimator = 2.0*numpy.pi*(1.0-cosa)
+
+	### return minimum
+	return numpy.minimum(sa_finite_d,sa_collimator)
+
+
+
 # conversion factors
 charge_per_amp = 6.241e18
 charge_per_milliamp = charge_per_amp/1e3
@@ -176,6 +193,7 @@ std19 = mctal('/home/l_bergmann/Documents/nim-brightness/ICON-PDarraz.mctal')
 ike19 = mctal('/home/l_bergmann/Documents/nim-brightness/ICON-PDarray-19IKE.mctal')
 ike24 = mctal('/home/l_bergmann/Documents/nim-brightness/ICON-PDarray-24IKE.mctal')
 this_tal = std19
+std19.plot(tal=[5],obj=[8],options=['log','lethargy'])
 
 # 1d model efficiency
 oned_eff = [[],[]]
@@ -243,14 +261,25 @@ dex = this_tal.tallies[5]._hash(obj=8)
 tal = this_tal.tallies[5].vals[dex]['data'][:-1]
 wvl = to_wavelength(ene)
 widths = -1.0*numpy.diff(wvl)
-sa_pd_collimator = 2.0*numpy.pi*(1.0-102./numpy.sqrt(102.0*102.0+1.0*1.0))
-sa_pd_cadmium    = 2.0*numpy.pi*(1.0-3./numpy.sqrt(3.0*3.0+0.5*0.5))
-sa_pd_sapphire   = 2.0*numpy.pi*(1.0-420./numpy.sqrt(420.0*420.0+10.*10.))
-sa_measure    = 2.0*numpy.pi*(1.0-101./numpy.sqrt(101.0*101.0+1.5*1.5))
-print "solid angle PD (collimator)  %6.4E"%sa_pd_collimator
-print "solid angle PD (cadmium)     %6.4E"%sa_pd_cadmium
-print "solid angle PD (sapphire)    %6.4E"%sa_pd_sapphire
-print "solid angle measurement      %6.4E"%sa_measure
+
+### solid angles
+sa_collimator = get_view_sa(b=0.1,  l=10.1,   thk=10.0)
+sa_cadmium    = get_view_sa(b=0.05, l= 0.1,   thk= 0.1)
+sa_sapphire   = get_view_sa(b=1.0,  l=41.835, thk=25.0)
+sa_steel      = get_view_sa(b=2.5,  l=784.8,  thk=30.0)
+sa_aperture   = get_view_sa(b=4.0,  l=1230.8, thk=0.1)
+sa_zapfen     = get_view_sa(b=4.0,  l=1577.5, thk=347.0)
+
+sa_measure       = 2.0*numpy.pi*(1.0-101./numpy.sqrt(101.0*101.0+1.5*1.5))
+
+
+print "solid angle collimator     %6.4E"%sa_collimator
+print "solid angle cadmium        %6.4E"%sa_cadmium
+print "solid angle sapphire       %6.4E"%sa_sapphire
+print "solid angle steel          %6.4E"%sa_steel
+print "solid angle aperture       %6.4E"%sa_aperture
+print "solid angle zapfen         %6.4E"%sa_zapfen
+print "solid angle measurement    %6.4E"%sa_measure
 tal_normed = charge_per_milliamp*numpy.divide(tal,widths*sa_measure)
 
 measurement[1] = numpy.array(measurement[1])

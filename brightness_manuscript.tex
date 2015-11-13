@@ -235,6 +235,10 @@ Simulations were done with MCNP6.1 and with ENDF/B-VII.1 data.  Thermal scatteri
      \caption{Vertical cross section of the target MCNP model geometry. \label{fig:target}}
 \end{figure}
 
+Since the detector is very far away from the neutron source, special methods had to be used in order to gather sufficient statistics in a reasonable amount of time.  A point detector XXX \cite{mcnp}.  
+
+Using a point detector would be a reasonable solution if only cancluated the flux was desired, but the brightness also depends on the view able solid angle of the detector system.   The physical system responds to a view limited by the pinhole collimator and cadmium sheet, which produces a small, finite spot on detector surface.  A point detector would only see a single point of this view and wouldn't represent the average brightness (the measured quantity).  The solid angle of each point could be calculated, multiple point detectors used, and their induvidual spectra averaged to produce the average brightness, but this more complicated situation can be avoided by using a DXTRAN sphere instead of a point detector. A DXTRAN sphere blah blah XXX \cite{mcnp}.  Unlike a point detector, a DXTRAN sphere as a extent, so it can capture all the angles visible to the detector instead of those that pass through a single point.  A point detector placed at the focal point of the collimator should have a similar repsonse, but 
+
 \subsection{Detector \& Efficiency}
 \label{subsec:eff}
 

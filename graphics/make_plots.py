@@ -12,6 +12,7 @@ from MCNPtools.mctal import mctal
 from MCNPtools.plot import plot
 import scipy.special
 import numpy.linalg
+import matplotlib.ticker as ticker
 
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
@@ -192,52 +193,87 @@ Na     = 6.0221409e+23  # number/mol
 std19 = mctal('/home/l_bergmann/Documents/nim-brightness/ICON-PDarraz.mctal')
 ike19 = mctal('/home/l_bergmann/Documents/nim-brightness/ICON-PDarray-19IKE.mctal')
 ike24 = mctal('/home/l_bergmann/Documents/nim-brightness/ICON-PDarray-24IKE.mctal')
-this_tal = std19
-std19.plot(tal=[5],obj=[8],options=['log','lethargy'])
+new = mctal('/home/l_bergmann/repos/temp/ICON-center.mctal')
+this_tal = new
+#std19.plot(tal=[5],obj=[8],options=['log','lethargy'])
 
-# 1d model efficiency
-oned_eff = [[],[]]
-f=open('/home/l_bergmann/Documents/nim-brightness/1deff.csv','r')
-for line in f:
-	nums = line.split(',')
-	oned_eff[0].append(float(nums[0]))
-	oned_eff[1].append(float(nums[1]))
-f.close()
+### radiography tally
+rad_tal=125
+rad_non_zero = 0
+tol=1e-10
+img = numpy.zeros((len(this_tal.tallies[rad_tal].cosines),len(this_tal.tallies[rad_tal].segments) ))
+for y in range(0,len(this_tal.tallies[rad_tal].cosines)-1):
+	for x in range(0,len(this_tal.tallies[rad_tal].segments)-1):
+		dex = this_tal.tallies[rad_tal]._hash(obj=0,seg=x,cos=y)
+		img[y][x]=numpy.sum(this_tal.tallies[rad_tal].vals[dex]['data'][-1])
+		if img[y][x]>= tol:
+			rad_non_zero = rad_non_zero + 1
 
-# mcnp calculated efficieny
-mcnp_eff = [[],[]]
-f=open('/home/l_bergmann/Documents/nim-brightness/mcnpeff.csv','r')
-for line in f:
-	nums = line.split(',')
-	mcnp_eff[0].append(float(nums[0]))
-	mcnp_eff[1].append(float(nums[1]))
-f.close()
+pix_str = 2.0*numpy.pi*(1.0-10.0/numpy.sqrt(10.0*10.0+0.001*0.001))
+total_str=pix_str*rad_non_zero
+print "pixels >= %6.4E : %d"%(tol,rad_non_zero)
+print "pixels worth approx %6.4E str"%pix_str
+print "total view approx %6.4E str"%total_str
 
-# get new eff
-mcnp_eff2 = [[],[]]
-seam = mctal('/home/l_bergmann/Documents/Other Projects/ICON-brightness/detector/2mm.mctal')
-ene = numpy.array(seam.tallies[1].energies[:-1])
-dex =             seam.tallies[1]._hash(obj=0,cos=0)
-tal_in =          seam.tallies[1].vals[dex]['data'][:-1]
-dex =             seam.tallies[34]._hash(obj=0,mul=2)
-tal_rr =          seam.tallies[34].vals[dex]['data'][:-1]
-wvl = to_wavelength(ene)
-mcnp_eff2[0] = wvl
-mcnp_eff2[1] = numpy.divide(tal_rr,tal_in)
 
-# plot efficiency
+def fmt(x, pos):
+    a, b = '{:.2e}'.format(x).split('e')
+    b = int(b)
+    return r'${} \times 10^{{{}}}$'.format(a, b)
+
 f=plt.figure()
 ax=f.add_subplot(111)
-ax.plot(oned_eff[0],oned_eff[1],  linewidth=2,label='1-D Model')
-ax.plot(mcnp_eff[0],mcnp_eff[1],  linewidth=2,label='MCNP - no seam')
-make_steps(ax,mcnp_eff2[0],[0],mcnp_eff2[1],linewidth=2,label='MCNP - 1 mm seam',options=['lin'])
-ax.set_xlabel(r'Wavelength (\AA)')
-ax.set_ylabel(r'Efficiency')
-ax.set_ylim([0,1])
-ax.set_xlim([0,12])
-ax.grid(1)
-plt.legend(loc=4)
+ax.set_title('Pinhole Image at Cd/Zapfen System Focal Point')
+ax.set_xlabel(r'x (cm)')
+ax.set_ylabel(r'y (cm)')
+imgax=ax.imshow(img,interpolation='none',aspect='auto',origin='lower',extent=[this_tal.tallies[rad_tal].cosines[0],this_tal.tallies[rad_tal].cosines[-1],this_tal.tallies[rad_tal].segments[0],this_tal.tallies[rad_tal].segments[-1]])
+c=plt.colorbar(imgax, format=ticker.FuncFormatter(fmt))
+c.set_label(r'Neutron Flux (n p$^{-1}$ cm$^{-2}$)')
+ax.set_ylim([-0.05,0.05])
+ax.set_xlim([-0.05,0.05])
 plt.show()
+
+## 1d model efficiency
+#oned_eff = [[],[]]
+#f=open('/home/l_bergmann/Documents/nim-brightness/1deff.csv','r')
+#for line in f:
+#	nums = line.split(',')
+#	oned_eff[0].append(float(nums[0]))
+#	oned_eff[1].append(float(nums[1]))
+#f.close()
+#
+## mcnp calculated efficieny
+#mcnp_eff = [[],[]]
+#f=open('/home/l_bergmann/Documents/nim-brightness/mcnpeff.csv','r')
+#for line in f:
+#	nums = line.split(',')
+#	mcnp_eff[0].append(float(nums[0]))
+#	mcnp_eff[1].append(float(nums[1]))
+#f.close()
+#
+## measured efficiency
+#meas_eff = [[],[]]
+#f=open('/home/l_bergmann/Documents/nim-brightness/measeff.csv','r')
+#for line in f:
+#        nums = line.split(',')
+#        meas_eff[0].append(float(nums[0]))
+#        meas_eff[1].append(float(nums[1]))
+#f.close()
+#
+#
+## plot efficiency
+#f=plt.figure()
+#ax=f.add_subplot(111)
+#ax.plot(oned_eff[0],oned_eff[1],  linewidth=2,label='1-D Model')
+#ax.plot(mcnp_eff[0],mcnp_eff[1],  linewidth=2,label='MCNP Model')
+#ax.plot(meas_eff[0],meas_eff[1],  linewidth=2,label='NPL Measurement')
+#ax.set_xlabel(r'Wavelength (\AA)')
+#ax.set_ylabel(r'Efficiency')
+#ax.set_ylim([0,1])
+#ax.set_xlim([0,12])
+#ax.grid(1)
+#plt.legend(loc=4)
+#plt.show()
 
 
 # final measurement
@@ -257,7 +293,7 @@ f.close()
 
 # scale and normalize the simulation data
 ene = numpy.array(this_tal.tallies[5].energies[:-1])
-dex = this_tal.tallies[5]._hash(obj=8)
+dex = this_tal.tallies[5]._hash(obj=7)
 tal = this_tal.tallies[5].vals[dex]['data'][:-1]
 wvl = to_wavelength(ene)
 widths = -1.0*numpy.diff(wvl)
@@ -268,10 +304,9 @@ sa_cadmium    = get_view_sa(b=0.05, l= 0.1,   thk= 0.1)
 sa_sapphire   = get_view_sa(b=1.0,  l=41.835, thk=25.0)
 sa_steel      = get_view_sa(b=2.5,  l=784.8,  thk=30.0)
 sa_aperture   = get_view_sa(b=4.0,  l=1230.8, thk=0.1)
-sa_zapfen     = get_view_sa(b=4.0,  l=1577.5, thk=347.0)
-
+sa_zapfen     = get_view_sa(b=4.0,  l=1577.5, thk=450.0)
+sa_nozzle     = get_view_sa(b=6.9,  l=1720.0, thk=0.1)
 sa_measure       = 2.0*numpy.pi*(1.0-101./numpy.sqrt(101.0*101.0+1.5*1.5))
-
 
 print "solid angle collimator     %6.4E"%sa_collimator
 print "solid angle cadmium        %6.4E"%sa_cadmium
@@ -279,8 +314,9 @@ print "solid angle sapphire       %6.4E"%sa_sapphire
 print "solid angle steel          %6.4E"%sa_steel
 print "solid angle aperture       %6.4E"%sa_aperture
 print "solid angle zapfen         %6.4E"%sa_zapfen
+print "solid angle nozzle         %6.4E"%sa_nozzle
 print "solid angle measurement    %6.4E"%sa_measure
-tal_normed = charge_per_milliamp*numpy.divide(tal,widths*sa_measure)
+tal_normed = charge_per_milliamp*numpy.divide(tal,widths*total_str)
 
 measurement[1] = numpy.array(measurement[1])
 
@@ -292,11 +328,11 @@ target_gain = 1.0#*1.4*1.20*1.05  #  collotte, STIP, light water in loop
 # plot spectra
 f=plt.figure()
 ax=f.add_subplot(111)
-ax.plot(measurement[0][:],measurement[1],linewidth=2,label='Measurement')
+ax.plot(measurement[0][:],numpy.multiply(measurement[1],sa_measure/total_str),linewidth=2,label='Measurement')
 make_steps(ax,wvl,[0],tal_normed/target_gain,linewidth=2,label='MCNP',options=['lin'])
 ax.set_xlabel(r'Wavelength (\AA)')
 ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ str$^{-1}$)')
-ax.set_ylim([0,3.2e10])
+ax.set_ylim([0,4e11])
 ax.set_xlim([0,12])
 ax.grid(1)
 plt.legend(loc=1)

@@ -209,7 +209,19 @@ The principle components in the neutron path, listed in increasing distance from
   \item Lead spallation target
 \end{enumerate}
 
-The pinhole collimator and cadmium sheet restricts the solid angle visible to the detector to $6.92\times10^{-4}$ steradians.  Five measurements were done in total: centered in the beam port, +20 mm away from center (towards the target), -20 mm away from center (away from the target), centered with beryllium at 77 K in the beamline to show the 4 \AA bin, and without sapphire or beryllium.Figure \ref{fig:det} shows a photograph of the $^3$He detector with the iron pinhole collimator positioned in front of it before the large shielding blocks and sapphire crystals were positioned.
+\begin{figure}[h!] 
+  \centering
+    \includegraphics[width=\textwidth]{graphics/solid_angle.eps}
+     \caption{The limiting collimation system in the measurement (not to scale), and the focal point where the point detector was place in the MCNP simulations. \label{fig:solid_angle}}
+\end{figure}
+
+\begin{figure}[h!] 
+  \centering
+    \includegraphics[width=\textwidth]{graphics/pinhole.eps}
+     \caption{The flux image created by a pinhole radiography tally in MCNP at the collimation system focal point. \label{fig:pinhole_image}}
+\end{figure}
+
+The beamline entrance and cadmium sheet restricts the solid angle visible to the detector to $6.92\times10^{-4}$ steradians.  Five measurements were done in total: centered in the beam port, +20 mm away from center (towards the target), -20 mm away from center (away from the target), centered with beryllium at 77 K in the beamline to show the 4 \AA bin, and without sapphire or beryllium.Figure \ref{fig:det} shows a photograph of the $^3$He detector with the iron pinhole collimator positioned in front of it before the large shielding blocks and sapphire crystals were positioned.
 
 \begin{figure}[h!] 
   \centering
@@ -237,7 +249,7 @@ Simulations were done with MCNP6.1 and with ENDF/B-VII.1 data.  Thermal scatteri
 
 Since the detector is very far away from the neutron source, special methods had to be used in order to gather sufficient statistics in a reasonable amount of time.  A point detector XXX \cite{mcnp}.  
 
-Using a point detector would be a reasonable solution if only cancluated the flux was desired, but the brightness also depends on the view able solid angle of the detector system.   The physical system responds to a view limited by the pinhole collimator and cadmium sheet, which produces a small, finite spot on detector surface.  A point detector would only see a single point of this view and wouldn't represent the average brightness (the measured quantity).  The solid angle of each point could be calculated, multiple point detectors used, and their induvidual spectra averaged to produce the average brightness, but this more complicated situation can be avoided by using a DXTRAN sphere instead of a point detector. A DXTRAN sphere blah blah XXX \cite{mcnp}.  Unlike a point detector, a DXTRAN sphere as a extent, so it can capture all the angles visible to the detector instead of those that pass through a single point.  A point detector placed at the focal point of the collimator should have a similar repsonse, but 
+Using a point detector would be a reasonable solution if only cancluated the flux was desired, but the brightness also depends on the view able solid angle of the detector system.   The physical system responds to a view limited by the pinhole collimator and cadmium sheet, which produces a small, finite spot on detector surface.  A point detector would only see a single point of this view and wouldn't represent the average brightness (the measured quantity).  If the point detector were placed at the focal point of the collimator,   The solid angle of each point could be calculated, multiple point detectors used, and their induvidual spectra averaged to produce the average brightness, but this more complicated situation can be avoided by using a DXTRAN sphere instead of a point detector. A DXTRAN sphere blah blah XXX \cite{mcnp}.  Unlike a point detector, a DXTRAN sphere as a extent, so it can capture all the angles visible to the detector instead of those that pass through a single point.  A point detector placed at the focal point of the collimator should have a similar repsonse, but 
 
 \subsection{Detector \& Efficiency}
 \label{subsec:eff}

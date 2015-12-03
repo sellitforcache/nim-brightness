@@ -193,34 +193,58 @@ Na     = 6.0221409e+23  # number/mol
 std19 = mctal('/home/l_bergmann/Documents/nim-brightness/ICON-PDarraz.mctal')
 ike19 = mctal('/home/l_bergmann/Documents/nim-brightness/ICON-PDarray-19IKE.mctal')
 ike24 = mctal('/home/l_bergmann/Documents/nim-brightness/ICON-PDarray-24IKE.mctal')
-new = mctal('/home/l_bergmann/repos/temp/ICON-center.mctal')
+new = mctal('/home/l_bergmann/repos/temp/ICON-center-19std.mctal')
 this_tal = new
 #std19.plot(tal=[5],obj=[8],options=['log','lethargy'])
 
+#### make circle for Cd hole
+cd_radius = 0.050
+theta  = numpy.linspace(0,2*numpy.pi,512)
+circ_x = cd_radius*numpy.cos(theta)
+circ_y = cd_radius*numpy.sin(theta)
+
 ### radiography tally
-rad_tal=125
+rad_tal=135
 rad_non_zero = 0
-tol=1e-10
+tol=5e-8
+img_accepted=0.0
+count_num=0
 img = numpy.zeros((len(this_tal.tallies[rad_tal].cosines),len(this_tal.tallies[rad_tal].segments) ))
+print "cosines ",this_tal.tallies[rad_tal].cosines
+print "segments ",this_tal.tallies[rad_tal].segments
 for y in range(0,len(this_tal.tallies[rad_tal].cosines)-1):
 	for x in range(0,len(this_tal.tallies[rad_tal].segments)-1):
 		dex = this_tal.tallies[rad_tal]._hash(obj=0,seg=x,cos=y)
 		img[y][x]=numpy.sum(this_tal.tallies[rad_tal].vals[dex]['data'][-1])
+		#
+		x_val = numpy.amin(   numpy.absolute( [this_tal.tallies[rad_tal].segments[x],this_tal.tallies[rad_tal].segments[x+1]] )  )
+		y_val = numpy.amin(   numpy.absolute( [this_tal.tallies[rad_tal].cosines[ y],this_tal.tallies[rad_tal].cosines[ y+1]] )  )
+		#
 		if img[y][x]>= tol:
 			rad_non_zero = rad_non_zero + 1
+		if numpy.sqrt(x_val*x_val+y_val*y_val)<=cd_radius:
+			img_accepted = img_accepted + img[y][x]
+			count_num = count_num+1
+img_total=numpy.sum(img)
+img_avg  =img_total/count_num
 
-pix_str = 2.0*numpy.pi*(1.0-10.0/numpy.sqrt(10.0*10.0+0.001*0.001))
+correction_factor_cd = img_accepted/img_total
+d=19.47530854
+pix_str = 2.0*numpy.pi*(1.0-d/numpy.sqrt(d*d+0.0005*0.0005))
 total_str=pix_str*rad_non_zero
+print "   ========  "
 print "pixels >= %6.4E : %d"%(tol,rad_non_zero)
 print "pixels worth approx %6.4E str"%pix_str
 print "total view approx %6.4E str"%total_str
+print "correction factor for Cd acceptance: %6.4E"%correction_factor_cd
 
-
+#### formatter for scientific notation
 def fmt(x, pos):
     a, b = '{:.2e}'.format(x).split('e')
     b = int(b)
     return r'${} \times 10^{{{}}}$'.format(a, b)
 
+#  plot it
 f=plt.figure()
 ax=f.add_subplot(111)
 ax.set_title('Pinhole Image at Cd/Zapfen System Focal Point')
@@ -229,51 +253,53 @@ ax.set_ylabel(r'y (cm)')
 imgax=ax.imshow(img,interpolation='none',aspect='auto',origin='lower',extent=[this_tal.tallies[rad_tal].cosines[0],this_tal.tallies[rad_tal].cosines[-1],this_tal.tallies[rad_tal].segments[0],this_tal.tallies[rad_tal].segments[-1]])
 c=plt.colorbar(imgax, format=ticker.FuncFormatter(fmt))
 c.set_label(r'Neutron Flux (n p$^{-1}$ cm$^{-2}$)')
-ax.set_ylim([-0.05,0.05])
-ax.set_xlim([-0.05,0.05])
+ax.plot(circ_x,circ_y,color=numpy.array([255.0,0.0,255.0])/255.0,linewidth=4,linestyle='--')
+
+#ax.set_ylim([-0.06,0.06])
+#ax.set_xlim([-0.06,0.06])
 plt.show()
 
-## 1d model efficiency
-#oned_eff = [[],[]]
-#f=open('/home/l_bergmann/Documents/nim-brightness/1deff.csv','r')
-#for line in f:
-#	nums = line.split(',')
-#	oned_eff[0].append(float(nums[0]))
-#	oned_eff[1].append(float(nums[1]))
-#f.close()
-#
-## mcnp calculated efficieny
-#mcnp_eff = [[],[]]
-#f=open('/home/l_bergmann/Documents/nim-brightness/mcnpeff.csv','r')
-#for line in f:
-#	nums = line.split(',')
-#	mcnp_eff[0].append(float(nums[0]))
-#	mcnp_eff[1].append(float(nums[1]))
-#f.close()
-#
-## measured efficiency
-#meas_eff = [[],[]]
-#f=open('/home/l_bergmann/Documents/nim-brightness/measeff.csv','r')
-#for line in f:
-#        nums = line.split(',')
-#        meas_eff[0].append(float(nums[0]))
-#        meas_eff[1].append(float(nums[1]))
-#f.close()
-#
-#
-## plot efficiency
-#f=plt.figure()
-#ax=f.add_subplot(111)
-#ax.plot(oned_eff[0],oned_eff[1],  linewidth=2,label='1-D Model')
-#ax.plot(mcnp_eff[0],mcnp_eff[1],  linewidth=2,label='MCNP Model')
-#ax.plot(meas_eff[0],meas_eff[1],  linewidth=2,label='NPL Measurement')
-#ax.set_xlabel(r'Wavelength (\AA)')
-#ax.set_ylabel(r'Efficiency')
-#ax.set_ylim([0,1])
-#ax.set_xlim([0,12])
-#ax.grid(1)
-#plt.legend(loc=4)
-#plt.show()
+# 1d model efficiency
+oned_eff = [[],[]]
+f=open('/home/l_bergmann/Documents/nim-brightness/1deff.csv','r')
+for line in f:
+	nums = line.split(',')
+	oned_eff[0].append(float(nums[0]))
+	oned_eff[1].append(float(nums[1]))
+f.close()
+
+# mcnp calculated efficieny
+mcnp_eff = [[],[]]
+f=open('/home/l_bergmann/Documents/nim-brightness/mcnpeff.csv','r')
+for line in f:
+	nums = line.split(',')
+	mcnp_eff[0].append(float(nums[0]))
+	mcnp_eff[1].append(float(nums[1]))
+f.close()
+
+# measured efficiency
+meas_eff = [[],[]]
+f=open('/home/l_bergmann/Documents/nim-brightness/measeff.csv','r')
+for line in f:
+        nums = line.split(',')
+        meas_eff[0].append(float(nums[0]))
+        meas_eff[1].append(float(nums[1]))
+f.close()
+
+
+# plot efficiency
+f=plt.figure()
+ax=f.add_subplot(111)
+ax.plot(meas_eff[0],meas_eff[1],  linewidth=2,label='BOA Measurement')
+ax.plot(oned_eff[0],oned_eff[1],  linewidth=2,label='1-D Model')
+ax.plot(mcnp_eff[0],mcnp_eff[1],  linewidth=2,label='MCNP Model')
+ax.set_xlabel(r'Wavelength (\AA)')
+ax.set_ylabel(r'Efficiency')
+ax.set_ylim([0,1])
+ax.set_xlim([0,12])
+ax.grid(1)
+plt.legend(loc=4)
+plt.show()
 
 
 # final measurement
@@ -293,10 +319,17 @@ f.close()
 
 # scale and normalize the simulation data
 ene = numpy.array(this_tal.tallies[5].energies[:-1])
-dex = this_tal.tallies[5]._hash(obj=7)
+dex = this_tal.tallies[5]._hash(obj=0)
 tal = this_tal.tallies[5].vals[dex]['data'][:-1]
 wvl = to_wavelength(ene)
 widths = -1.0*numpy.diff(wvl)
+this_tal.plot(tal=[5],obj=[7])
+
+## compare PD and radiography
+print "   ========  "
+print "PD total       %6.4E"%this_tal.tallies[5].vals[dex]['data'][-1]
+print "Pinhole mean   %6.4E"%(numpy.mean(img))
+print "Pinhole sum    %6.4E"%(numpy.sum(img))
 
 ### solid angles
 sa_collimator = get_view_sa(b=0.1,  l=10.1,   thk=10.0)
@@ -308,6 +341,7 @@ sa_zapfen     = get_view_sa(b=4.0,  l=1577.5, thk=450.0)
 sa_nozzle     = get_view_sa(b=6.9,  l=1720.0, thk=0.1)
 sa_measure       = 2.0*numpy.pi*(1.0-101./numpy.sqrt(101.0*101.0+1.5*1.5))
 
+print "  HORIZONTAL ========  "
 print "solid angle collimator     %6.4E"%sa_collimator
 print "solid angle cadmium        %6.4E"%sa_cadmium
 print "solid angle sapphire       %6.4E"%sa_sapphire
@@ -316,23 +350,64 @@ print "solid angle aperture       %6.4E"%sa_aperture
 print "solid angle zapfen         %6.4E"%sa_zapfen
 print "solid angle nozzle         %6.4E"%sa_nozzle
 print "solid angle measurement    %6.4E"%sa_measure
+
+
+### solid angles
+sa_collimator = get_view_sa(b=0.1,  l=10.1,   thk=10.0)
+sa_cadmium    = get_view_sa(b=0.05, l= 0.1,   thk= 0.1)
+sa_sapphire   = get_view_sa(b=1.0,  l=41.835, thk=25.0)
+sa_steel      = get_view_sa(b=2.5,  l=784.8,  thk=30.0)
+sa_aperture   = get_view_sa(b=4.0,  l=1230.8, thk=0.1)
+sa_zapfen     = get_view_sa(b=6.0,  l=1577.5, thk=450.0)
+sa_nozzle     = get_view_sa(b=6.9,  l=1720.0, thk=0.1)
+sa_measure       = 2.0*numpy.pi*(1.0-101./numpy.sqrt(101.0*101.0+1.5*1.5))
+
+print "  VERTICAL ========  "
+print "solid angle collimator     %6.4E"%sa_collimator
+print "solid angle cadmium        %6.4E"%sa_cadmium
+print "solid angle sapphire       %6.4E"%sa_sapphire
+print "solid angle steel          %6.4E"%sa_steel
+print "solid angle aperture       %6.4E"%sa_aperture
+print "solid angle zapfen         %6.4E"%sa_zapfen
+print "solid angle nozzle         %6.4E"%sa_nozzle
+print "solid angle measurement    %6.4E"%sa_measure
+
+
+### solid angles
+sa_collimator = get_view_sa(b=numpy.sqrt(2)*0.1,            l=10.1,   thk=10.0)
+sa_cadmium    = get_view_sa(b=0.05,                         l= 0.1,   thk= 0.1)
+sa_sapphire   = get_view_sa(b=numpy.sqrt(2)*1.0,            l=41.835, thk=25.0)
+sa_steel      = get_view_sa(b=numpy.sqrt(2)*2.5,            l=784.8,  thk=30.0)
+sa_aperture   = get_view_sa(b=4.0,                          l=1230.8, thk=0.1)
+sa_zapfen     = get_view_sa(b=numpy.sqrt(4.0*4.0+6.0*6.0),  l=1577.5, thk=450.0)
+sa_nozzle     = get_view_sa(b=numpy.sqrt(2)*6.9,            l=1720.0, thk=0.1)
+sa_measure       = 2.0*numpy.pi*(1.0-101./numpy.sqrt(101.0*101.0+1.5*1.5))
+
+print "  DIAGONAL ========  "
+print "solid angle collimator     %6.4E"%sa_collimator
+print "solid angle cadmium        %6.4E"%sa_cadmium
+print "solid angle sapphire       %6.4E"%sa_sapphire
+print "solid angle steel          %6.4E"%sa_steel
+print "solid angle aperture       %6.4E"%sa_aperture
+print "solid angle zapfen         %6.4E"%sa_zapfen
+print "solid angle nozzle         %6.4E"%sa_nozzle
+print "solid angle measurement    %6.4E"%sa_measure
+
+
+
+
 tal_normed = charge_per_milliamp*numpy.divide(tal,widths*total_str)
 
 measurement[1] = numpy.array(measurement[1])
-
-
-# CORRECTION? UNTIL DO REAL SIMULATION
-target_gain = 1.0#*1.4*1.20*1.05  #  collotte, STIP, light water in loop
-
 
 # plot spectra
 f=plt.figure()
 ax=f.add_subplot(111)
 ax.plot(measurement[0][:],numpy.multiply(measurement[1],sa_measure/total_str),linewidth=2,label='Measurement')
-make_steps(ax,wvl,[0],tal_normed/target_gain,linewidth=2,label='MCNP',options=['lin'])
+make_steps(ax,wvl,[0],tal_normed,linewidth=2,label='MCNP',options=['lin'])
 ax.set_xlabel(r'Wavelength (\AA)')
 ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ str$^{-1}$)')
-ax.set_ylim([0,4e11])
+ax.set_ylim([0,5e11])
 ax.set_xlim([0,12])
 ax.grid(1)
 plt.legend(loc=1)

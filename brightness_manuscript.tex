@@ -180,7 +180,7 @@ The brightness measurement was conducted on July 21, 2014 in the ICON beamline a
 \section{Experimental Setup}
 \label{sec:setup}
 
-The layout of the experimental is shown in Figure \ref{fig:geom}, which is a horizonal cut of the MCNP model geometry.  The target and moderators are shown furthest to the right.  The vertical line is the shielding monolith boundary, which is mostly steel blocks.  The ICON bunker is to the left of the monolith, the walls of which are made of heavy concrete and are shown as retangular blocks.  
+The layout of the experimental is shown in Figure \ref{fig:geom}, which is a horizonal cut of the MCNP model geometry.  The target and moderators are shown furthest to the right.  The vertical line is the shielding monolith boundary, which is mostly steel blocks.  The ICON bunker is to the left of the monolith, the walls of which are made of heavy concrete and are shown as rectangular blocks.  The velocity selector that is usually mounted on the monolith wall in the ICON bunker was removed for this measurement.
 
 \begin{figure}[h!] 
   \centering
@@ -188,40 +188,7 @@ The layout of the experimental is shown in Figure \ref{fig:geom}, which is a hor
      \caption{Geometry \label{fig:geom} }
 \end{figure}
 
-The principle components in the neutron path, listed in increasing distance from the detector, were:
-
-\begin{center} \underline{In-bunker components}\end{center}
-\begin{enumerate}
-  \item Spherical $^3$He detector, 3.30 cm $\oslash$, sorrounded by 1 mm cadmium sheets on all sides except towards the pinhole collimator
-  \item Cadmium aperture, 1 mm $\oslash$, 1 mm thick, 2 mm from the detector surface
-  \item Iron pinhole collimator, immediately after the cadmium aperture, surrounded by heavy concrete, lead, and polyethylene shielding
-  \item Sapphire crystals, 20x20mm faces, 80 mm total thickness, within the heavy concrete, lead, and polyethylene shielding
-  \item Evacuated flight tubes with XXX mm thick aluminum faces, total length 
-  \item Steel collimator, 50x50 mm aperature at xxx cm from detector
-\end{enumerate}
-\begin{center}\underline{In-pile components}\end{center}
-\begin{enumerate}[resume]
-  \item Moveable Gd aperature wheel, set to the largest opening of 80 mm $\oslash$
-  \item High energy shutters
-  \item D$_2$O moderator tank
-  \item Low pressure nozzle
-  \item Liquid deuterium cold source
-  \item Lead spallation target
-\end{enumerate}
-
-\begin{figure}[h!] 
-  \centering
-    \includegraphics[width=\textwidth]{graphics/solid_angle.eps}
-     \caption{The limiting collimation system in the measurement (not to scale), and the focal point where the point detector was place in the MCNP simulations. \label{fig:solid_angle}}
-\end{figure}
-
-\begin{figure}[h!] 
-  \centering
-    \includegraphics[width=\textwidth]{graphics/pinhole.eps}
-     \caption{The flux image created by a pinhole radiography tally in MCNP at the collimation system focal point. \label{fig:pinhole_image}}
-\end{figure}
-
-The beamline entrance and cadmium sheet restricts the solid angle visible to the detector to $6.92\times10^{-4}$ steradians.  Five measurements were done in total: centered in the beam port, +20 mm away from center (towards the target), -20 mm away from center (away from the target), centered with beryllium at 77 K in the beamline to show the 4 \AA bin, and without sapphire or beryllium.Figure \ref{fig:det} shows a photograph of the $^3$He detector with the iron pinhole collimator positioned in front of it before the large shielding blocks and sapphire crystals were positioned.
+Figure \ref{fig:det} shows a photograph of the $^3$He detector with the iron pinhole collimator positioned in front of it before the large shielding blocks and sapphire crystals were positioned.
 
 \begin{figure}[h!] 
   \centering
@@ -229,15 +196,68 @@ The beamline entrance and cadmium sheet restricts the solid angle visible to the
      \caption{$^3$He detector with iron collimator. \label{fig:det}}
 \end{figure}
 
+The principle components in the neutron path, listed in increasing distance from the detector during the measurement, were:
+
+\begin{center} \underline{In-bunker components}\end{center}
+\begin{enumerate}
+  \item Spherical $^3$He detector, 3.30 cm $\oslash$, sorrounded by 1 mm cadmium sheets on all sides except towards the pinhole collimator
+  \item Cadmium aperture, 1 mm $\oslash$, 1 mm thick, 1 mm from the detector surface
+  \item Iron pinhole collimator, 100 mm long, immediately after the cadmium aperture, surrounded by heavy concrete, lead, and polyethylene shielding
+  \item Sapphire crystals, 20x20 mm faces, 80 mm total thickness, within the heavy concrete, lead, and polyethylene shielding
+  \item Evacuated flight tubes with 1.0 mm thick aluminum faces, ~7410 mm total length 
+  \item Steel collimator, 50x50 mm aperature 7548 mm from detector
+\end{enumerate}
+\begin{center}\underline{In-pile components}\end{center}
+\begin{enumerate}[resume]
+  \item Moveable gadolinium circular aperature wheel, set to the largest opening of 80 mm $\oslash$
+  \item High energy shutters
+  \item Zapfen unit, 40x120 mm
+  \item D$_2$O moderator tank
+  \item Low pressure nozzle which pentrates the D$_2$O moderator tank, end size is 138x138 mm
+  \item Liquid deuterium cold source
+  \item Lead spallation target
+\end{enumerate}
+
+
+Since brightness/brilliance was to goal of the measurement, the solid angle seen by the detector is needed to normalize the spectra.  The cadmium sheet limits the sensitive region of the helium detector to a 1 mm diameter circle, and the the other items in the beam path create a system that limited the angular view of the detector.  Table \ref{tab:sa} shows the maximum solid angle of the various items in the neutron beam.  The values are the minimum of the item's self-collimation (due to its thickness) and the collimation of the system formed by the item and the hole in the cadmium sheet.  Figure \ref{fig:solid_angle} shows a cartoon of the collimation system formed by the items and the cadmium hole.
+
+\begin{figure}[h!] 
+  \centering
+    \includegraphics[width=\textwidth]{graphics/solid_angle.eps}
+     \caption{The limiting collimation system in the measurement in the horizontal plane (not to scale), and the crossing point where the point detector was place in the MCNP simulations. \label{fig:solid_angle}}
+\end{figure}
+
+\begin{table}
+\begin{center}
+     \caption{Table of solid angles with the limiting member marked with boldface and a star (*).  \label{tab:sa} }
+\begin{tabular}{|l|r|r|r|}
+  \hline
+              &  Horizontal  &     Vertical   &     Diagonal   \\
+  \hline
+Fe Collimator &     6.9282E-04  &     6.9282E-04 &     1.1282E-03 \\
+\hline 
+Cadmium       &     1.8403E+00  &     1.8403E+00 &     1.8403E+00 \\
+\hline 
+Sapphire      &     1.9781E-03  &     1.9781E-03 &     3.8449E-03 \\
+\hline 
+Steel         &     3.3167E-05  &\bf* 3.3167E-05 &     6.5574E-05 \\
+\hline
+Aperture      &     3.4016E-05  &     3.4016E-05 &\bf* 3.4016E-05 \\
+\hline
+Zapfen        &\bf* 2.0707E-05  &     4.6208E-05 &     6.6559E-05 \\
+\hline
+Nozzle        &     5.1293E-05  &     5.1293E-05 &     1.0215E-04 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+It can be seen that in the horizontal plane, the Zapfen opening (where the beamline opens into large nozzle in the moderator tank) is the limiting item.  In the vertical plane, the limiting item is the steel shielding blocks positioned before the chopper.  At 45 degrees, the aperture wheel is the limiting case.  These items should be seen in the pinhole image calculated with MCNP and discussed in Section \ref{sec:sim}
+
 
 
 \section{Simulations}
 \label{sec:sim}
- 
-
-
-\subsection{MCNP}
-\label{subsec:mcnp}
 
 Simulations were done with MCNP6.1 and with ENDF/B-VII.1 data.  Thermal scattering data for the room temperature sapphire crystals were used \cite{sapp}, as were 77 K thermal scattering data for beryllium, 19 K data for ortho-/para-deuterium, 273 K data for heavy water, 273 K data for light water \cite{mcnp6}, and 25 K data for aluminum, and 25 K data for zirconium \cite{IKE}.  The aliumun and zirconium data are important for accurately simulating the transmission through the various hulls surrounding the deuterium in the cold source.  The model geometry of has already been shown in Figure \ref{fig:geom}, and was created to be as true-to-life as possible.  The target in use during the measurement was ``target 10'', which is shown in Figure \ref{fig:target}. This target had a hemisphereical beam entrance window, STIP samples, and some light water contamination in the inner cooling loop.  These features were modelled in the MCNP simulation \cite{target10}.
 
@@ -251,7 +271,17 @@ Since the detector is very far away from the neutron source, special methods had
 
 Using a point detector would be a reasonable solution if only cancluated the flux was desired, but the brightness also depends on the view able solid angle of the detector system.   The physical system responds to a view limited by the pinhole collimator and cadmium sheet, which produces a small, finite spot on detector surface.  A point detector would only see a single point of this view and wouldn't represent the average brightness (the measured quantity).  If the point detector were placed at the focal point of the collimator,   The solid angle of each point could be calculated, multiple point detectors used, and their induvidual spectra averaged to produce the average brightness, but this more complicated situation can be avoided by using a DXTRAN sphere instead of a point detector. A DXTRAN sphere blah blah XXX \cite{mcnp}.  Unlike a point detector, a DXTRAN sphere as a extent, so it can capture all the angles visible to the detector instead of those that pass through a single point.  A point detector placed at the focal point of the collimator should have a similar repsonse, but 
 
-\subsection{Detector \& Efficiency}
+\begin{figure}[h!] 
+  \centering
+    \includegraphics[width=\textwidth]{graphics/pinhole.eps}
+     \caption{The flux image created by a pinhole radiography tally in MCNP at the collimation crossing focal point.  The image plane is at upstream surface of the cadmium sheet.  The magenta outline shows the extent of the hole in the sheet. \label{fig:pinhole_image}}
+\end{figure}
+
+The beamline entrance and cadmium sheet restricts the solid angle visible to the detector to $6.92\times10^{-4}$ steradians.  Five measurements were done in total: centered in the beam port, +20 mm away from center (towards the target), -20 mm away from center (away from the target), centered with beryllium at 77 K in the beamline to show the 4 \AA bin, and without sapphire or beryllium.
+
+
+
+\section{Detector Efficiency}
 \label{subsec:eff}
 
 The efficiency curve of the helium detector was also measured and compared to calculated curves.  Curves were calculated using a 1D model and 1/v cross sections as well as with a detailed MCNP model of the helium detector \cite{bonner_manual}.  The 1D model efficiency is shown in Eq. \ref{eqn:eff1}, where $\Sigma_{\textrm{stl}}$ is the stainless steel total macroscopic cross section, $\Sigma_{\textrm{He}}$ is the $^3$He absorbtion macroscopic cross section, $x_{\textrm{stl}}$ is the thickness of the detector's stainless steel shell, and  $D_{\textrm{stl}}$ is the diameter $^3$He volume.  The cross section wavelength dependence is shown in Eq. \ref{eqn:eff2}, where $a$ and $b$ are linear fit coefficients derived from cross section data.  
@@ -268,6 +298,9 @@ The MCNP
     \includegraphics[width=\textwidth]{graphics/eff.eps}
      \caption{The efficiency curves. \label{fig:geom} }
 \end{figure}
+
+
+
 
 \section{Measured Brightness}
 \label{sec:results}

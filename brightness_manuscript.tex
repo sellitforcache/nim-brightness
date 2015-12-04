@@ -231,53 +231,57 @@ Since brightness/brilliance was to goal of the measurement, the solid angle seen
 \begin{center}
      \caption{Table of solid angles with the limiting member marked with boldface and a star (*).  \label{tab:sa} }
 \begin{tabular}{|l|r|r|r|}
-  \hline
-              &  Horizontal  &     Vertical   &     Diagonal   \\
-  \hline
-Fe Collimator &     6.9282E-04  &     6.9282E-04 &     1.1282E-03 \\
-\hline 
-Cadmium       &     1.8403E+00  &     1.8403E+00 &     1.8403E+00 \\
-\hline 
-Sapphire      &     1.9781E-03  &     1.9781E-03 &     3.8449E-03 \\
-\hline 
-Steel         &     3.3167E-05  &\bf* 3.3167E-05 &     6.5574E-05 \\
-\hline
-Aperture      &     3.4016E-05  &     3.4016E-05 &\bf* 3.4016E-05 \\
-\hline
-Zapfen        &\bf* 2.0707E-05  &     4.6208E-05 &     6.6559E-05 \\
-\hline
-Nozzle        &     5.1293E-05  &     5.1293E-05 &     1.0215E-04 \\
-\hline
+     \hline
+                   &     Horizontal  &     Vertical   &     Diagonal   \\
+     \hline
+     Fe Collimator &     6.9282E-04  &     6.9282E-04 &     6.9282E-04 \\
+     \hline 
+     Cadmium Hole  &     1.8403E-00  &     1.8403E-00 &     1.8403E-00 \\
+     \hline 
+     Sapphire      &     1.9781E-03  &     1.9781E-03 &     3.8449E-03 \\
+     \hline 
+     Steel         &     3.3167E-05  &     3.3167E-05 &     6.5574E-05 \\
+     \hline
+     Aperture      &     3.4016E-05  &     3.4016E-05 &\bf* 3.4016E-05 \\
+     \hline
+     Tube          &     2.2597E-05  &\bf* 2.2597E-05 &    4.4867E-05  \\
+     \hline
+     Zapfen        &\bf* 2.0707E-05  &     4.6208E-05 &     6.6559E-05 \\
+     \hline
+     Nozzle        &     5.1293E-05  &     5.1293E-05 &     1.0215E-04 \\
+     \hline
 \end{tabular}
 \end{center}
 \end{table}
 
-It can be seen that in the horizontal plane, the Zapfen opening (where the beamline opens into large nozzle in the moderator tank) is the limiting item.  In the vertical plane, the limiting item is the steel shielding blocks positioned before the chopper.  At 45 degrees, the aperture wheel is the limiting case.  These items should be seen in the pinhole image calculated with MCNP and discussed in Section \ref{sec:sim}
+It can be seen that in the horizontal plane, the Zapfen opening (where the beamline opens into large nozzle in the moderator tank) is the limiting item.  In the vertical plane, the limiting item is the steel shielding blocks positioned before the chopper.  At 45 degrees, the aperture wheel is the limiting case.  These items are shown in the pinhole image calculated with MCNP and discussed in Section \ref{sec:sim}.
 
-
-
-\section{Simulations}
+\section{Simulations and Solid Angle}
 \label{sec:sim}
 
-Simulations were done with MCNP6.1 and with ENDF/B-VII.1 data.  Thermal scattering data for the room temperature sapphire crystals were used \cite{sapp}, as were 77 K thermal scattering data for beryllium, 19 K data for ortho-/para-deuterium, 273 K data for heavy water, 273 K data for light water \cite{mcnp6}, and 25 K data for aluminum, and 25 K data for zirconium \cite{IKE}.  The aliumun and zirconium data are important for accurately simulating the transmission through the various hulls surrounding the deuterium in the cold source.  The model geometry of has already been shown in Figure \ref{fig:geom}, and was created to be as true-to-life as possible.  The target in use during the measurement was ``target 10'', which is shown in Figure \ref{fig:target}. This target had a hemisphereical beam entrance window, STIP samples, and some light water contamination in the inner cooling loop.  These features were modelled in the MCNP simulation \cite{target10}.
+Simulations were done with MCNP6.1 and with ENDF/B-VII.1 data.  Thermal scattering data for the room temperature sapphire crystals were used \cite{sapp}, as were 77 K thermal scattering data for beryllium, 19 K data for ortho-/para-deuterium, 273 K data for heavy water, 273 K data for light water \cite{mcnp6}, and 25 K data for aluminum, and 25 K data for zirconium \cite{IKE}.  The aliumun and zirconium data are important for accurately simulating the transmission through the various hulls surrounding the deuterium in the cold source.  The model geometry of has already been shown in Figure \ref{fig:geom}, and was created to be as true-to-life as possible.  The target in use during the measurement was ``target 10'', which is shown in Figure \ref{fig:target}. This target had a hemispherical beam entrance window, STIP samples, and some light water contamination in the inner cooling loop.  These features were modelled in the MCNP simulation \cite{target10}.
 
 \begin{figure}[h!] 
   \centering
-    \includegraphics[width=\textwidth]{graphics/target.eps}
+    \includegraphics[width=0.25\textwidth,trim={15cm 0 5cm 0},clip]{graphics/target.pdf}
      \caption{Vertical cross section of the target MCNP model geometry. \label{fig:target}}
 \end{figure}
 
-Since the detector is very far away from the neutron source, special methods had to be used in order to gather sufficient statistics in a reasonable amount of time.  A point detector XXX \cite{mcnp}.  
+Since the detector is very far away from the neutron source, special methods had to be used in order to gather sufficient statistics in a reasonable amount of time.  A point detector is a ``next event'' estimator that scores a tally at every neutron collision event \cite{mcnp}.  The contribution to the tally is weighted by the probability of the neutron scattering into the direction of the detector point and travelling to the detector without colliding again (i.e. weight is rediced by the attentuation of the material in between).  
 
-Using a point detector would be a reasonable solution if only cancluated the flux was desired, but the brightness also depends on the view able solid angle of the detector system.   The physical system responds to a view limited by the pinhole collimator and cadmium sheet, which produces a small, finite spot on detector surface.  A point detector would only see a single point of this view and wouldn't represent the average brightness (the measured quantity).  If the point detector were placed at the focal point of the collimator,   The solid angle of each point could be calculated, multiple point detectors used, and their induvidual spectra averaged to produce the average brightness, but this more complicated situation can be avoided by using a DXTRAN sphere instead of a point detector. A DXTRAN sphere blah blah XXX \cite{mcnp}.  Unlike a point detector, a DXTRAN sphere as a extent, so it can capture all the angles visible to the detector instead of those that pass through a single point.  A point detector placed at the focal point of the collimator should have a similar repsonse, but 
+Using a point detector would be a reasonable solution if only cancluated the flux was desired, but the brightness also depends on the view able solid angle of the detector system.   The physical system responds to a view limited by the pinhole collimator and cadmium sheet, which produces a small, finite spot on detector surface.  A regular point detector would only see a single point of this view and wouldn't report any angular information needed for caluclating the brightness.  If the point detector were placed at the crossing point of the collimation system, it would see the full flux visible to the detector, but it would summed over all angles.  In order to calculate the solid angle visible, a ``pinhole radiography tally'' was used in MCNP.  This tally calculates contributions in the same way, but it projects the contibutions through the point onto an image plane.  If such a projection is placed behind all the items which limit the detector view, the solid angle visible to the detector can be calculated by summing the solid angle each pixel corresponds to.
+
+Figure \ref{fig:pinhole_image} shows a pinhole radiography tally image generated at the upstream surface of the cadmium sheet with the pinhole placed at the horizontal collimation crossing point.  The Zapfen limits the view on the horizontal plane, so the hole in the cadmium lines up perfectly with projection of the Zapfen.  The other limiting objects are also projected onto the plane to show the planes where they limit the detector view.
 
 \begin{figure}[h!] 
   \centering
     \includegraphics[width=\textwidth]{graphics/pinhole.eps}
-     \caption{The flux image created by a pinhole radiography tally in MCNP at the collimation crossing focal point.  The image plane is at upstream surface of the cadmium sheet.  The magenta outline shows the extent of the hole in the sheet. \label{fig:pinhole_image}}
+     \caption{The flux image created by a pinhole radiography tally in MCNP at the collimation crossing focal point.  The image plane is at upstream surface of the cadmium sheet.  The outlines show the projections of the limiting geometry through the pinhole: Grey=cadmium hole, blue=beam port, magenta=Zapfen, yellow=Gd aperture. \label{fig:pinhole_image}}
 \end{figure}
 
-The beamline entrance and cadmium sheet restricts the solid angle visible to the detector to $6.92\times10^{-4}$ steradians.  Five measurements were done in total: centered in the beam port, +20 mm away from center (towards the target), -20 mm away from center (away from the target), centered with beryllium at 77 K in the beamline to show the 4 \AA bin, and without sapphire or beryllium.
+From this image, it was deduced that the total solid angle visible to the detector was limited to $2.1363\times10^{-5}$ steradians.  
+
+The hole is fully illuminated (there are no spots on the where a radiography tally produced a zero result), so the area used to normalize the spectra is the area of the hole (7.85398$\times 10^{-3}$ cm$^2$).
 
 
 
@@ -305,6 +309,7 @@ The MCNP
 \section{Measured Brightness}
 \label{sec:results}
 
+Five measurements were done in total: centered in the beam port, +20 mm away from center (towards the target), -20 mm away from center (away from the target), centered with beryllium at 77 K in the beamline to show the 4 \AA bin, and without sapphire or beryllium.
 
 \begin{figure}[h!] 
   \centering

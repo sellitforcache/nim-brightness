@@ -4,7 +4,7 @@ from pyne import mcnp, ace
 import math
 import pylab, numpy, sys, cPickle, progressbar, copy
 import matplotlib.pyplot as plt
-from matplotlib import cm, gridspec
+from matplotlib import cm, gridspec, colors
 from MCNPtools.to_energy import to_energy
 from MCNPtools.to_temperature import to_temperature
 from MCNPtools.to_wavelength import to_wavelength
@@ -197,14 +197,10 @@ new = mctal('/home/l_bergmann/repos/temp/ICON-center-19std.mctal')
 this_tal = new
 #std19.plot(tal=[5],obj=[8],options=['log','lethargy'])
 
-#### make circle for Cd hole
 cd_radius = 0.050
-theta  = numpy.linspace(0,2*numpy.pi,512)
-circ_x = cd_radius*numpy.cos(theta)
-circ_y = cd_radius*numpy.sin(theta)
 
 ### radiography tally
-rad_tal=135
+rad_tal=235
 rad_non_zero = 0
 tol=5e-8
 img_accepted=0.0
@@ -229,7 +225,7 @@ img_total=numpy.sum(img)
 img_avg  =img_total/count_num
 
 correction_factor_cd = img_accepted/img_total
-d=19.47530854
+d=19.681240460
 pix_str = 2.0*numpy.pi*(1.0-d/numpy.sqrt(d*d+0.0005*0.0005))
 total_str=pix_str*rad_non_zero
 print "   ========  "
@@ -252,11 +248,54 @@ ax.set_xlabel(r'x (cm)')
 ax.set_ylabel(r'y (cm)')
 imgax=ax.imshow(img,interpolation='none',aspect='auto',origin='lower',extent=[this_tal.tallies[rad_tal].cosines[0],this_tal.tallies[rad_tal].cosines[-1],this_tal.tallies[rad_tal].segments[0],this_tal.tallies[rad_tal].segments[-1]])
 c=plt.colorbar(imgax, format=ticker.FuncFormatter(fmt))
+jet = plt.get_cmap('jet') 
+cNorm  = colors.Normalize(vmin=0, vmax=1)
+scalarMap = cm.ScalarMappable(norm=cNorm, cmap=jet)
+ax.set_axis_bgcolor(scalarMap.to_rgba(0))
 c.set_label(r'Neutron Flux (n p$^{-1}$ cm$^{-2}$)')
-ax.plot(circ_x,circ_y,color=numpy.array([255.0,0.0,255.0])/255.0,linewidth=4,linestyle='--')
 
-#ax.set_ylim([-0.06,0.06])
-#ax.set_xlim([-0.06,0.06])
+
+### plot limits
+# circle for Cd hole
+theta  = numpy.linspace(0,2*numpy.pi,512)
+circ_x = cd_radius*numpy.cos(theta)
+circ_y = cd_radius*numpy.sin(theta)
+ax.plot(circ_x,circ_y,color=numpy.array([155.0,155.0,155.0])/255.0,linewidth=4,linestyle='--')
+# rectangle for Zapfen
+la=19.681240460
+b =4.0
+l =1577.5
+a =la*b/(l-la)
+zap_x = [-a , a, a , -a, -a]
+b =6.0
+l =1577.5
+a =la*b/(l-la)
+zap_y = [-a , -a , a , a, -a]
+ax.plot(zap_x,zap_y,color=numpy.array([255.0,0.0,255.0])/255.0,linewidth=4,linestyle='--')
+# rectangle for steel
+b =4.0
+l =1510.1
+a =la*b/(l-la)
+steel_x = [-a , a, a , -a, -a]
+b =4.0
+l =1510.1
+a =la*b/(l-la)
+steel_y = [-a , -a , a , a, -a]
+ax.plot(steel_x,steel_y,color=numpy.array([0.0,255.0,255.0])/255.0,linewidth=4,linestyle='--')
+#circle for aperture
+b =4.0
+l =1230.8
+a =la*b/(l-la)
+ap_x = a*numpy.cos(theta)
+ap_y = a*numpy.sin(theta)
+ax.plot(ap_x,ap_y,color=numpy.array([255.0,255.0,0.0])/255.0,linewidth=4,linestyle='--')
+
+
+
+
+
+ax.set_ylim([-0.08,0.08])
+ax.set_xlim([-0.08,0.08])
 plt.show()
 
 # 1d model efficiency
@@ -323,7 +362,7 @@ dex = this_tal.tallies[5]._hash(obj=0)
 tal = this_tal.tallies[5].vals[dex]['data'][:-1]
 wvl = to_wavelength(ene)
 widths = -1.0*numpy.diff(wvl)
-this_tal.plot(tal=[5],obj=[7])
+#this_tal.plot(tal=[5],obj=[7])
 
 ## compare PD and radiography
 print "   ========  "
@@ -337,9 +376,9 @@ sa_cadmium    = get_view_sa(b=0.05, l= 0.1,   thk= 0.1)
 sa_sapphire   = get_view_sa(b=1.0,  l=41.835, thk=25.0)
 sa_steel      = get_view_sa(b=2.5,  l=784.8,  thk=30.0)
 sa_aperture   = get_view_sa(b=4.0,  l=1230.8, thk=0.1)
+sa_tube       = get_view_sa(b=4.0,  l=1510.1, thk=271.8)
 sa_zapfen     = get_view_sa(b=4.0,  l=1577.5, thk=450.0)
 sa_nozzle     = get_view_sa(b=6.9,  l=1720.0, thk=0.1)
-sa_measure       = 2.0*numpy.pi*(1.0-101./numpy.sqrt(101.0*101.0+1.5*1.5))
 
 print "  HORIZONTAL ========  "
 print "solid angle collimator     %6.4E"%sa_collimator
@@ -347,9 +386,9 @@ print "solid angle cadmium        %6.4E"%sa_cadmium
 print "solid angle sapphire       %6.4E"%sa_sapphire
 print "solid angle steel          %6.4E"%sa_steel
 print "solid angle aperture       %6.4E"%sa_aperture
+print "solid angle tube           %6.4E"%sa_tube
 print "solid angle zapfen         %6.4E"%sa_zapfen
 print "solid angle nozzle         %6.4E"%sa_nozzle
-print "solid angle measurement    %6.4E"%sa_measure
 
 
 ### solid angles
@@ -357,10 +396,10 @@ sa_collimator = get_view_sa(b=0.1,  l=10.1,   thk=10.0)
 sa_cadmium    = get_view_sa(b=0.05, l= 0.1,   thk= 0.1)
 sa_sapphire   = get_view_sa(b=1.0,  l=41.835, thk=25.0)
 sa_steel      = get_view_sa(b=2.5,  l=784.8,  thk=30.0)
-sa_aperture   = get_view_sa(b=4.0,  l=1230.8, thk=0.1)
-sa_zapfen     = get_view_sa(b=6.0,  l=1577.5, thk=450.0)
+sa_aperture   = get_view_sa(b=4.0,  l=1230.8, thk=150.5)
+sa_tube       = get_view_sa(b=4.0,  l=1510.1, thk=271.8)
+sa_zapfen     = get_view_sa(b=6.0,  l=1577.5, thk=250.0)
 sa_nozzle     = get_view_sa(b=6.9,  l=1720.0, thk=0.1)
-sa_measure       = 2.0*numpy.pi*(1.0-101./numpy.sqrt(101.0*101.0+1.5*1.5))
 
 print "  VERTICAL ========  "
 print "solid angle collimator     %6.4E"%sa_collimator
@@ -368,20 +407,20 @@ print "solid angle cadmium        %6.4E"%sa_cadmium
 print "solid angle sapphire       %6.4E"%sa_sapphire
 print "solid angle steel          %6.4E"%sa_steel
 print "solid angle aperture       %6.4E"%sa_aperture
+print "solid angle tube           %6.4E"%sa_tube
 print "solid angle zapfen         %6.4E"%sa_zapfen
 print "solid angle nozzle         %6.4E"%sa_nozzle
-print "solid angle measurement    %6.4E"%sa_measure
 
 
 ### solid angles
-sa_collimator = get_view_sa(b=numpy.sqrt(2)*0.1,            l=10.1,   thk=10.0)
+sa_collimator = get_view_sa(b=0.1,                          l=10.1,   thk=10.0)
 sa_cadmium    = get_view_sa(b=0.05,                         l= 0.1,   thk= 0.1)
 sa_sapphire   = get_view_sa(b=numpy.sqrt(2)*1.0,            l=41.835, thk=25.0)
 sa_steel      = get_view_sa(b=numpy.sqrt(2)*2.5,            l=784.8,  thk=30.0)
 sa_aperture   = get_view_sa(b=4.0,                          l=1230.8, thk=0.1)
+sa_tube       = get_view_sa(b=numpy.sqrt(2)*4.0,            l=1510.1, thk=271.8)
 sa_zapfen     = get_view_sa(b=numpy.sqrt(4.0*4.0+6.0*6.0),  l=1577.5, thk=450.0)
 sa_nozzle     = get_view_sa(b=numpy.sqrt(2)*6.9,            l=1720.0, thk=0.1)
-sa_measure       = 2.0*numpy.pi*(1.0-101./numpy.sqrt(101.0*101.0+1.5*1.5))
 
 print "  DIAGONAL ========  "
 print "solid angle collimator     %6.4E"%sa_collimator
@@ -389,15 +428,13 @@ print "solid angle cadmium        %6.4E"%sa_cadmium
 print "solid angle sapphire       %6.4E"%sa_sapphire
 print "solid angle steel          %6.4E"%sa_steel
 print "solid angle aperture       %6.4E"%sa_aperture
+print "solid angle tube           %6.4E"%sa_tube
 print "solid angle zapfen         %6.4E"%sa_zapfen
 print "solid angle nozzle         %6.4E"%sa_nozzle
-print "solid angle measurement    %6.4E"%sa_measure
-
-
 
 
 tal_normed = charge_per_milliamp*numpy.divide(tal,widths*total_str)
-
+sa_measure       = 2.0*numpy.pi*(1.0-101./numpy.sqrt(101.0*101.0+1.5*1.5))
 measurement[1] = numpy.array(measurement[1])
 
 # plot spectra

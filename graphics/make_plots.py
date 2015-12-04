@@ -304,7 +304,7 @@ plt.show()
 
 # final measurement
 measurement = [[],[]]
-f=open('/home/l_bergmann/Documents/nim-brightness/meas.csv','r')
+f=open('/home/l_bergmann/Documents/nim-brightness/brightness_measurement.csv','r')
 for line in f:
 	nums = line.split(',')
 	measurement[0].append(float(nums[0]))

@@ -271,7 +271,7 @@ Since the detector is very far away from the neutron source, special methods had
 
 Using a point detector would be a reasonable solution if only cancluated the flux was desired, but the brightness also depends on the view able solid angle of the detector system.   The physical system responds to a view limited by the pinhole collimator and cadmium sheet, which produces a small, finite spot on detector surface.  A regular point detector would only see a single point of this view and wouldn't report any angular information needed for caluclating the brightness.  If the point detector were placed at the crossing point of the collimation system, it would see the full flux visible to the detector, but it would summed over all angles.  In order to calculate the solid angle visible, a ``pinhole radiography tally'' was used in MCNP.  This tally calculates contributions in the same way, but it projects the contibutions through the point onto an image plane.  If such a projection is placed behind all the items which limit the detector view, the solid angle visible to the detector can be calculated by summing the solid angle each pixel corresponds to.
 
-Figure \ref{fig:pinhole_image} shows a pinhole radiography tally image generated at the upstream surface of the cadmium sheet with the pinhole placed at the horizontal collimation crossing point.  The Zapfen limits the view on the horizontal plane, so the hole in the cadmium lines up perfectly with projection of the Zapfen.  The other limiting objects are also projected onto the plane to show the planes where they limit the detector view.
+Figure \ref{fig:pinhole_image} shows a pinhole radiography tally image generated at the upstream surface of the cadmium sheet with the pinhole placed at the horizontal collimation crossing point.  The Zapfen limits the view on the horizontal plane, so the hole in the cadmium lines up perfectly with projection of the Zapfen, confirming that the Zapfen is indeed the limiting member in the horizontal plane of the collimaiton system.  The other limiting objects are also projected onto the plane to show the planes where they limit the detector view.  They are shown as dashed colored lines in Figure \ref{fig:pinhole_image}.
 
 \begin{figure}[h!] 
   \centering
@@ -279,9 +279,7 @@ Figure \ref{fig:pinhole_image} shows a pinhole radiography tally image generated
      \caption{The flux image created by a pinhole radiography tally in MCNP at the collimation crossing focal point.  The image plane is at upstream surface of the cadmium sheet.  The outlines show the projections of the limiting geometry through the pinhole: Grey=cadmium hole, blue=beam port, magenta=Zapfen, yellow=Gd aperture. \label{fig:pinhole_image}}
 \end{figure}
 
-From this image, it was deduced that the total solid angle visible to the detector was limited to $2.1363\times10^{-5}$ steradians.  
-
-The hole is fully illuminated (there are no spots on the where a radiography tally produced a zero result), so the area used to normalize the spectra is the area of the hole (7.85398$\times 10^{-3}$ cm$^2$).
+From this image, it was deduced that the total solid angle visible to the detector was limited to $2.1363\times10^{-5}$ steradians.  The hole is fully illuminated (there are no spots on the where a radiography tally produced a zero result), so the area used to normalize the spectra is the area of the hole (7.85398$\times 10^{-3}$ cm$^2$).
 
 
 
@@ -295,14 +293,15 @@ The efficiency curve of the helium detector was also measured and compared to ca
      \label{eqn:eff2} \Sigma_i(\lambda) = a_i\lambda+b_i
 \end{gather}
 
-The MCNP
+The efficieny curve was calculated from the MCNP model by directing a stream of neutrons in a 0.5 mm radius with a flat spectrum towards the midplane of the spherical detector, tallying the absorbtion reaction rate in $^{3}$He, then divding the absobtion rate by the source spectrum.  The measured efficiency curve was done at the BOA beamline at PSI, xxx MORE HERE.
+
+Figure \ref{fig:eff} shows the two calculated efficiency curves agaist the measured curve.  The MCNP curve agrees very well with the measured curve, and was used to produce the measured brightness spectrum in Section \ref{sec:results}.
 
 \begin{figure}[h!] 
   \centering
     \includegraphics[width=\textwidth]{graphics/eff.eps}
-     \caption{The efficiency curves. \label{fig:geom} }
+     \caption{The efficiency curves. \label{fig:eff} }
 \end{figure}
-
 
 
 

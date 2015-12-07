@@ -146,6 +146,8 @@
 \author{Uwe Filges}
 %\ead{uwe.filges@psi.ch}
 
+\author{Ander Kaestner}
+%\ead{anders.kaestner@psi.ch} 
 
 
 \address{Paul Scherrer Institut, Villigen, Switzerland}
@@ -156,7 +158,7 @@
 \end{abstract}
 
 \begin{keyword}
-brightness \sep cold
+spallation \sep neutron \sep source \sep brightness \sep cold
 
 
 \end{keyword}
@@ -219,7 +221,7 @@ The principle components in the neutron path, listed in increasing distance from
 \end{enumerate}
 
 
-Since brightness/brilliance was to goal of the measurement, the solid angle seen by the detector is needed to normalize the spectra.  The cadmium sheet limits the sensitive region of the helium detector to a 1 mm diameter circle, and the the other items in the beam path create a system that limited the angular view of the detector.  Table \ref{tab:sa} shows the maximum solid angle of the various items in the neutron beam.  The values are the minimum of the item's self-collimation (due to its thickness) and the collimation of the system formed by the item and the hole in the cadmium sheet.  Figure \ref{fig:solid_angle} shows a cartoon of the collimation system formed by the items and the cadmium hole.
+Since brightness/brilliance was to goal of the measurement, the solid angle seen by the detector is needed to normalize the spectra.  The cadmium sheet limits the sensitive region of the helium detector to a 1 mm diameter circle, and the the other items in the beam path create a system that limited the angular view of the detector.  Table \ref{tab:sa} shows the maximum solid angle of the various items in the neutron beam.  The values are the minimum of the item's self-collimation (due to its thickness) and the collimation of the system formed by the item and the hole in the cadmium sheet.  Figure \ref{fig:solid_angle} shows a cartoon of the collimation system formed by the items and the cadmium hole.  It can be seen that in the horizontal plane, the Zapfen opening (where the beamline opens into large nozzle in the moderator tank) is the limiting item.  In the vertical plane, the limiting item is the steel shielding blocks positioned before the chopper.  At 45 degrees, the aperture wheel is the limiting case.  These items are shown in the pinhole image calculated with MCNP and discussed in Section \ref{sec:sim}.
 
 \begin{figure}[h!] 
   \centering
@@ -254,9 +256,8 @@ Since brightness/brilliance was to goal of the measurement, the solid angle seen
 \end{center}
 \end{table}
 
-It can be seen that in the horizontal plane, the Zapfen opening (where the beamline opens into large nozzle in the moderator tank) is the limiting item.  In the vertical plane, the limiting item is the steel shielding blocks positioned before the chopper.  At 45 degrees, the aperture wheel is the limiting case.  These items are shown in the pinhole image calculated with MCNP and discussed in Section \ref{sec:sim}.
 
-\section{Simulations and Solid Angle}
+\section{Simulations and Solid Angle Determination}
 \label{sec:sim}
 
 Simulations were done with MCNP6.1 and with ENDF/B-VII.1 data.  Thermal scattering data for the room temperature sapphire crystals were used \cite{sapp}, as were 77 K thermal scattering data for beryllium, 19 K data for ortho-/para-deuterium, 273 K data for heavy water, 273 K data for light water \cite{mcnp6}, and 25 K data for aluminum, and 25 K data for zirconium \cite{IKE}.  The aliumun and zirconium data are important for accurately simulating the transmission through the various hulls surrounding the deuterium in the cold source.  The model geometry of has already been shown in Figure \ref{fig:geom}, and was created to be as true-to-life as possible.  The target in use during the measurement was ``target 10'', which is shown in Figure \ref{fig:target}. This target had a hemispherical beam entrance window, STIP samples, and some light water contamination in the inner cooling loop.  These features were modelled in the MCNP simulation \cite{target10}.

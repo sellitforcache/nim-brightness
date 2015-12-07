@@ -190,9 +190,9 @@ Na     = 6.0221409e+23  # number/mol
 
 
 # tallies
-std19 = mctal('/home/l_bergmann/Documents/nim-brightness/ICON-PDarraz.mctal')
-ike19 = mctal('/home/l_bergmann/Documents/nim-brightness/ICON-PDarray-19IKE.mctal')
-ike24 = mctal('/home/l_bergmann/Documents/nim-brightness/ICON-PDarray-24IKE.mctal')
+#std19 = mctal('/home/l_bergmann/Documents/nim-brightness/ICON-PDarraz.mctal')
+#ike19 = mctal('/home/l_bergmann/Documents/nim-brightness/ICON-PDarray-19IKE.mctal')
+#ike24 = mctal('/home/l_bergmann/Documents/nim-brightness/ICON-PDarray-24IKE.mctal')
 new = mctal('/home/l_bergmann/repos/temp/ICON-center-19std.mctal')
 this_tal = new
 #std19.plot(tal=[5],obj=[8],options=['log','lethargy'])
@@ -357,9 +357,10 @@ f.close()
 #measurement[1] = numpy.multiply(measurement[1][1:],numpy.divide(old_eff,new_eff))
 
 # scale and normalize the simulation data
-ene = numpy.array(this_tal.tallies[5].energies[:-1])
-dex = this_tal.tallies[5]._hash(obj=0)
-tal = this_tal.tallies[5].vals[dex]['data'][:-1]
+tal_num=5
+ene = numpy.array(this_tal.tallies[tal_num].energies[:-1])
+dex = this_tal.tallies[tal_num]._hash(obj=7)
+tal = this_tal.tallies[tal_num].vals[dex]['data'][:-1]
 wvl = to_wavelength(ene)
 widths = -1.0*numpy.diff(wvl)
 #this_tal.plot(tal=[5],obj=[7])

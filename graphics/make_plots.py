@@ -243,7 +243,7 @@ def fmt(x, pos):
 #  plot it
 f=plt.figure()
 ax=f.add_subplot(111)
-ax.set_title('Pinhole Image at Cd/Zapfen System Focal Point')
+ax.set_title('Pinhole Image at Cd/Zapfen System Crossing Point')
 ax.set_xlabel(r'x (cm)')
 ax.set_ylabel(r'y (cm)')
 imgax=ax.imshow(img,interpolation='none',aspect='auto',origin='lower',extent=[this_tal.tallies[rad_tal].cosines[0],this_tal.tallies[rad_tal].cosines[-1],this_tal.tallies[rad_tal].segments[0],this_tal.tallies[rad_tal].segments[-1]])
@@ -252,7 +252,7 @@ jet = plt.get_cmap('jet')
 cNorm  = colors.Normalize(vmin=0, vmax=1)
 scalarMap = cm.ScalarMappable(norm=cNorm, cmap=jet)
 ax.set_axis_bgcolor(scalarMap.to_rgba(0))
-c.set_label(r'Neutron Flux (n p$^{-1}$ cm$^{-2}$)')
+c.set_label(r'Neutron Flux (n cm$^{-2}$ p$^{-1}$)')
 
 
 ### plot limits

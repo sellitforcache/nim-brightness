@@ -193,8 +193,9 @@ Na     = 6.0221409e+23  # number/mol
 #std19 = mctal('/home/l_bergmann/Documents/nim-brightness/ICON-PDarraz.mctal')
 #ike19 = mctal('/home/l_bergmann/Documents/nim-brightness/ICON-PDarray-19IKE.mctal')
 #ike24 = mctal('/home/l_bergmann/Documents/nim-brightness/ICON-PDarray-24IKE.mctal')
-new = mctal('/home/l_bergmann/repos/temp/ICON-center-19std.mctal')
-this_tal = new
+#new = mctal('/home/l_bergmann/repos/temp/ICON-center-19std.mctal')
+stip= mctal('/home/l_bergmann/repos/temp/ICON-center-19std-STIP.mctal')
+this_tal = stip
 #std19.plot(tal=[5],obj=[8],options=['log','lethargy'])
 
 cd_radius = 0.050

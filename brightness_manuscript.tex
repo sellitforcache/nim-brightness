@@ -194,6 +194,14 @@ There is an extended shutdown of SINQ ambitiously planned for 2018 which will pr
 
 The brightness measurement was conducted on July 21, 2014 in the ICON beamline at SINQ.  ICON is the cold neutron imaging facility at the neutron spallation source SINQ. The beamline offers an aperture wheel to change beam intensity and collimation ratio, as well as large evaculated flight tubes to minimize losses from scattering in the air \cite{icon}.  ICON was chosen since it does not incorporate any neutron optics, has good collimation, and looks directly on the surface of the cold source.  This removes additional uncertainty associated with the current state of the neutron guides and the physics involved with neutron-refecltive surfaces.
 
+
+%
+%
+%
+%
+%
+
+
 \section{Experimental Setup}
 \label{sec:setup}
 
@@ -271,6 +279,11 @@ Since brightness/brilliance was to goal of the measurement, the solid angle seen
 \end{center}
 \end{table}
 
+%
+%
+%
+%
+%
 
 \section{Monte Carlo Simulations}
 \label{sec:sim}
@@ -283,6 +296,11 @@ Simulations were done with MCNP6.1 and with ENDF/B-VII.1 data.  Thermal scatteri
      \caption{Vertical cross section of the target MCNP model geometry. \label{fig:target}}
 \end{figure}
 
+%
+%
+%
+%
+%
 
 \subsection{Solid Angle Calculation}
 \label{subsec:solidangle}
@@ -302,19 +320,48 @@ Figure \ref{fig:pinhole_image} shows a pinhole radiography tally image generated
 
 From this image, it was deduced that the total solid angle visible to the detector was limited to $2.1363\times10^{-5}$ steradians.  The hole is fully illuminated (there are no spots on the Cd sheet where a radiography tally produced a zero result), so the area used to normalize the spectra is the area of the hole (7.85398$\times 10^{-3}$ cm$^2$).
 
+
+%
+%
+%
+%
+%
+
+
+
 \subsection{Sensitivity to Scattering Data}
 \label{subsec:data}
 
-The energy spectrum of the neutrons emitted from the liquid deuterium in the cold source is \cite{granada_d2,granada_d2o_1,granada_d2o_2,granada_d2o_3}.
+To calculate an accurate neutron spectrum that is emitted from the liquid deuterium in the cold source at lower energies, thermal scattering data must be used to account for any effects from molecular bonds, crystal sctructure, nuclear alignment, etc.  There were several data libraries available when doing these MCNP calculations.  Namely, the default libraries from the ENDF/B-VII.1 data \cite{endf_d2}, several libraries from the Univisersit of Stuttgart \cite{IKE}, and those published by Centro At\'{o}mico Bariloche (CAB) \cite{granada_d2}.  The spectra calculated at the helium detector position are shown in Figure \ref{fig:data_compare_d2} for the three types of liquid D$_2$ data.
 
 \begin{figure}[h!] 
   \centering
-    \includegraphics[width=\columnwidth]{graphics/data_compare.eps}
-     \caption{data   \label{fig:data_compare}}
+    \includegraphics[width=\columnwidth]{graphics/data_compare_d2.eps}
+     \caption{data   \label{fig:data_compare_d2}}
 \end{figure}
+
+Bariloche also released improved thermal scattering data for light and heavy water as well \cite{granada_d2o_1,granada_d2o_2,granada_d2o_3}.  The effect of replacing the ENDF/B-VII.1 data with the CAB data for both light and heavy water in the SINQ tank are shown in Figure \ref{fig:data_compare_d2o}.
+
+\begin{figure}[h!] 
+  \centering
+    \includegraphics[width=\columnwidth]{graphics/data_compare_d2o.eps}
+     \caption{data   \label{fig:data_compare_d2o}}
+\end{figure}
+
+
+something more
+
+%
+%
+%
+%
+%
 
 \subsection{Sensitivity to Ortho-/Para-D$_2$ Fraction and D$_2$ Density}
 \label{subsec:frac_den}
+
+Other than the data themselves, the spectrum emitted from the cold source is also sensitive to the density and the ortho- and para-D$_2$ fractions of the liquid deuterium.  These parameters effect the scttering length as well as the scattering kinematics of the moderator.
+
 
 \begin{figure}[h!] 
   \centering
@@ -327,6 +374,14 @@ The energy spectrum of the neutrons emitted from the liquid deuterium in the col
     \includegraphics[width=\columnwidth]{graphics/op_compare.eps}
      \caption{op \label{fig:op_compare}}
 \end{figure}
+
+
+%
+%
+%
+%
+%
+
 
 \section{Detector Efficiency}
 \label{sec:eff}
@@ -348,7 +403,11 @@ Figure \ref{fig:eff} shows the two calculated efficiency curves agaist the measu
      \caption{The efficiency curves. \label{fig:eff} }
 \end{figure}
 
-
+%
+%
+%
+%
+%
 
 \section{Measured Brightness and Best Matching Case}
 \label{sec:results}
@@ -361,21 +420,42 @@ Five measurements were done in total: centered in the beam port, +20 mm away fro
      \caption{Measured and simulated source brightness at ICON. \label{fig:brightness} }
 \end{figure}
 
+
+%
+%
+%
+%
+%
+
+
 \section{Discussion}
 \label{sec:discussion}
 
-
+%
+%
+%
+%
+%
 
 \section{Conclusions}
 \label{sec:conclusions}
 
-
+%
+%
+%
+%
+%
 
 \section*{Acknowledgements}
 \label{sec:ack}
 
 This work was supported by Swiss National Science Foundation grant 200021\_150048/1
 
+%
+%
+%
+%
+%
 
 \section*{References}
 \bibliographystyle{elsarticle-num-names.bst}

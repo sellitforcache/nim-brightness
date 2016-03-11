@@ -88,6 +88,20 @@
 
 % \biboptions{}
 
+
+%\makeatletter
+%\providecommand{\doi}[1]{%
+%  \begingroup
+%    \let\bibinfo\@secondoftwo
+%    \urlstyle{rm}%
+%    \href{http://dx.doi.org/#1}{%
+%      doi:\discretionary{}{}{}%
+%      \nolinkurl{#1}%
+%    }%
+%  \endgroup
+%}
+%\makeatother
+
 \let\originaleqref\eqref
 \renewcommand{\eqref}{Eq.~\originaleqref}
 
@@ -187,7 +201,7 @@ The layout of the experimental is shown in Figure \ref{fig:geom}, which is a hor
 
 \begin{figure}[h!] 
   \centering
-    \includegraphics[width=\textwidth]{graphics/geom_bw_labels.eps}
+    \includegraphics[width=\columnwidth]{graphics/geom_bw_labels.eps}
      \caption{Geometry \label{fig:geom} }
 \end{figure}
 
@@ -195,7 +209,7 @@ Figure \ref{fig:det} shows a photograph of the $^3$He detector with the iron pin
 
 \begin{figure}[h!] 
   \centering
-    \includegraphics[width=\textwidth]{graphics/det.eps}
+    \includegraphics[width=\columnwidth]{graphics/det.eps}
      \caption{$^3$He detector with iron collimator. \label{fig:det}}
 \end{figure}
 
@@ -226,7 +240,7 @@ Since brightness/brilliance was to goal of the measurement, the solid angle seen
 
 \begin{figure}[h!] 
   \centering
-    \includegraphics[width=\textwidth]{graphics/solid_angle.eps}
+    \includegraphics[width=\columnwidth]{graphics/solid_angle.eps}
      \caption{The limiting collimation system in the measurement in the horizontal plane (not to scale), and the crossing point where the point detector was place in the MCNP simulations. \label{fig:solid_angle}}
 \end{figure}
 
@@ -265,7 +279,7 @@ Simulations were done with MCNP6.1 and with ENDF/B-VII.1 data.  Thermal scatteri
 
 \begin{figure}[h!] 
   \centering
-    \includegraphics[width=0.25\textwidth,trim={5cm 0 5cm 0},clip]{graphics/target.eps}
+    \includegraphics[width=0.25\columnwidth,trim={5cm 0 5cm 0},clip]{graphics/target.eps}
      \caption{Vertical cross section of the target MCNP model geometry. \label{fig:target}}
 \end{figure}
 
@@ -282,7 +296,7 @@ Figure \ref{fig:pinhole_image} shows a pinhole radiography tally image generated
 
 \begin{figure}[h!] 
   \centering
-    \includegraphics[width=\textwidth]{graphics/pinhole.eps}
+    \includegraphics[width=\columnwidth]{graphics/pinhole.eps}
      \caption{The flux image created by a pinhole radiography tally in MCNP at the horizontal collimation crossing point.  The image plane is at upstream surface of the cadmium sheet.  The outlines show the projections of the limiting geometry through the pinhole: Grey=cadmium hole, blue=beam port, magenta=Zapfen, yellow=Gd aperture.  Note, the flux vlaues shown are those resulting from a pinhole-limited view (not the real, full view).  \label{fig:pinhole_image}}
 \end{figure}
 
@@ -291,13 +305,28 @@ From this image, it was deduced that the total solid angle visible to the detect
 \subsection{Sensitivity to Scattering Data}
 \label{subsec:data}
 
-The energy spectrum of the neutrons emitted from the liquid deuterium in the cold source is 
+The energy spectrum of the neutrons emitted from the liquid deuterium in the cold source is \cite{granada_d2,granada_d2o_1,granada_d2o_2,granada_d2o_3}.
 
-
+\begin{figure}[h!] 
+  \centering
+    \includegraphics[width=\columnwidth]{graphics/data_compare.eps}
+     \caption{data   \label{fig:data_compare}}
+\end{figure}
 
 \subsection{Sensitivity to Ortho-/Para-D$_2$ Fraction and D$_2$ Density}
 \label{subsec:frac_den}
 
+\begin{figure}[h!] 
+  \centering
+    \includegraphics[width=\columnwidth]{graphics/density_compare.eps}
+     \caption{density \label{fig:density_compare}}
+\end{figure}
+
+\begin{figure}[h!] 
+  \centering
+    \includegraphics[width=\columnwidth]{graphics/op_compare.eps}
+     \caption{op \label{fig:op_compare}}
+\end{figure}
 
 \section{Detector Efficiency}
 \label{sec:eff}
@@ -315,7 +344,7 @@ Figure \ref{fig:eff} shows the two calculated efficiency curves agaist the measu
 
 \begin{figure}[h!] 
   \centering
-    \includegraphics[width=\textwidth]{graphics/eff.eps}
+    \includegraphics[width=\columnwidth]{graphics/eff.eps}
      \caption{The efficiency curves. \label{fig:eff} }
 \end{figure}
 
@@ -328,7 +357,7 @@ Five measurements were done in total: centered in the beam port, +20 mm away fro
 
 \begin{figure}[h!] 
   \centering
-    \includegraphics[width=\textwidth]{graphics/brightness.eps}
+    \includegraphics[width=\columnwidth]{graphics/brightness.eps}
      \caption{Measured and simulated source brightness at ICON. \label{fig:brightness} }
 \end{figure}
 
@@ -350,7 +379,7 @@ This work was supported by Swiss National Science Foundation grant 200021\_15004
 
 \section*{References}
 \bibliographystyle{elsarticle-num-names.bst}
-\bibliography{references}
+\bibliography{brightness_manuscript}
 
 \end{document}
 

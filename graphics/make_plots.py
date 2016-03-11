@@ -177,6 +177,7 @@ def get_view_sa(a=0.05,b=0,l=0,thk=0):
 	sa_collimator = 2.0*numpy.pi*(1.0-cosa)
 
 	### return minimum
+	print "detector system limit",sa_finite_d," self limit ", sa_collimator
 	return numpy.minimum(sa_finite_d,sa_collimator)
 
 
@@ -190,11 +191,14 @@ Na     = 6.0221409e+23  # number/mol
 
 
 # tallies
-#std19 = mctal('/home/l_bergmann/Documents/nim-brightness/ICON-PDarraz.mctal')
+inv = mctal('/home/l_bergmann/repos/temp/ICON-PDarraz.mctal')
 #ike19 = mctal('/home/l_bergmann/Documents/nim-brightness/ICON-PDarray-19IKE.mctal')
 #ike24 = mctal('/home/l_bergmann/Documents/nim-brightness/ICON-PDarray-24IKE.mctal')
-#new = mctal('/home/l_bergmann/repos/temp/ICON-center-19std.mctal')
+new = mctal('/home/l_bergmann/repos/temp/ICON-center-19std.mctal')
 stip= mctal('/home/l_bergmann/repos/temp/ICON-center-19std-STIP.mctal')
+deg24 = mctal('/home/l_bergmann/repos/temp/ICON-sph-stip-24kden.mctal')
+deg25 = mctal('/home/l_bergmann/repos/temp/ICON-sph-stip-25kden.mctal')
+deg28 = mctal('/home/l_bergmann/repos/temp/ICON-sph-stip-28kden.mctal')
 this_tal = stip
 #std19.plot(tal=[5],obj=[8],options=['log','lethargy'])
 
@@ -359,11 +363,32 @@ f.close()
 
 # scale and normalize the simulation data
 tal_num=5
-ene = numpy.array(this_tal.tallies[tal_num].energies[:-1])
-dex = this_tal.tallies[tal_num]._hash(obj=7)
-tal = this_tal.tallies[tal_num].vals[dex]['data'][:-1]
-wvl = to_wavelength(ene)
-widths = -1.0*numpy.diff(wvl)
+ene1  = numpy.array(this_tal.tallies[tal_num].energies[:-1])
+dex  = this_tal.tallies[tal_num]._hash(obj=0)
+tal1 = this_tal.tallies[tal_num].vals[dex]['data'][:-1]
+
+dex  = new.tallies[tal_num]._hash(obj=0)
+tal2 = new.tallies[tal_num].vals[dex]['data'][:-1]
+
+dex  = inv.tallies[tal_num]._hash(obj=7)
+tal3 = inv.tallies[tal_num].vals[dex]['data'][:-1]
+
+
+ene4  = numpy.array(deg24.tallies[tal_num].energies[:-1])
+dex  = deg24.tallies[tal_num]._hash(obj=0,cos=0)
+tal4 = deg24.tallies[tal_num].vals[dex]['data'][:-1]
+
+dex  = deg25.tallies[tal_num]._hash(obj=0,cos=0)
+tal5 = deg25.tallies[tal_num].vals[dex]['data'][:-1]
+
+dex  = deg28.tallies[tal_num]._hash(obj=0,cos=0)
+tal6 = deg28.tallies[tal_num].vals[dex]['data'][:-1]
+
+
+wvl1 = to_wavelength(ene1)
+widths1 = -1.0*numpy.diff(wvl1)
+wvl4 = to_wavelength(ene4)
+widths4 = -1.0*numpy.diff(wvl4)
 #this_tal.plot(tal=[5],obj=[7])
 
 ## compare PD and radiography
@@ -435,19 +460,98 @@ print "solid angle zapfen         %6.4E"%sa_zapfen
 print "solid angle nozzle         %6.4E"%sa_nozzle
 
 
-tal_normed = charge_per_milliamp*numpy.divide(tal,widths*total_str)
-sa_measure       = 2.0*numpy.pi*(1.0-101./numpy.sqrt(101.0*101.0+1.5*1.5))
+tal1_normed = charge_per_milliamp*numpy.divide(tal1,widths1*total_str)
+tal2_normed = charge_per_milliamp*numpy.divide(tal2,widths1*total_str)
+tal3_normed = charge_per_milliamp*numpy.divide(tal3,widths1*total_str)
+
+tal4_normed = charge_per_milliamp*numpy.divide(tal4,widths4*total_str)
+tal5_normed = charge_per_milliamp*numpy.divide(tal5,widths4*total_str)
+tal6_normed = charge_per_milliamp*numpy.divide(tal6,widths4*total_str)
+sa_measure  = 6.28E-4 #2.0*numpy.pi*(1.0-101./numpy.sqrt(101.0*101.0+1.5*1.5))
 measurement[1] = numpy.array(measurement[1])
 
 # plot spectra
 f=plt.figure()
 ax=f.add_subplot(111)
-ax.plot(measurement[0][:],numpy.multiply(measurement[1],sa_measure/total_str),linewidth=2,label='Measurement')
-make_steps(ax,wvl,[0],tal_normed,linewidth=2,label='MCNP',options=['lin'])
+ax.plot(measurement[0][:],numpy.multiply(measurement[1][:],sa_measure/total_str),linewidth=2,label='Measurement')
+make_steps(ax,wvl1,[0],tal1_normed,linewidth=2,label='MCNP - STIP,  SPHERICAL',options=['lin'])
+make_steps(ax,wvl1,[0],tal2_normed,linewidth=2,label='MCNP - NOSTIP, INVERTED',options=['lin'])
+make_steps(ax,wvl1,[0],tal3_normed,linewidth=2,label='MCNP - NOSTIP, INVERTED, MISALIGNED',options=['lin'])
+make_steps(ax,wvl4,[0],tal4_normed,linewidth=2,label='MCNP - STIP,  SPHERICAL, 24K density',options=['lin'])
+make_steps(ax,wvl4,[0],tal5_normed,linewidth=2,label='MCNP - STIP,  SPHERICAL, 25K density',options=['lin'])
+make_steps(ax,wvl4,[0],tal6_normed,linewidth=2,label='MCNP - STIP,  SPHERICAL, 28K density',options=['lin'])
 ax.set_xlabel(r'Wavelength (\AA)')
 ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ str$^{-1}$)')
-ax.set_ylim([0,5e11])
+#ax.set_ylim([0,5e11])
 ax.set_xlim([0,12])
 ax.grid(1)
 plt.legend(loc=1)
 plt.show()
+
+
+#case=['MCNP - STIP,  SPHERICAL','MCNP - NOSTIP, INVERTED','MCNP - NOSTIP, INVERTED, MISALIGNED']
+#mctals={}
+#mctal_names={}
+#areas={}
+#segs={}
+#tals={}
+#objs={}
+#dex={}
+#
+#mctal_names[case[0]]='/home/l_bergmann/repos/temp/ICON-center-19std-STIP.mctal'
+#mctal_names[case[1]]='/home/l_bergmann/repos/temp/ICON-center-19std.mctal'
+#mctal_names[case[2]]='/home/l_bergmann/repos/temp/ICON-PDarraz.mctal'
+#areas[case[0]]=1.0
+#areas[case[1]]=1.0
+#areas[case[2]]=1.0
+#segs[case[0]]=0
+#segs[case[1]]=0
+#segs[case[2]]=0
+#tals[case[0]]=5
+#tals[case[1]]=5
+#tals[case[2]]=5
+#objs[case[0]]=0
+#objs[case[1]]=0
+#objs[case[2]]=7
+#dex[case[0]]=0
+#dex[case[1]]=0
+#dex[case[2]]=0
+#
+#
+#f=open('PD_data.csv','w')
+#header = 'Lower Bin Energy (MeV)   ,   Upper Bin Energy (MeV)    '+'Lower Bin Wavelength (A)   ,   Upper Bin Wavelength (A)    ,     '+case[0]+'      ,     '+case[1]+'     ,     '+case[2]
+#f.write(header+'\n')
+#
+## loop over guides
+#for n in case:
+#
+#	print "Loading "+n+" ..."
+#	this_tal   = tals[   n]
+#	area       = areas[  n]
+#	mctal_name = mctal_names[ n]
+#	this_seg   = segs[   n]
+#	this_obj   = objs[   n]
+#
+#	tal = mctal(mctal_name)
+#	tal.tallies[this_tal].energies[0] = 9e-13
+#	mctals[n]=tal
+#
+#	dex[n] = tal.tallies[this_tal]._hash(obj=this_obj,seg=this_seg)
+#
+#
+#ene = numpy.array(mctals[case[0]].tallies[this_tal].energies[:-1])
+#ene_a = to_wavelength(ene)
+#
+#for i in range(0,len(ene)-1):
+#
+#	v0 = mctals[case[0]].tallies[tals[case[0]]].vals[dex[case[0]]]['data'][i]
+#	v1 = mctals[case[1]].tallies[tals[case[1]]].vals[dex[case[1]]]['data'][i]
+#	v2 = mctals[case[2]].tallies[tals[case[2]]].vals[dex[case[2]]]['data'][i]
+#	e0 =   ene[i]
+#	e1 =   ene[i+1]
+#	a0 = ene_a[i]
+#	a1 = ene_a[i+1]
+#
+#	f.write("% 6.4E ,  % 6.4E ,   % 6.4E ,   % 6.4E ,   % 6.4E ,   % 6.4E ,   % 6.4E\n"%(e0,e1,a0,a1,v0,v1,v2))
+#
+#f.close()

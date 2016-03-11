@@ -279,6 +279,8 @@ Since brightness/brilliance was to goal of the measurement, the solid angle seen
 \end{center}
 \end{table}
 
+Five measurements were done in total: centered in the beam port, +20 mm away from center (towards the target), -20 mm away from center (away from the target), centered with beryllium at 77 K in the beamline to show the 4 \AA bin, and without sapphire or beryllium.
+
 %
 %
 %
@@ -332,13 +334,15 @@ From this image, it was deduced that the total solid angle visible to the detect
 \subsection{Sensitivity to Scattering Data}
 \label{subsec:data}
 
-To calculate an accurate neutron spectrum that is emitted from the liquid deuterium in the cold source at lower energies, thermal scattering data must be used to account for any effects from molecular bonds, crystal sctructure, nuclear alignment, etc.  There were several data libraries available when doing these MCNP calculations.  Namely, the default libraries from the ENDF/B-VII.1 data \cite{endf_d2}, several libraries from the Univisersit of Stuttgart \cite{IKE}, and those published by Centro At\'{o}mico Bariloche (CAB) \cite{granada_d2}.  The spectra calculated at the helium detector position are shown in Figure \ref{fig:data_compare_d2} for the three types of liquid D$_2$ data.
+To calculate an accurate neutron spectrum that is emitted from the liquid deuterium in the cold source at lower energies, thermal scattering data must be used to account for any effects from molecular bonds, crystal sctructure, nuclear alignment, etc.  There were several data libraries available when doing these MCNP calculations.  Namely, the default libraries from the ENDF/B-VII.1 data \cite{endf_d2}, several libraries from the Institut f\"{u}r Kernenergetik und Energiesysteme (IKE) at Universit\"{a}t Stuttgart \cite{IKE}, and those published by Centro At\'{o}mico Bariloche (CAB) \cite{granada_d2}.  The spectra calculated at the helium detector position are shown in Figure \ref{fig:data_compare_d2} for the three types of liquid D$_2$ data.
 
 \begin{figure}[h!] 
   \centering
     \includegraphics[width=\columnwidth]{graphics/data_compare_d2.eps}
      \caption{data   \label{fig:data_compare_d2}}
 \end{figure}
+
+It can be seen that the 24 K IKE data produce a significantly different spectrum compared to the ENDF 19K data.  The CAB data something something.  
 
 Bariloche also released improved thermal scattering data for light and heavy water as well \cite{granada_d2o_1,granada_d2o_2,granada_d2o_3}.  The effect of replacing the ENDF/B-VII.1 data with the CAB data for both light and heavy water in the SINQ tank are shown in Figure \ref{fig:data_compare_d2o}.
 
@@ -412,7 +416,7 @@ Figure \ref{fig:eff} shows the two calculated efficiency curves agaist the measu
 \section{Measured Brightness and Best Matching Case}
 \label{sec:results}
 
-Five measurements were done in total: centered in the beam port, +20 mm away from center (towards the target), -20 mm away from center (away from the target), centered with beryllium at 77 K in the beamline to show the 4 \AA bin, and without sapphire or beryllium.
+Since the state of the deuterium is uncertain based on the irradiation history of the source (o/p fraction) \cite{op_equi}, the total power deposited in the deterium (density), a paramtric studt was done with the different data on a rasonable parameter space in order to see what combination gave the best fit and to bound the spectral uncertainty from these factors.
 
 \begin{figure}[h!] 
   \centering

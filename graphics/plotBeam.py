@@ -83,14 +83,14 @@ c0_eq=0.955
 d2_o=0.666
 
 # get beam data
-step_size = 5.0   # seconds
+step_size = 10.0*60.0 #5.0   # seconds
 index=0
 measurement_index=0
 for line in datf:
 	items=line.split()
 	time_str.append(items[5])
 	date_str.append(items[4])
-	if date_str[-1] == '21-07-2014' and time_str[-1] == '21:55:10':
+	if date_str[-1] == '21-07-2014' and time_str[-1] == '22:00:00':
 			measurement_index = index
 	current.append(float(items[2]))
 	z.append(0.0)

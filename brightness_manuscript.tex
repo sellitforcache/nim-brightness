@@ -21,7 +21,7 @@
 %% $Id: elsarticle-template-1-num.tex 149 2009-10-08 05:01:15Z rishi $
 %% $URL: http://lenova.river-valley.com/svn/elsbst/trunk/elsarticle-template-1-num.tex $
 %%
-\documentclass[preprint,12pt]{elsarticle}
+\documentclass[5p,12pt]{elsarticle}
 \usepackage{amsmath}
 \usepackage{graphicx,subcaption}
 \usepackage{listings}
@@ -106,7 +106,7 @@
 \renewcommand{\eqref}{Eq.~\originaleqref}
 
 \hypersetup{colorlinks=true,
-  pdftitle={Neutron brightness of the liquid determium cold source measured from the ICON beamline at the Swiss Spallation Neutron Source (SINQ)},
+  pdftitle={Brightness of the Liquid Determium Cold Source as Measured from the ICON Beamline at the Swiss Spallation Neutron Source (SINQ)},
   pdfauthor={Ryan M. Bergmann, Masako Yamada, Tibor Reiss, Vadim Talanov, Michael Wohlmuther, Uwe Filges}}
 
 \journal{Nuclear Instruments and Methods in Physics Research Section A: Accelerators, Spectrometers, Detectors and Associated Equipment}
@@ -136,7 +136,7 @@
 %% \address{Address\fnref{label3}}
 %% \fntext[label3]{}
 
-\title{Brightness of the liquid determium cold source measured from the ICON beamline at the Swiss Spallation Neutron Source (SINQ)}
+\title{Brightness of the Liquid Determium Cold Source as Measured from the ICON Beamline at the Swiss Spallation Neutron Source (SINQ)}
 
 %% use optional labels to link authors explicitly to addresses:
 %% \author[label1,label2]{<author name>}
@@ -153,15 +153,16 @@
 \author{Tibor Reiss}
 %\ead{tibor.reiss@psi.ch}
 
+\author{Uwe Filges}
+%\ead{uwe.filges@psi.ch}
+
 \author{Vadim Talanov}
+%\ead{vadim.talanov@psi.ch}
 
 \author{Michael Wohlmuther}
 %\ead{michael.wohlmuther@psi.ch}
 
-\author{Uwe Filges}
-%\ead{uwe.filges@psi.ch}
-
-\author{Ander Kaestner}
+\author{Anders Kaestner}
 %\ead{anders.kaestner@psi.ch} 
 
 
@@ -181,7 +182,7 @@ spallation \sep neutron \sep source \sep brightness \sep cold
 
 \end{frontmatter}
 
-\linenumbers
+%\linenumbers
 
 %% main text
 
@@ -192,7 +193,7 @@ The Swiss Spallation Neutron Source (SINQ) is a spallation neutron source driven
 
 There is an extended shutdown of SINQ ambitiously planned for 2018 which will provide an opportunity for changes to be made to the cold neutron source \cite{rueegg_icans}.  Any changes will require a large amount of calculations done to minimize risk and ensure good the proposed changes will benifit the facility and its users.  The brightness measureemtn presented in this paper is the first step in validating the computational models reuqired to carry out a sucessful upgrade.  
 
-The brightness measurement was conducted on July 21, 2014 in the ICON beamline at SINQ.  ICON is the cold neutron imaging facility at the neutron spallation source SINQ. The beamline offers an aperture wheel to change beam intensity and collimation ratio, as well as large evaculated flight tubes to minimize losses from scattering in the air \cite{icon}.  ICON was chosen since it does not incorporate any neutron optics, has good collimation, and looks directly on the surface of the cold source.  This removes additional uncertainty associated with the current state of the neutron guides and the physics involved with neutron-refecltive surfaces.
+The brightness measurement was conducted on July 21, 2014 in the ICON beamline at SINQ.  ICON is the cold neutron imaging facility at the neutron spallation source SINQ. The beamline offers an aperture wheel to change beam intensity and collimation ratio, as well as large evaculated flight tubes to minimize losses from scattering in the air \cite{icon}.  ICON was chosen since it does not incorporate any neutron optics, has good collimation, and looks directly on the surface of the cold source.  This removes additional uncertainty associated with the current state of the neutron guides and the physics involved with neutron-reflective surfaces.
 
 
 %
@@ -207,11 +208,11 @@ The brightness measurement was conducted on July 21, 2014 in the ICON beamline a
 
 The layout of the experimental is shown in Figure \ref{fig:geom}, which is a horizonal cut of the MCNP model geometry.  The target and moderators are shown furthest to the right.  The vertical line is the shielding monolith boundary, which is mostly steel blocks.  The ICON bunker is to the left of the monolith, the walls of which are made of heavy concrete and are shown as rectangular blocks.  The velocity selector that is usually mounted on the monolith wall in the ICON bunker was removed for this measurement.
 
-\begin{figure}[h!] 
+\begin{figure*}[ht!] 
   \centering
-    \includegraphics[width=\columnwidth]{graphics/geom_bw_labels.eps}
+    \includegraphics[width=0.9\textwidth]{graphics/geom_bw_labels.eps}
      \caption{Geometry \label{fig:geom} }
-\end{figure}
+\end{figure*}
 
 Figure \ref{fig:det} shows a photograph of the $^3$He detector with the iron pinhole collimator positioned in front of it before the large shielding blocks and sapphire crystals were positioned.
 
@@ -244,7 +245,7 @@ The principle components in the neutron path, listed in increasing distance from
 \end{enumerate}
 
 
-Since brightness/brilliance was to goal of the measurement, the solid angle seen by the detector is needed to normalize the spectra.  The cadmium sheet limits the sensitive region of the helium detector to a 1 mm diameter circle, and the the other items in the beam path create a system that limited the angular view of the detector.  Table \ref{tab:sa} shows the maximum solid angle of the various items in the neutron beam.  The values are the minimum of the item's self-collimation (due to its thickness) and the collimation of the system formed by the item and the hole in the cadmium sheet.  Figure \ref{fig:solid_angle} shows a cartoon of the collimation system formed by the items and the cadmium hole.  It can be seen that in the horizontal plane, the Zapfen opening (where the beamline opens into large nozzle in the moderator tank) is the limiting item.  In the vertical plane, the limiting item is the steel shielding blocks positioned before the chopper.  At 45 degrees, the aperture wheel is the limiting case.  These items are shown in the pinhole image calculated with MCNP and discussed in Section \ref{sec:sim}.
+Since brightness/brilliance was to goal of the measurement, the solid angle seen by the detector is needed to normalize the spectra.  The cadmium sheet limits the sensitive region of the helium detector to a 1 mm diameter circle, and the the other items in the beam path create a system that limited the angular view of the detector.  Table \ref{tab:sa} shows the maximum solid angle of the various items in the neutron beam.  The values are the minimum of the item's self-collimation (due to its thickness) and the collimation of the system formed by the item and the hole in the cadmium sheet.  Figure \ref{fig:solid_angle} shows a cartoon of the collimation system formed by the items and the cadmium hole.  It can be seen that in the horizontal plane, the Zapfen opening (where the beamline opens into large nozzle in the moderator tank) is the limiting item.  In the vertical plane, the limiting item is the steel shielding blocks positioned before the chopper.  At 45 degrees of azimuthal angle, the aperture wheel is the limiting case.  These items are shown in the pinhole image calculated with MCNP and discussed in Section \ref{sec:sim}.
 
 \begin{figure}[h!] 
   \centering
@@ -253,39 +254,68 @@ Since brightness/brilliance was to goal of the measurement, the solid angle seen
 \end{figure}
 
 \begin{table}
+\scriptsize
 \begin{center}
      \caption{Table of solid angles with the limiting member marked with boldface and a star (*).  \label{tab:sa} }
 \begin{tabular}{|l|r|r|r|}
      \hline
                    &     Horizontal  &     Vertical   &     Diagonal   \\
      \hline
-     Fe Collimator &     6.9282E-04  &     6.9282E-04 &     6.9282E-04 \\
+     Fe Collimator &     6.93E-4  &     6.93E-4 &     6.93E-4 \\
      \hline 
-     Cadmium Hole  &     1.8403E-00  &     1.8403E-00 &     1.8403E-00 \\
+     Cadmium Hole  &     1.84E-0  &     1.84E-0 &     1.84E-0 \\
      \hline 
-     Sapphire      &     1.9781E-03  &     1.9781E-03 &     3.8449E-03 \\
+     Sapphire      &     1.98E-3  &     1.98E-3 &     3.84E-3 \\
      \hline 
-     Steel         &     3.3167E-05  &     3.3167E-05 &     6.5574E-05 \\
+     Steel         &     3.32E-5  &     3.32E-5 &     6.56E-5 \\
      \hline
-     Aperture      &     3.4016E-05  &     3.4016E-05 &\bf* 3.4016E-05 \\
+     Aperture      &     3.40E-5  &     3.40E-5 &\bf* 3.40E-5 \\
      \hline
-     Tube          &     2.2597E-05  &\bf* 2.2597E-05 &    4.4867E-05  \\
+     Tube          &     2.26E-5  &\bf* 2.26E-5 &     4.49E-5  \\
      \hline
-     Zapfen        &\bf* 2.0707E-05  &     4.6208E-05 &     6.6559E-05 \\
+     Zapfen        &\bf* 2.07E-5  &     4.62E-5 &     6.66E-5 \\
      \hline
-     Nozzle        &     5.1293E-05  &     5.1293E-05 &     1.0215E-04 \\
+     Nozzle        &     5.13E-5  &     5.13E-5 &     1.02E-4 \\
      \hline
 \end{tabular}
 \end{center}
 \end{table}
 
-Five measurements were done in total: centered in the beam port, +20 mm away from center (towards the target), -20 mm away from center (away from the target), centered with beryllium at 77 K in the beamline to show the 4 \AA bin, and without sapphire or beryllium.
+Three measurements were done in total: centered in the beam with sapphire crystals inside the nearest shielding, centered with beryllium at 77 K in the beamline to show the 4 \AA bin, and centered in the beam without sapphire or beryllium.  The center of the beam was found by scanning a neutron-sensitive CCD camera through the beam and assuming the flux maximum was the center.  On positioned at the center, the vertical tilt of the detector/pinhole system was scanned to find the maximum once again.  Since a measurement was not done with the shutter closed to collect background, the average value of lower-energy tail of the measured spectrum >8 \AA was assumed to be the background level.
 
 %
 %
 %
 %
 %
+
+%
+%
+%
+%
+%
+
+
+\section{Detector Efficiency}
+\label{sec:eff}
+
+The efficiency curve of the helium detector was also measured and compared to calculated curves.  Curves were calculated using a one-dimensional (1D) model and 1/v cross sections as well as with a detailed MCNP model of the helium detector \cite{bonner_manual}.  The 1D model efficiency is shown in Eq. \ref{eqn:eff1}, where $\Sigma_{\textrm{stl}}$ is the stainless steel total macroscopic cross section, $\Sigma_{\textrm{He}}$ is the $^3$He absorbtion macroscopic cross section, $x_{\textrm{stl}}$ is the thickness of the detector's stainless steel shell, and  $D_{\textrm{stl}}$ is the diameter $^3$He volume.  The cross section wavelength dependence is shown in Eq. \ref{eqn:eff2}, where $a$ and $b$ are linear fit coefficients derived from cross section data.  
+
+\begin{gather}
+     \label{eqn:eff1} \epsilon(\lambda) = \exp \left(-\Sigma_{\textrm{stl}}(\lambda) x_{\textrm{stl}}\right)[1-\exp(-\Sigma_{\textrm{He}}(\lambda) D_{\textrm{He}})] \\
+     \label{eqn:eff2} \Sigma_i(\lambda) = a_i\lambda+b_i
+\end{gather}
+
+The efficieny curve was calculated from the MCNP model by directing a stream of neutrons in a 0.5 mm radius with a flat spectrum towards the midplane of the spherical detector, tallying the absorbtion reaction rate in $^{3}$He, then dividing the absobtion rate by the source spectrum.  The measured efficiency curve was taken at the BOA beamline at PSI.  MASAKO MORE DETAILS HERE.
+
+Figure \ref{fig:eff} shows the two calculated efficiency curves agaist the measured curve.  The MCNP curve agrees very well with the measured curve, and was used to produce the measured brightness spectrum in Section \ref{sec:results}.
+
+\begin{figure}[h!] 
+  \centering
+    \includegraphics[width=\columnwidth]{graphics/eff.eps}
+     \caption{The efficiency curves. \label{fig:eff} }
+\end{figure}
+
 
 \section{Monte Carlo Simulations}
 \label{sec:sim}
@@ -311,14 +341,15 @@ Since the detector is very far away from the neutron source, special methods had
 
 Using a point detector would be a reasonable solution if only cancluated the flux was desired, but the brightness also depends on the view able solid angle of the detector system.   The physical system responds to a view limited by the pinhole collimator and cadmium sheet, which produces a small, finite spot on detector surface.  A regular point detector would only see a single point of this view and wouldn't report any angular information needed for caluclating the brightness.  If the point detector were placed at the crossing point of the collimation system, it would see the full flux visible to the detector, but it would summed over all angles.  In order to calculate the solid angle visible, a ``pinhole radiography tally'' was used in MCNP.  This tally calculates contributions in the same way, but it projects the contibutions through the point onto an image plane.  If such a projection is placed behind all the items which limit the detector view, the solid angle visible to the detector can be calculated by summing the solid angle values each pixel corresponds to.
 
-Figure \ref{fig:pinhole_image} shows a pinhole radiography tally image generated at the upstream surface of the cadmium sheet with the pinhole placed at the horizontal collimation crossing point.  The Zapfen limits the view on the horizontal plane, so the hole in the cadmium lines up with projection of the Zapfen.  The other limiting objects are also projected onto the plane to show the areas where they limit the detector view.  They are shown as dashed colored lines in Figure \ref{fig:pinhole_image}.  The Zapfen is indeed the limiting member in the horizontal plane of the collimaiton system since it can be seen that the image does not extend past the magenta Zapfen projection line.  A horizontal and vertical gradient is also apparent in the projected image.  Since the dimensions are mirrored and the image is plotted from the view point of the pinhole towards the Cd sheet, the target would be to the right in the image and thermal flux maximum would be in the downward direction. 
-
+Figure \ref{fig:pinhole_image} shows a pinhole radiography tally image generated at the upstream surface of the cadmium sheet with the pinhole placed at the horizontal collimation crossing point.  The Zapfen limits the view on the horizontal plane, so the hole in the cadmium lines up with projection of the Zapfen.  The other limiting objects are also projected onto the plane to show the areas where they limit the detector view.  They are shown as dashed colored lines in Figure \ref{fig:pinhole_image}.   
 
 \begin{figure}[h!] 
   \centering
     \includegraphics[width=\columnwidth]{graphics/pinhole.eps}
      \caption{The flux image created by a pinhole radiography tally in MCNP at the horizontal collimation crossing point.  The image plane is at upstream surface of the cadmium sheet.  The outlines show the projections of the limiting geometry through the pinhole: Grey=cadmium hole, blue=beam port, magenta=Zapfen, yellow=Gd aperture.  Note, the flux vlaues shown are those resulting from a pinhole-limited view (not the real, full view).  \label{fig:pinhole_image}}
 \end{figure}
+
+The Zapfen is indeed the limiting member in the horizontal plane of the collimaiton system since it can be seen that the image does not extend past the magenta Zapfen projection line.  A horizontal and vertical gradient is also apparent in the projected image.  Since the dimensions are mirrored and the image is plotted from the view point of the pinhole towards the Cd sheet, the target would be to the right in the image and thermal flux maximum would be in the downward direction.
 
 From this image, it was deduced that the total solid angle visible to the detector was limited to $2.1363\times10^{-5}$ steradians.  The hole is fully illuminated (there are no spots on the Cd sheet where a radiography tally produced a zero result), so the area used to normalize the spectra is the area of the hole (7.85398$\times 10^{-3}$ cm$^2$).
 
@@ -334,7 +365,7 @@ From this image, it was deduced that the total solid angle visible to the detect
 \subsection{Sensitivity to Scattering Data}
 \label{subsec:data}
 
-To calculate an accurate neutron spectrum that is emitted from the liquid deuterium in the cold source at lower energies, thermal scattering data must be used to account for any effects from molecular bonds, crystal sctructure, nuclear alignment, etc.  There were several data libraries available when doing these MCNP calculations.  Namely, the default libraries from the ENDF/B-VII.1 data \cite{endf_d2}, several libraries from the Institut f\"{u}r Kernenergetik und Energiesysteme (IKE) at Universit\"{a}t Stuttgart \cite{IKE}, and those published by Centro At\'{o}mico Bariloche (CAB) \cite{granada_d2}.  The spectra calculated at the helium detector position are shown in Figure \ref{fig:data_compare_d2} for the three types of liquid D$_2$ data.
+To calculate an accurate neutron spectrum that is emitted from the liquid deuterium in the cold source at lower energies, thermal scattering data must be used to account for the influence of molecular bonds, crystal sctructure, nuclear alignment, etc.   There were several data libraries available when doing these MCNP calculations.  Namely, the default libraries from the ENDF/B-VII.1 data \cite{endf_d2}, several libraries from the Institut f\"{u}r Kernenergetik und Energiesysteme (IKE) at Universit\"{a}t Stuttgart \cite{IKE}, and those published by Centro At\'{o}mico Bariloche (CAB) \cite{granada_d2}.  The spectra calculated at the helium detector position are shown in Figure \ref{fig:data_compare_d2} for the various liquid D$_2$ data.
 
 \begin{figure}[h!] 
   \centering
@@ -364,14 +395,17 @@ something more
 \subsection{Sensitivity to Ortho-/Para-D$_2$ Fraction and D$_2$ Density}
 \label{subsec:frac_den}
 
-Other than the data themselves, the spectrum emitted from the cold source is also sensitive to the density and the ortho- and para-D$_2$ fractions of the liquid deuterium.  These parameters effect the scttering length as well as the scattering kinematics of the moderator.
-
+Other than the data themselves, the spectrum emitted from the cold source is also sensitive to the density and the ortho- and para-D$_2$ fractions of the liquid deuterium.  These parameters effect the scattering length as well as the scattering kinematics of the moderator.  From the operational experience at the ILL, their 20 L liquid deuterium cold source runs at about 80\% nominal density at 25 K at full reactor power \cite{ill_cns}. The nominal saturation density of liquid deuterium at 25 K is 0.162 g/cm$^3$\cite{bnl_cryo}.  Since the average proton current on the SINQ target range from XXX to XXX during the measurement, the density fo the deuterium should be close to the (maximum) saturation value.  Figure \ref{fig:density_compare} shows the variation of the neutrion spectrum due to density reduction from boiling in the deuterium.  A reduction of 80\% was chosen to be the maximum limiting case since the power deposition in the ILL cold source should be greater than that deposited in the SINQ deterium volume.
 
 \begin{figure}[h!] 
   \centering
     \includegraphics[width=\columnwidth]{graphics/density_compare.eps}
      \caption{density \label{fig:density_compare}}
 \end{figure}
+
+Figure \ref{fig:density_compare} shows that the peak of calculated spectrum increases with density reduction.  Since the deuterium is more transparent to neutrons at lower densities, the emission region of the modertor becomes larger and less cold, increasing the thermal peak of the spectrum and reducing the cold region (wavelengths greater than the crossing point at 2.75 \AA).  From the MCNP simulations done, reducing the deuterium to 80\% nominal density increases thermal peak by 12\%.
+
+With no other influences, the thermodynamic equlibrium of ortho- to para-D$_2$ at 25 K is 0.995, but radiation-induced recombination of the deuterium molucules resuts in an equilibrium ratio of 0.762 for 1.2 mA of proton current on the SINQ target \cite{op_equi}.  This ratio gradually returns to thermodynamic equilibrium when the beam is shut off.  The proton current on SINQ prior to the brightness measurement is shown in Figure \ref{fig:p_current}.  The was a steady period of XXX mA for XXX days, with a period of zero current for XXX time before the measurement was taken.  From this history, the o/p fraction should have been around XXX.  There is some uncertainty in this value, however, and Figure \ref{fig:op_compare} shows the variation in the emitted neutron spectrum caused by a o/p ratio change from 0.66 (room temperature equlibrium) to 0.995 (25 K equlibrium) when the deuterium is at nominal saturation density of 0.162 g/cm$^3$ at 25 K \cite{bnl_cryo}.
 
 \begin{figure}[h!] 
   \centering
@@ -380,32 +414,6 @@ Other than the data themselves, the spectrum emitted from the cold source is als
 \end{figure}
 
 
-%
-%
-%
-%
-%
-
-
-\section{Detector Efficiency}
-\label{sec:eff}
-
-The efficiency curve of the helium detector was also measured and compared to calculated curves.  Curves were calculated using a 1D model and 1/v cross sections as well as with a detailed MCNP model of the helium detector \cite{bonner_manual}.  The 1D model efficiency is shown in Eq. \ref{eqn:eff1}, where $\Sigma_{\textrm{stl}}$ is the stainless steel total macroscopic cross section, $\Sigma_{\textrm{He}}$ is the $^3$He absorbtion macroscopic cross section, $x_{\textrm{stl}}$ is the thickness of the detector's stainless steel shell, and  $D_{\textrm{stl}}$ is the diameter $^3$He volume.  The cross section wavelength dependence is shown in Eq. \ref{eqn:eff2}, where $a$ and $b$ are linear fit coefficients derived from cross section data.  
-
-\begin{gather}
-     \label{eqn:eff1} \epsilon(\lambda) = \exp \left(-\Sigma_{\textrm{stl}}(\lambda) x_{\textrm{stl}}\right)[1-\exp(-\Sigma_{\textrm{He}}(\lambda) D_{\textrm{He}})] \\
-     \label{eqn:eff2} \Sigma_i(\lambda) = a_i\lambda+b_i
-\end{gather}
-
-The efficieny curve was calculated from the MCNP model by directing a stream of neutrons in a 0.5 mm radius with a flat spectrum towards the midplane of the spherical detector, tallying the absorbtion reaction rate in $^{3}$He, then divding the absobtion rate by the source spectrum.  The measured efficiency curve was done at the BOA beamline at PSI, xxx MORE HERE.
-
-Figure \ref{fig:eff} shows the two calculated efficiency curves agaist the measured curve.  The MCNP curve agrees very well with the measured curve, and was used to produce the measured brightness spectrum in Section \ref{sec:results}.
-
-\begin{figure}[h!] 
-  \centering
-    \includegraphics[width=\columnwidth]{graphics/eff.eps}
-     \caption{The efficiency curves. \label{fig:eff} }
-\end{figure}
 
 %
 %
@@ -416,7 +424,7 @@ Figure \ref{fig:eff} shows the two calculated efficiency curves agaist the measu
 \section{Measured Brightness and Best Matching Case}
 \label{sec:results}
 
-Since the state of the deuterium is uncertain based on the irradiation history of the source (o/p fraction) \cite{op_equi}, the total power deposited in the deterium (density), a paramtric studt was done with the different data on a rasonable parameter space in order to see what combination gave the best fit and to bound the spectral uncertainty from these factors.
+As was mentioned previously, the state of the deuterium was uncertain due to the uncertainty in the irradiation history of the source (o/p fraction) and the total power deposited in the deterium (density). Therefore, a paramtric study was done with the different scattering data across a reasonable parameter space in order to see what combination gave the best fit and to find the limiting cases arising from these uncertainties.  To find the best fit, the 2-norm of relative error of the calculated spectrum compared to the measured spectrum was minimized.  The 2-norm is more appropriate in this case since it penalizes large departures from the ``true'' curve more severely than a 1-norm.  
 
 \begin{figure}[h!] 
   \centering
@@ -424,6 +432,7 @@ Since the state of the deuterium is uncertain based on the irradiation history o
      \caption{Measured and simulated source brightness at ICON. \label{fig:brightness} }
 \end{figure}
 
+It is also apparent from the simulations, something about the 0.2 \AA shift.
 
 %
 %
@@ -435,6 +444,8 @@ Since the state of the deuterium is uncertain based on the irradiation history o
 \section{Discussion}
 \label{sec:discussion}
 
+hmmmmm
+
 %
 %
 %
@@ -443,6 +454,8 @@ Since the state of the deuterium is uncertain based on the irradiation history o
 
 \section{Conclusions}
 \label{sec:conclusions}
+
+excellent
 
 %
 %
@@ -453,7 +466,7 @@ Since the state of the deuterium is uncertain based on the irradiation history o
 \section*{Acknowledgements}
 \label{sec:ack}
 
-This work was supported by Swiss National Science Foundation grant 200021\_150048/1
+This work was supported by Swiss National Science Foundation grant 200021\_150048/1.
 
 %
 %

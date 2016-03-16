@@ -117,7 +117,7 @@ ax1.grid()
 ax1.set_ylim([0.60,1.00])
 ax1.set_xlim([0,xlim[1]])
 #ax1.set_xlabel("Day of July, 2014")
-ax1.set_ylabel(r"Ortho/Para Fraction")
+ax1.set_ylabel(r"o-D$_2$ Fraction")
 #ax1.set_aspect(2.0*asp/8.0)
 
 ax2.grid()
@@ -127,7 +127,7 @@ ax2.set_xlabel('Weeks Since %s'%date_str[0])
 ax2.set_ylabel(r"SINQ Proton Current ($\mu$A)")
 #ax2.set_aspect(2.0*asp/8.0)
 
-ax1.annotate(r'\noindent July 21, 2014, o/p = %4.3f'%frac[measurement_index],     
+ax1.annotate(r'\noindent July 21, 2014, o-D$_2$ = %4.3f'%frac[measurement_index],     
 	                              xy=(adjusted_time[measurement_index],     frac[measurement_index]    ), 
 	                          xytext=(adjusted_time[measurement_index]*0.95, frac[measurement_index]*1.13), 
 	                          verticalalignment='bottom', horizontalalignment='right',

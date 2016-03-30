@@ -367,7 +367,7 @@ To calculate an accurate neutron spectrum that is emitted from the liquid deuter
 \begin{figure}[h!] 
   \centering
     \includegraphics[width=\columnwidth]{graphics/data_compare_d2.eps}
-     \caption{data   \label{fig:data_compare_d2}}
+     \caption{Simulated neutron spectra emitted from liquid deuterium cold source using various S($\alpha$,$\beta$) scattering data for D$_2$. \label{fig:data_compare_d2}}
 \end{figure}
 
 It can be seen that the 24 K IKE data produce a significantly different spectrum compared to the ENDF 19K data.  The CAB data something something.  
@@ -377,7 +377,7 @@ Bariloche also released improved thermal scattering data for light and heavy wat
 \begin{figure}[h!] 
   \centering
     \includegraphics[width=\columnwidth]{graphics/data_compare_d2o.eps}
-     \caption{data   \label{fig:data_compare_d2o}}
+     \caption{Simulated neutron spectra emitted from liquid deuterium cold source using the standard ENDF/B-VII.1 and the new Bariloche S($\alpha$,$\beta$) scattering data for the D$_2$O moderator.   \label{fig:data_compare_d2o}}
 \end{figure}
 
 %
@@ -389,12 +389,12 @@ Bariloche also released improved thermal scattering data for light and heavy wat
 \subsection{Sensitivity to Ortho-/Para-D$_2$ Fraction and D$_2$ Density}
 \label{subsec:frac_den}
 
-Other than the data themselves, the spectrum emitted from the cold source is also sensitive to the density and the ortho- and para-D$_2$ fractions of the liquid deuterium.  These parameters effect the scattering length as well as the scattering kinematics of the moderator.  From the operational experience at the ILL, their 20 L liquid deuterium cold source runs at about 80\% nominal density at 25 K at full reactor power \cite{ill_cns}. The nominal saturation density of liquid deuterium at 25 K is 0.162 g/cm$^3$\cite{bnl_cryo}.  Since the average proton current on the SINQ target range from XXX to XXX during the measurement, the density fo the deuterium should be close to the (maximum) saturation value.  Figure \ref{fig:density_compare} shows the variation of the neutrion spectrum due to density reduction from boiling in the deuterium.  A reduction of 80\% was chosen to be the maximum limiting case since the power deposition in the ILL cold source should be greater than that deposited in the SINQ deterium volume.
+Other than the data themselves, the spectrum emitted from the cold source is also sensitive to the density and the ortho- and para-D$_2$ fractions of the liquid deuterium.  These parameters effect the scattering length as well as the scattering kinematics of the moderator.  From the operational experience at the Institut Laue-Langevin (ILL), their 20 L liquid deuterium cold source runs at about 80\% nominal density at 25 K at full reactor power \cite{ill_cns}. The nominal saturation density of liquid deuterium at 25 K is 0.162 g/cm$^3$\cite{bnl_cryo}.  Figure \ref{fig:density_compare} shows the variation of the neutrion spectrum due to density reduction from boiling in the deuterium.  A reduction of 80\% was chosen to be the maximum limiting case since the power deposition in the ILL cold source should be greater than that deposited in the SINQ deuterium volume.
 
 \begin{figure}[h!] 
   \centering
     \includegraphics[width=\columnwidth]{graphics/density_compare.eps}
-     \caption{density \label{fig:density_compare}}
+     \caption{Simulated neutron spectra emitted from liquid deuterium cold source at various D$_2$ densities. \label{fig:density_compare}}
 \end{figure}
 
 Figure \ref{fig:density_compare} shows that the peak of calculated spectrum increases with density reduction.  Since the deuterium is more transparent to neutrons at lower densities, the emission region of the modertor becomes larger and less cold, increasing the thermal peak of the spectrum and reducing the cold region (wavelengths greater than the crossing point at 2.75 {\AA}).  From the MCNP simulations done, reducing the deuterium to 80\% nominal density (0.130 g/cm$^3$) increases thermal peak by about 12\%.
@@ -404,7 +404,7 @@ With no other influences, the thermodynamic equlibrium fraction of ortho-D$_2$ a
 \begin{figure}[h!] 
   \centering
     \includegraphics[width=\columnwidth]{graphics/p_current.eps}
-     \caption{current \label{fig:p_current}}
+     \caption{The proton current history for SINQ in the weeks leading up to the measurement time. \label{fig:p_current}}
 \end{figure}
 
 There is some uncertainty in this value, however, and Figure \ref{fig:op_compare} shows the variation in the emitted neutron spectrum caused by a o/p ratio change from 0.66 to 0.955 when the deuterium is at nominal saturation density of 0.162 g/cm$^3$ at 25 K \cite{bnl_cryo}.  It is apparent that higher ortho fractions produce spectra with reduced neutron density at the thermal peak and enhanced density in cold regions $>$3.75 {\AA}.
@@ -412,7 +412,7 @@ There is some uncertainty in this value, however, and Figure \ref{fig:op_compare
 \begin{figure}[h!] 
   \centering
     \includegraphics[width=\columnwidth]{graphics/op_compare.eps}
-     \caption{op \label{fig:op_compare}}
+     \caption{Simulated neutron spectra emitted from liquid deuterium cold source at various ortho/para-D$_2$ ratios. \label{fig:op_compare}}
 \end{figure}
 
 %
@@ -429,7 +429,7 @@ As was mentioned previously, the state of the deuterium was uncertain due to the
 \begin{figure}[h!] 
   \centering
     \includegraphics[width=\columnwidth]{graphics/brightness.eps}
-     \caption{Measured and simulated source brightness at ICON. \label{fig:brightness} }
+     \caption{Measured and simulated cold neutron source brightness at the ICON beamline. \label{fig:brightness} }
 \end{figure}
 
 Figure \ref{fig:brightness} also shows that the peaks of simulated spectra are about 0.25 {\AA} less than the peak of the measured spectrum.  This phenomenon has been document previously, and it is suspected that it arises from some inaccuracies in the deuterium thermal scattering data \cite{giller_thesis}.

@@ -106,7 +106,7 @@
 \renewcommand{\eqref}{Eq.~\originaleqref}
 
 \hypersetup{colorlinks=true,
-  pdftitle={Brightness of the Liquid Determium Cold Source as Measured from the ICON Beamline at the Swiss Spallation Neutron Source (SINQ)},
+  pdftitle={Neutron Brightness of the Liquid Determium Cold Source as Measured from the ICON Beamline at the Swiss Spallation Neutron Source (SINQ)},
   pdfauthor={Ryan M. Bergmann, Masako Yamada, Tibor Reiss, Vadim Talanov, Michael Wohlmuther, Uwe Filges}}
 
 \journal{Nuclear Instruments and Methods in Physics Research Section A: Accelerators, Spectrometers, Detectors and Associated Equipment}
@@ -136,40 +136,43 @@
 %% \address{Address\fnref{label3}}
 %% \fntext[label3]{}
 
-\title{Brightness of the Liquid Determium Cold Source as Measured from the ICON Beamline at the Swiss Spallation Neutron Source (SINQ)}
+\title{Neutron Brightness of the Liquid Determium Cold Source as Measured from the ICON Beamline at the Swiss Spallation Neutron Source (SINQ)}
 
 %% use optional labels to link authors explicitly to addresses:
 %% \author[label1,label2]{<author name>}
 %% \address[label1]{<address>}
 %% \address[label2]{<address>}
 
-\author{Ryan M. Bergmann\corref{rmb}}
+\author[]{Ryan M. Bergmann\corref{cor1}}
 \ead{ryan.bergmann@psi.ch}
-\cortext[rmb]{Corresponding author. Tel.: +41.56.310.56.12.}
 
-\author{Masako Yamada}
+
+\author[]{Masako Yamada}
 %\ead{masako.yamada@psi.ch}
 
-\author{Tibor Reiss}
+\author[]{Tibor Reiss}
 %\ead{tibor.reiss@psi.ch}
 
-\author{Uwe Filges}
+\author[]{Uwe Filges}
 %\ead{uwe.filges@psi.ch}
 
-\author{Vadim Talanov}
+\author[]{Vadim Talanov}
 %\ead{vadim.talanov@psi.ch}
 
-\author{Michael Wohlmuther}
+\author[]{Michael Wohlmuther}
 %\ead{michael.wohlmuther@psi.ch}
 
-\author{Anders Kaestner}
+\author[]{Anders Kaestner}
 %\ead{anders.kaestner@psi.ch} 
 
 
 \address{Paul Scherrer Institut, Villigen, Switzerland}
 
+\cortext[cor1]{Corresponding author. Tel.: +41.56.310.56.12.}
+
 \begin{abstract}
 
+SOMETHING HERE
 
 \end{abstract}
 
@@ -424,7 +427,7 @@ There is some uncertainty in this value, however, and Figure \ref{fig:op_compare
 \section{Measured Brightness and Best Matching Case}
 \label{sec:results}
 
-As was mentioned previously, the state of the deuterium was uncertain due to the uncertainty in the irradiation history of the source (o/p fraction) and the total power deposited in the deterium (density), but using the best information avaiable, the most accurate results should comes from a simulation using the 24 K thermal scattering data from IKE and using an ortho-D$_2$ ratio of 0.762.  The beam current during the measuremnt was approximately 200 $\mu$A, so the power deposition inside the D$_2$ volume should have been approximately 100 watts \cite{sinq_power}.  Therefore, based on previous studies on the void fraction in liquid D$_2$ under irradiation \cite{Siegwarth_Olson_Lewis_Rowe_Williams_1994}, the density should be near 98\% of the saturation density.  Figure \ref{fig:brightness} shows the measured neutron spectra compared to simulated spectra at 98\% and 80\% saturadtion density, which are both included to show the most relaistic case and the case which matches the peak intensity.  It is doubtful that the cold source had 20\% void during the measurement due to the low beam intensity.
+As was mentioned previously, the state of the deuterium was uncertain due to the uncertainty in the irradiation history of the source (o/p fraction) and the total power deposited in the deterium (density), but using the best information avaiable, the most accurate results should comes from a simulation using the 24 K thermal scattering data from IKE and using an ortho-D$_2$ ratio of 0.762.  The beam current during the measuremnt was approximately 200 $\mu$A, so the power deposition inside the D$_2$ volume should have been approximately 100 watts \cite{sinq_power}.  Therefore, based on previous studies on the void fraction in liquid D$_2$ under irradiation \cite{Siegwarth_Olson_Lewis_Rowe_Williams_1994}, the density should be near 98\% of the saturation density.  Figure \ref{fig:brightness} shows the measured neutron spectra compared to simulated spectra at 98\% and 80\% saturadtion density, which are both included to show the most relaistic case and the case which matches the peak intensity.  It is doubtful that the cold source had 20\% void during the measurement due to the low proton current.
 
 \begin{figure}[h!] 
   \centering
@@ -432,7 +435,7 @@ As was mentioned previously, the state of the deuterium was uncertain due to the
      \caption{Measured and simulated cold neutron source brightness at the ICON beamline. \label{fig:brightness} }
 \end{figure}
 
-Figure \ref{fig:brightness} also shows that the peaks of simulated spectra are about 0.25 {\AA} less than the peak of the measured spectrum.  This phenomenon has been document previously, and it is suspected that it arises from some inaccuracies in the deuterium thermal scattering data \cite{giller_thesis}.
+Figure \ref{fig:brightness} also shows that the peaks of simulated spectra are about 0.25 {\AA} less than the peak of the measured spectrum.  This phenomenon has been document previously, and it is suspected that it arises from some inaccuracies in the liquid deuterium thermal scattering data \cite{giller_thesis}.
 
 %
 %
@@ -443,7 +446,7 @@ Figure \ref{fig:brightness} also shows that the peaks of simulated spectra are a
 \section{Conclusions}
 \label{sec:conclusions}
 
-excellent
+The total view of the detertor system was calculated to be $2.1363\times10^{-5}$ steradians via a MCNP calculation using a pinhole radiography tally.  The peak brightness of the deuterium cold source at SINQ has been measured to be $3.5\times10^{11}$ n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ str$^{-1}$ at 1.9 {\AA} via a time-of-flight measurement at the ICON beamline in July 2014.  The total brightness (energy-integrated) has been measured to be  $9.91\times10^{11}$  n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ str$^{-1}$ for wavelengths above 0.7 {\AA}.
 
 %
 %

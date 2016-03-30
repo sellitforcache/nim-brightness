@@ -281,7 +281,7 @@ Since brightness/brilliance was to goal of the measurement, the solid angle seen
 \end{center}
 \end{table}
 
-Three measurements were done in total: centered in the beam with sapphire crystals inside the nearest shielding, centered with beryllium at 77 K in the beamline to show the 4 \AA bin, and centered in the beam without sapphire or beryllium.  The center of the beam was found by scanning a neutron-sensitive CCD camera through the beam and assuming the flux maximum was the center.  On positioned at the center, the vertical tilt of the detector/pinhole system was scanned to find the maximum once again.  Since a measurement was not done with the shutter closed to collect background, the average value of lower-energy tail of the measured spectrum >8 \AA was assumed to be the background level.
+Three measurements were done in total: centered in the beam with sapphire crystals inside the nearest shielding, centered with beryllium at 77 K in the beamline to show the 4 {\AA} bin, and centered in the beam without sapphire or beryllium.  The center of the beam was found by scanning a neutron-sensitive CCD camera through the beam and assuming the flux maximum was the center.  On positioned at the center, the vertical tilt of the detector/pinhole system was scanned to find the maximum once again.  Since a measurement was not done with the shutter closed to collect background, the average value of lower-energy tail of the measured spectrum $>$8 {\AA} was assumed to be the background level.
 
 %
 %
@@ -324,7 +324,7 @@ Simulations were done with MCNP6.1 and with ENDF/B-VII.1 data.  Thermal scatteri
 
 \begin{figure}[h!] 
   \centering
-    \includegraphics[width=0.25\columnwidth,trim={5cm 0 5cm 0},clip]{graphics/target.eps}
+    \includegraphics[width=0.25\columnwidth,trim={5cm 3cm 5cm 0},clip]{graphics/target.eps}
      \caption{Vertical cross section of the target MCNP model geometry. \label{fig:target}}
 \end{figure}
 
@@ -397,7 +397,7 @@ Other than the data themselves, the spectrum emitted from the cold source is als
      \caption{density \label{fig:density_compare}}
 \end{figure}
 
-Figure \ref{fig:density_compare} shows that the peak of calculated spectrum increases with density reduction.  Since the deuterium is more transparent to neutrons at lower densities, the emission region of the modertor becomes larger and less cold, increasing the thermal peak of the spectrum and reducing the cold region (wavelengths greater than the crossing point at 2.75 \AA).  From the MCNP simulations done, reducing the deuterium to 80\% nominal density (0.130 g/cm$^3$) increases thermal peak by about 12\%.
+Figure \ref{fig:density_compare} shows that the peak of calculated spectrum increases with density reduction.  Since the deuterium is more transparent to neutrons at lower densities, the emission region of the modertor becomes larger and less cold, increasing the thermal peak of the spectrum and reducing the cold region (wavelengths greater than the crossing point at 2.75 {\AA}).  From the MCNP simulations done, reducing the deuterium to 80\% nominal density (0.130 g/cm$^3$) increases thermal peak by about 12\%.
 
 With no other influences, the thermodynamic equlibrium fraction of ortho-D$_2$ at 25 K is 0.955, but radiation-induced recombination of the deuterium molucules resuts in an equilibrium ratio of 0.762 for 1.2 mA of proton current on the SINQ target \cite{op_equi}.  This ratio gradually returns to thermodynamic equilibrium when the beam is shut off.  The proton current on SINQ prior to the brightness measurement is shown in bottom plot in Figure \ref{fig:p_current}.  The was a relatively steady period of 1.5 mA for 13 weeks, with a period of zero current of 1 week about 6 weeks before the measurement was taken.  The ortho-D$_2$ fraction was calculated based on this proton current history using the methods described in \cite{op_equi}, which accounts for the irradtiation induced recombination, thermal conversion, catalytic conversion, and conversion from free atom collisions.  The results of the calculation are shown in lower plot in Figure \ref{fig:p_current}, with an initial ortho/para fraction of 2/3 (the room temperature, ``bottle'' equilibrium) after the shutdown which ended May 1, 2014.  Figure \ref{fig:p_current} suggests the o-D$_2$ fraction during the measurement on July 21 should have been around 0.761.
 
@@ -407,7 +407,7 @@ With no other influences, the thermodynamic equlibrium fraction of ortho-D$_2$ a
      \caption{current \label{fig:p_current}}
 \end{figure}
 
-There is some uncertainty in this value, however, and Figure \ref{fig:op_compare} shows the variation in the emitted neutron spectrum caused by a o/p ratio change from 0.66 to 0.955 when the deuterium is at nominal saturation density of 0.162 g/cm$^3$ at 25 K \cite{bnl_cryo}.  It is apparent that higher ortho fractions produce spectra with reduced neutron density at the thermal peak and enhanced density in cold regions $>$3.75 \AA.
+There is some uncertainty in this value, however, and Figure \ref{fig:op_compare} shows the variation in the emitted neutron spectrum caused by a o/p ratio change from 0.66 to 0.955 when the deuterium is at nominal saturation density of 0.162 g/cm$^3$ at 25 K \cite{bnl_cryo}.  It is apparent that higher ortho fractions produce spectra with reduced neutron density at the thermal peak and enhanced density in cold regions $>$3.75 {\AA}.
 
 \begin{figure}[h!] 
   \centering
@@ -424,7 +424,7 @@ There is some uncertainty in this value, however, and Figure \ref{fig:op_compare
 \section{Measured Brightness and Best Matching Case}
 \label{sec:results}
 
-As was mentioned previously, the state of the deuterium was uncertain due to the uncertainty in the irradiation history of the source (o/p fraction) and the total power deposited in the deterium (density).  
+As was mentioned previously, the state of the deuterium was uncertain due to the uncertainty in the irradiation history of the source (o/p fraction) and the total power deposited in the deterium (density), but using the best information avaiable, the most accurate results should comes from a simulation using the 24 K thermal scattering data from IKE and using an ortho-D$_2$ ratio of 0.762.  The beam current during the measuremnt was approximately 200 $\mu$A, so the power deposition inside the D$_2$ volume should have been approximately 100 watts \cite{sinq_power}.  Therefore, based on previous studies on the void fraction in liquid D$_2$ under irradiation \cite{Siegwarth_Olson_Lewis_Rowe_Williams_1994}, the density should be near 98\% of the saturation density.  Figure \ref{fig:brightness} shows the measured neutron spectra compared to simulated spectra at 98\% and 80\% saturadtion density, which are both included to show the most relaistic case and the case which matches the peak intensity.  It is doubtful that the cold source had 20\% void during the measurement due to the low beam intensity.
 
 \begin{figure}[h!] 
   \centering
@@ -432,18 +432,7 @@ As was mentioned previously, the state of the deuterium was uncertain due to the
      \caption{Measured and simulated source brightness at ICON. \label{fig:brightness} }
 \end{figure}
 
-It is also apparent from the simulations, something about the 0.2 \AA shift.
-
-%
-%
-%
-%
-%
-
-\section{Discussion}
-\label{sec:discussion}
-
-hmmmmm
+Figure \ref{fig:brightness} also shows that the peaks of simulated spectra are about 0.25 {\AA} less than the peak of the measured spectrum.  This phenomenon has been document previously, and it is suspected that it arises from some inaccuracies in the deuterium thermal scattering data \cite{giller_thesis}.
 
 %
 %

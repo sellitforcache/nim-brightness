@@ -286,9 +286,9 @@ paths={}
 cases=[]
 cases.append('19 K, ENDF/B-VII.1')
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case028.mctal'
-cases.append('19 K, Bariloche')
+cases.append('19 K, CAB')
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-bar/results/case028.mctal'
-cases.append('23 K, Bariloche')
+cases.append('23 K, CAB')
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-23K-bar/results/case028.mctal'
 cases.append('24 K, IKE')
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-24K-ike/results/case028.mctal'
@@ -332,7 +332,7 @@ paths={}
 cases=[]
 cases.append(r'ENDF/B-VII.1 D$_2$O')
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case028.mctal'
-cases.append(r'Bariloche D$_2$O')
+cases.append(r'CAB D$_2$O')
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-std-d2o-granda/results/case028.mctal'
 
 for case in cases:

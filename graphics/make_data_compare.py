@@ -256,21 +256,36 @@ charge_per_microamp = charge_per_amp/1e6
 Na     = 6.0221409e+23  # number/mol
 total_str = 2.1355E-05  # calculated from pinhole detector
 
-
-shift=-0.0
-
 # final measurement
-measurement = [[],[]]
-f=open('/home/l_bergmann/Documents/nim-brightness/brightness_measurement.csv','r')
+measurement = [[],[],[],[],[],[],[]]
+f=open('/home/l_bergmann/Documents/nim-brightness/brightness_measurement_corrected.csv','r')
 for line in f:
 	nums = line.split(',')
-	measurement[0].append(float(nums[0]))
-	measurement[1].append(float(nums[1]))
+	try:
+		null=float(nums[0])
+	except:
+		pass
+	else:
+		measurement[0].append(float(nums[0]))
+		measurement[1].append(float(nums[1]))
+		measurement[2].append(float(nums[2]))
+		measurement[3].append(float(nums[3]))
+		measurement[4].append(float(nums[4]))
+		measurement[5].append(float(nums[5]))
+		measurement[6].append(float(nums[6]))
 f.close()
-sa_measure     = 6.28E-4 #2.0*numpy.pi*(1.0-101./numpy.sqrt(101.0*101.0+1.5*1.5))
-meas_edge      = numpy.array(measurement[0][:])+shift
+measurement[0] = numpy.array(measurement[0])
 measurement[1] = numpy.array(measurement[1])
-meas_normed    = numpy.multiply(measurement[1][:],sa_measure/total_str)
+measurement[2] = numpy.array(measurement[2])
+measurement[3] = numpy.array(measurement[3])
+measurement[4] = numpy.array(measurement[4])
+measurement[5] = numpy.array(measurement[5])
+measurement[6] = numpy.array(measurement[6])
+
+#sa_measure     = 6.28E-4 #2.0*numpy.pi*(1.0-101./numpy.sqrt(101.0*101.0+1.5*1.5))
+sa_measure     = 0.000021363
+meas_edge      = numpy.array(measurement[0][:])
+meas_normed    = numpy.multiply(measurement[4][:],sa_measure/total_str)
 
 # pstudy
 fracs=[0.99, 0.9, 0.8, 0.762, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0.01]
@@ -497,8 +512,11 @@ values2  = charge_per_milliamp*numpy.divide(this_tal2.tallies[tal_num].vals[dex]
 
 f=plt.figure()
 ax=f.add_subplot(111)
-ax.plot(      meas_edge    ,          meas_normed,     linewidth=2,label='Measurement')
-#ax.plot(      meas_edge-0.25,         meas_normed,     linewidth=2,label='Measurement, 0.25 {\AA}  Shift')
+# plot measurement
+ax.plot(      meas_edge    ,          meas_normed,     linewidth=2,label=r'Measurement, Smoothed 0.1 \AA',drawstyle='steps-mid')
+# plot error band
+ax.fill_between(meas_edge,numpy.multiply(meas_normed,1.0+numpy.array(measurement[6])),numpy.multiply(meas_normed,1.0-numpy.array(measurement[6])), facecolor='blue', linewidth=1.0, color='blue', alpha=0.2,label=r'Measurement 1-$\sigma$ Error')
+# plot simulations
 make_steps(ax,wvl1,[0],values1,linewidth=2,label=r'MCNP 6.1, 98\% density',options=['lin',smooth_string])
 make_steps(ax,wvl2,[0],values2,linewidth=2,label=r'MCNP 6.1, 80\% density',options=['lin',smooth_string])
 ax.set_title(r'24 K IKE, 0.762 o-D$_2$') #0.130 g/cm$^3$ D$_2$,
@@ -507,7 +525,10 @@ ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ str$^{-1}$
 ax.set_ylim([0,4e11])
 ax.set_xlim(xlims)
 ax.grid(1)
-plt.legend(loc=1)
+
+handles, labels = ax.get_legend_handles_labels()
+ax.legend([handles[0],handles[3],handles[1],handles[2]],[labels[0],labels[3],labels[1],labels[2]],loc=1,fontsize=14)
+
 plt.show()
 
 
@@ -532,3 +553,24 @@ for i in range(0,len(meas_edge)-1):
 
 print "TOTAL MEASURED BRIGHTNESS = %6.4E " % this_sum
 print "TOTAL CALCULATED BRIGHTNESS = %6.4E " % numpy.sum(numpy.multiply(widths1[1:],values1[1:]))
+
+
+
+
+
+# write some spectrum
+f=open('spec_24k_aligned.csv','w')
+header = 'Lower Bin Wavelength (A)   ,   Upper Bin Wavelength (A)    ,     value (n / cm2 / mA*s / A / str)'
+f.write(header+'\n')
+
+index = range(0,len(wvl1)-1)
+index = index[::-1]
+for i in index:
+
+	v0 = values1[i]
+	a0 = wvl1[i+1]
+	a1 = wvl1[i]
+
+	f.write("% 6.4E ,   % 6.4E ,   % 6.4E\n"%(a0,a1,v0))
+
+f.close()

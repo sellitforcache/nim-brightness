@@ -499,6 +499,7 @@ plt.show()
 
 this_tal1 = mctal('/home/l_bergmann/repos/ICON-brightness-parametric-24K-ike/results/case030.mctal')
 this_tal2 = mctal('/home/l_bergmann/repos/ICON-brightness-parametric-24K-ike/results/case033.mctal')
+#this_tal2 = mctal('/home/l_bergmann/repos/ICON-brightness-parametric-24K-ike-newgaussian/results/case001.mctal')
 
 wvl1 = to_wavelength(numpy.array(this_tal1.tallies[tal_num].energies[:-1]))
 widths1 = -1.0*numpy.diff(wvl1)

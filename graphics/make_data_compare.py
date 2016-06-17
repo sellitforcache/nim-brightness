@@ -417,7 +417,7 @@ ax=f.add_subplot(111)
 #make_steps(ax,numpy.insert(meas_edge,0.0,0) , [0], meas_normed,     linewidth=2,label='Measurement',options=['lin'])
 for case in cases:
 	make_steps(ax,bin_edges[case],[0],bin_values[case],linewidth=2,label=case,options=['lin',smooth_string])
-ax.set_title(r'ENDF/B-VII.1, 19K, %4.3f o-D$_2$'%fracs[cnum-1])
+#ax.set_title(r'ENDF/B-VII.1, 19K, %4.3f o-D$_2$'%fracs[cnum-1])
 ax.set_xlabel(r'Wavelength (\AA)')
 ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ str$^{-1}$)')
 ax.set_ylim([0,4e11])
@@ -476,7 +476,7 @@ ax=f.add_subplot(111)
 #ax.plot(      meas_edge,          meas_normed,     linewidth=2,label='Measurement')
 for case in cases:
 	make_steps(ax,bin_edges[case],[0],bin_values[case],linewidth=2,label=case,options=['lin',smooth_string])
-ax.set_title(r'ENDF/B-VII.1, 19K, D$_2$ Density %4.3f'%(densities[cnum-1]))
+#ax.set_title(r'ENDF/B-VII.1, 19K, D$_2$ Density %4.3f'%(densities[cnum-1]))
 ax.set_xlabel(r'Wavelength (\AA)')
 ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ str$^{-1}$)')
 ax.set_ylim([0,4e11])
@@ -520,7 +520,7 @@ ax.fill_between(meas_edge,numpy.multiply(meas_normed,1.0+numpy.array(measurement
 # plot simulations
 make_steps(ax,wvl1,[0],values1,linewidth=2,label=r'MCNP 6.1, 98\% density',options=['lin',smooth_string])
 make_steps(ax,wvl2,[0],values2,linewidth=2,label=r'MCNP 6.1, 80\% density',options=['lin',smooth_string])
-ax.set_title(r'24 K IKE, 0.762 o-D$_2$') #0.130 g/cm$^3$ D$_2$,
+#ax.set_title(r'24 K IKE, 0.762 o-D$_2$') #0.130 g/cm$^3$ D$_2$,
 ax.set_xlabel(r'Wavelength (\AA)')
 ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ str$^{-1}$)')
 ax.set_ylim([0,4e11])

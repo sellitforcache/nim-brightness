@@ -312,7 +312,8 @@ paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-24K-ike/resu
 tal_num = 5
 xlims = [0.75,6]
 
-smooth_string='smooth=11'
+smooth_int=11
+smooth_string='smooth=%d'%smooth_int
 
 for case in cases:
 	path = paths[case]
@@ -486,9 +487,22 @@ plt.legend(loc=1)
 plt.show()
 
 
-
-
-
+# calculate uncertainy from this
+b1=bin_values[r'%3.0f\%% o-D$_2$'%(fracs[0]*100)]
+b2=bin_values[r'%3.0f\%% o-D$_2$'%(fracs[5]*100)]
+b0=bin_values[r'%3.0f\%% o-D$_2$'%(fracs[3]*100)]
+op_err_pos = []
+op_err_neg = []
+op_err_max = []
+for i in range(0,len(b1)):
+	err_1 = (b1[i]-b0[i])/b0[i]
+	err_2 = (b2[i]-b0[i])/b0[i]
+	if b0[i]==0.0:
+		err_1=0.0
+		err_2=0.0
+	op_err_pos.append(abs(max( err_1 ,      err_2 )))
+	op_err_neg.append(abs(min( err_1 ,      err_2 )))
+	op_err_max.append(max( abs(err_1) , abs(err_2) ))
 
 #
 #
@@ -499,27 +513,54 @@ plt.show()
 
 this_tal1 = mctal('/home/l_bergmann/repos/ICON-brightness-parametric-24K-ike/results/case030.mctal')
 this_tal2 = mctal('/home/l_bergmann/repos/ICON-brightness-parametric-24K-ike/results/case033.mctal')
-#this_tal2 = mctal('/home/l_bergmann/repos/ICON-brightness-parametric-24K-ike-newgaussian/results/case001.mctal')
+this_tal3 = mctal('/home/l_bergmann/repos/ICON-brightness-FINAL/ICON-final.mctal')
+this_tal4 = mctal('/home/l_bergmann/repos/ICON-brightness-FINAL/ICON-final-0.8den.mctal')
 
 wvl1 = to_wavelength(numpy.array(this_tal1.tallies[tal_num].energies[:-1]))
+avg1 = (wvl1[1:]+wvl1[:-1])/2.0
 widths1 = -1.0*numpy.diff(wvl1)
 dex   = this_tal1.tallies[tal_num]._hash(obj=0,cos=0)
 values1  = charge_per_milliamp*numpy.divide(this_tal1.tallies[tal_num].vals[dex]['data'][:-1],widths1*total_str)
+err1     =                     numpy.array( this_tal1.tallies[tal_num].vals[dex]['err' ][:-1])
+values1_smooth = smooth(values1,window_len=smooth_int)
+values1_smooth = values1_smooth[(smooth_int-1)/2:-(smooth_int-1)/2]
+
+
+
+sigma1 = numpy.sum((numpy.multiply(this_tal1.tallies[tal_num].vals[dex]['data'][:-1],this_tal1.tallies[tal_num].vals[dex]['err'][:-1])))
+
+print 'calc total err',sigma1/this_tal1.tallies[tal_num].vals[dex]['data'][-1]
+print 'reported total err',this_tal1.tallies[tal_num].vals[dex]['err' ][-1]
+
 
 wvl2 = to_wavelength(numpy.array(this_tal2.tallies[tal_num].energies[:-1]))
 widths2 = -1.0*numpy.diff(wvl2)
 dex   = this_tal2.tallies[tal_num]._hash(obj=0,cos=0)
 values2  = charge_per_milliamp*numpy.divide(this_tal2.tallies[tal_num].vals[dex]['data'][:-1],widths2*total_str)
 
+wvl3 = to_wavelength(numpy.array(this_tal3.tallies[tal_num].energies[:-1]))
+widths3 = -1.0*numpy.diff(wvl3)
+dex   = this_tal3.tallies[tal_num]._hash(obj=0,cos=0)
+values3  = charge_per_milliamp*numpy.divide(this_tal3.tallies[tal_num].vals[dex]['data'][:-1],widths3*total_str)
+
+wvl4 = to_wavelength(numpy.array(this_tal4.tallies[tal_num].energies[:-1]))
+widths4 = -1.0*numpy.diff(wvl4)
+dex   = this_tal4.tallies[tal_num]._hash(obj=0,cos=0)
+values4  = charge_per_milliamp*numpy.divide(this_tal4.tallies[tal_num].vals[dex]['data'][:-1],widths4*total_str)
+
 f=plt.figure()
 ax=f.add_subplot(111)
 # plot measurement
 ax.plot(      meas_edge    ,          meas_normed,     linewidth=2,label=r'Measurement, Smoothed 0.1 \AA',drawstyle='steps-mid')
-# plot error band
-ax.fill_between(meas_edge,numpy.multiply(meas_normed,1.0+numpy.array(measurement[6])),numpy.multiply(meas_normed,1.0-numpy.array(measurement[6])), facecolor='blue', linewidth=1.0, color='blue', alpha=0.2,label=r'Measurement 1-$\sigma$ Error')
+# plot error band for measurement
+ax.fill_between(meas_edge,numpy.multiply(meas_normed,1.0+numpy.array(measurement[6])),numpy.multiply(meas_normed,1.0-numpy.array(measurement[6])), facecolor='blue', linewidth=1.0, color='blue', alpha=0.25,label=r'Measurement 1-$\sigma$ Error')
 # plot simulations
-make_steps(ax,wvl1,[0],values1,linewidth=2,label=r'MCNP 6.1, 98\% density',options=['lin',smooth_string])
-make_steps(ax,wvl2,[0],values2,linewidth=2,label=r'MCNP 6.1, 80\% density',options=['lin',smooth_string])
+make_steps(ax,wvl1,[0],values1,linewidth=2,color='r',label=r'MCNP 6.1, 98\% Density',options=['lin',smooth_string])
+#make_steps(ax,wvl2,[0],values2,linewidth=2,label=r'MCNP 6.1, 80\% Density',options=['lin',smooth_string])
+#make_steps(ax,wvl3,[0],values3,linewidth=2,label=r'MCNP 6.1, 98\% density, new target',options=['lin',smooth_string])
+#make_steps(ax,wvl4,[0],values4,linewidth=2,label=r'MCNP 6.1, 80\% density, new target',options=['lin',smooth_string])
+# plot error band for best guess case
+ax.fill_between(avg1,   numpy.multiply(values1_smooth, (1.0+numpy.add(err1, op_err_pos) )),   numpy.multiply(values1_smooth, (1.0- numpy.add(err1,op_err_neg)))  , facecolor='red', linewidth=1.0, color='red', alpha=0.25,label=r'98\% Density 1-$\sigma$ Error')
 #ax.set_title(r'24 K IKE, 0.762 o-D$_2$') #0.130 g/cm$^3$ D$_2$,
 ax.set_xlabel(r'Wavelength (\AA)')
 ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ str$^{-1}$)')
@@ -528,19 +569,28 @@ ax.set_xlim(xlims)
 ax.grid(1)
 
 handles, labels = ax.get_legend_handles_labels()
-ax.legend([handles[0],handles[3],handles[1],handles[2]],[labels[0],labels[3],labels[1],labels[2]],loc=1,fontsize=14)
+#ax.legend([handles[0],handles[5],handles[1],handles[2],handles[3],handles[4]],[labels[0],labels[5],labels[1],labels[2],labels[3],labels[4]],loc=1,fontsize=14)
+#ax.legend([handles[0],handles[3],handles[1],handles[4],handles[2]],[labels[0],labels[3],labels[1],labels[4],labels[2]],loc=1,fontsize=14)
+ax.legend([handles[0],handles[2],handles[1],handles[3]],[labels[0],labels[2],labels[1],labels[3]],loc=1,fontsize=14)
 
 plt.show()
 
 
+
+
+# err
+total_err_calc = numpy.sum(numpy.multiply(values1,numpy.add(op_err_max, err1)))/numpy.sum(values1)
+
+# err
+total_err_exp  = numpy.sum(numpy.multiply(meas_normed,numpy.array(measurement[6])))/numpy.sum(meas_normed)
 
 #
 #
 # total brightness from measurement
 #
 #
-print meas_edge
-print meas_normed
+#print meas_edge
+#print meas_normed
 this_sum = 0.0
 for i in range(0,len(meas_edge)-1):
 	x0=meas_edge[i]
@@ -552,8 +602,8 @@ for i in range(0,len(meas_edge)-1):
 		b=y0
 		this_sum = this_sum + a/2.0*(x1-x0)*(x1-x0)+b*(x1-x0)
 
-print "TOTAL MEASURED BRIGHTNESS = %6.4E " % this_sum
-print "TOTAL CALCULATED BRIGHTNESS = %6.4E " % numpy.sum(numpy.multiply(widths1[1:],values1[1:]))
+print "TOTAL MEASURED BRIGHTNESS   = %6.4E +- %6.4f" % (this_sum,total_err_exp)
+print "TOTAL CALCULATED BRIGHTNESS = %6.4E +- %6.4f" % (numpy.sum(numpy.multiply(widths1[1:],values1[1:])),total_err_calc)
 
 
 

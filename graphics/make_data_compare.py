@@ -602,8 +602,9 @@ for i in range(0,len(meas_edge)-1):
 		b=y0
 		this_sum = this_sum + a/2.0*(x1-x0)*(x1-x0)+b*(x1-x0)
 
-print "TOTAL MEASURED BRIGHTNESS   = %6.4E +- %6.4f" % (this_sum,total_err_exp)
-print "TOTAL CALCULATED BRIGHTNESS = %6.4E +- %6.4f" % (numpy.sum(numpy.multiply(widths1[1:],values1[1:])),total_err_calc)
+calc_bright_sum = numpy.sum(numpy.multiply(widths1[1:],values1[1:]))
+print "TOTAL MEASURED BRIGHTNESS   = %6.4E +- %6.4E (%6.4f RE)" % (this_sum,this_sum*total_err_exp,total_err_exp)
+print "TOTAL CALCULATED BRIGHTNESS = %6.4E +- %6.4E (%6.4f RE)" % (calc_bright_sum,calc_bright_sum*total_err_calc,total_err_calc)
 
 
 

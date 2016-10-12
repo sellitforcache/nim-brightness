@@ -339,6 +339,27 @@ plt.legend(loc=1)
 plt.show()
 
 
+# calculate uncertainy from this
+b1=bin_values['19 K, ENDF/B-VII.1']
+b2=bin_values['19 K, CAB']
+b3=bin_values['23 K, CAB']
+b0=bin_values['24 K, IKE']
+d2dat_err_pos = []
+d2dat_err_neg = []
+d2dat_err_max = []
+for i in range(0,len(b1)):
+	err_1 = (b1[i]-b0[i])/b0[i]
+	err_2 = (b2[i]-b0[i])/b0[i]
+	err_3 = (b3[i]-b0[i])/b0[i]
+	if b0[i]==0.0:
+		err_1=0.0
+		err_2=0.0
+		err_3=0.0
+	d2dat_err_pos.append(abs(max( err_1 ,      err_2 ,      err_3 )))
+	d2dat_err_neg.append(abs(min( err_1 ,      err_2 ,      err_3 )))
+	d2dat_err_max.append(max( abs(err_1),  abs(err_2),  abs(err_3) ))
+
+
 ### D2O DATA COMPARE
 
 # get sims
@@ -428,6 +449,24 @@ plt.legend(loc=1)
 plt.show()
 
 
+# calculate uncertainy from this
+b1=bin_values[r'%3.0f\%% $\rho$'%(densities[0]/densities[0]*100)]
+b2=bin_values[r'%3.0f\%% $\rho$'%(densities[3]/densities[0]*100)]
+b0=bin_values[r'%3.0f\%% $\rho$'%(densities[2]/densities[0]*100)]
+dendat_err_pos = []
+dendat_err_neg = []
+dendat_err_max = []
+for i in range(0,len(b1)):
+	err_1 = (b1[i]-b0[i])/b0[i]
+	err_2 = (b2[i]-b0[i])/b0[i]
+	if b0[i]==0.0:
+		err_1=0.0
+		err_2=0.0
+	dendat_err_pos.append(abs(max( err_1 ,      err_2  )))
+	dendat_err_neg.append(abs(min( err_1 ,      err_2  )))
+	dendat_err_max.append(max( abs(err_1),  abs(err_2)  ))
+
+
 
 ### O/P COMPARE
 
@@ -504,6 +543,8 @@ for i in range(0,len(b1)):
 	op_err_neg.append(abs(min( err_1 ,      err_2 )))
 	op_err_max.append(max( abs(err_1) , abs(err_2) ))
 
+
+
 #
 #
 # FINAL BEST GUESS
@@ -560,7 +601,7 @@ make_steps(ax,wvl1,[0],values1,linewidth=2,color='r',label=r'MCNP 6.1, 98\% Dens
 #make_steps(ax,wvl3,[0],values3,linewidth=2,label=r'MCNP 6.1, 98\% density, new target',options=['lin',smooth_string])
 #make_steps(ax,wvl4,[0],values4,linewidth=2,label=r'MCNP 6.1, 80\% density, new target',options=['lin',smooth_string])
 # plot error band for best guess case
-ax.fill_between(avg1,   numpy.multiply(values1_smooth, (1.0+numpy.add(err1, op_err_pos) )),   numpy.multiply(values1_smooth, (1.0- numpy.add(err1,op_err_neg)))  , facecolor='red', linewidth=1.0, color='red', alpha=0.25,label=r'98\% Density 1-$\sigma$ Error')
+ax.fill_between(avg1,   numpy.multiply(values1_smooth, (1.0+numpy.add(err1, op_err_pos) )),   numpy.multiply(values1_smooth, (1.0- numpy.add(err1,op_err_neg)))  , facecolor='red', linewidth=1.0, color='red', alpha=0.25,label=r'Simulation 1-$\sigma$ Error')
 #ax.set_title(r'24 K IKE, 0.762 o-D$_2$') #0.130 g/cm$^3$ D$_2$,
 ax.set_xlabel(r'Wavelength (\AA)')
 ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ str$^{-1}$)')
@@ -579,7 +620,10 @@ plt.show()
 
 
 # err
-total_err_calc = numpy.sum(numpy.multiply(values1,numpy.add(op_err_max, err1)))/numpy.sum(values1)
+total_param_err_calc=numpy.add(op_err_max, err1)
+total_param_err_calc=numpy.add(total_param_err_calc,d2dat_err_max)
+total_param_err_calc=numpy.add(total_param_err_calc,dendat_err_max)
+total_err_calc = numpy.sum(numpy.multiply(values1,total_param_err_calc))/numpy.sum(values1)
 
 # err
 total_err_exp  = numpy.sum(numpy.multiply(meas_normed,numpy.array(measurement[6])))/numpy.sum(meas_normed)

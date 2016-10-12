@@ -313,12 +313,13 @@ for line in f:
 f.close()
 
 # mcnp calculated efficieny
-mcnp_eff = [[],[]]
+mcnp_eff = [[],[],[]]
 f=open('/home/l_bergmann/Documents/nim-brightness/mcnpeff.csv','r')
 for line in f:
 	nums = line.split(',')
 	mcnp_eff[0].append(float(nums[0]))
 	mcnp_eff[1].append(float(nums[1]))
+	mcnp_eff[2].append(float(nums[2]))
 f.close()
 
 # measured efficiency
@@ -337,6 +338,7 @@ ax=f.add_subplot(111)
 ax.plot(meas_eff[0],meas_eff[1],  linewidth=2,label='BOA Measurement')
 ax.plot(oned_eff[0],oned_eff[1],  linewidth=2,label='1-D Model')
 ax.plot(mcnp_eff[0],mcnp_eff[1],  linewidth=2,label='MCNP Model')
+ax.fill_between(mcnp_eff[0],numpy.multiply(mcnp_eff[1],1.0+numpy.array(mcnp_eff[2])),numpy.multiply(mcnp_eff[1],1.0-numpy.array(mcnp_eff[2])), facecolor='red', linewidth=1.0, color='red', alpha=0.25,label=r'MCNP 1-$\sigma$ Error')
 ax.set_xlabel(r'Wavelength (\AA)')
 ax.set_ylabel(r'Efficiency')
 ax.set_ylim([0,1])

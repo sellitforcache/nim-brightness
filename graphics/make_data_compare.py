@@ -308,9 +308,13 @@ paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-23K-bar/resu
 cases.append('24 K, IKE')
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-24K-ike/results/case028.mctal'
 
-
+# get index limits for sums
 tal_num = 5
 xlims = [0.75,6]
+this_tal = mctal('/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case028.mctal')
+wvl = to_wavelength(numpy.array(this_tal.tallies[tal_num].energies[:-1]))
+index_xlims = numpy.multiply( wvl >= xlims[0] , wvl <= xlims[1] )
+
 
 smooth_int=11
 smooth_string='smooth=%d'%smooth_int

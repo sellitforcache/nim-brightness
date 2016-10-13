@@ -317,6 +317,7 @@ mcnp_eff = [[],[],[]]
 f=open('/home/l_bergmann/Documents/nim-brightness/mcnpeff.csv','r')
 for line in f:
 	nums = line.split(',')
+	print nums
 	mcnp_eff[0].append(float(nums[0]))
 	mcnp_eff[1].append(float(nums[1]))
 	mcnp_eff[2].append(float(nums[2]))

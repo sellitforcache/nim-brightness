@@ -255,6 +255,7 @@ charge_per_milliamp = charge_per_amp/1e3
 charge_per_microamp = charge_per_amp/1e6
 Na     = 6.0221409e+23  # number/mol
 total_str = 2.1355E-05  # calculated from pinhole detector
+sa_err = 0.006
 
 # final measurement
 measurement = [[],[],[]]#,[],[],[],[]]
@@ -288,6 +289,10 @@ meas_edge      = numpy.array(measurement[0][:])
 #meas_normed    = numpy.multiply(measurement[1][:],sa_measure/total_str)
 meas_normed    = measurement[1][:]
 meas_err    	= numpy.divide(measurement[2][:],measurement[1][:])
+for i in range(0,len(meas_err)):
+	meas_err[i] = numpy.linalg.norm([sa_err,meas_err[i]])
+
+
 
 # pstudy
 fracs=[0.99, 0.9, 0.8, 0.762, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0.01]
@@ -569,6 +574,8 @@ widths1 = -1.0*numpy.diff(wvl1)
 dex   = this_tal1.tallies[tal_num]._hash(obj=0,cos=0)
 values1  = charge_per_milliamp*numpy.divide(this_tal1.tallies[tal_num].vals[dex]['data'][:-1],widths1*total_str)
 err1     =                     numpy.array( this_tal1.tallies[tal_num].vals[dex]['err' ][:-1])
+for i in range(0,len(err1)):
+	err1[i] = numpy.linalg.norm([sa_err,err1[i]])
 values1_smooth = smooth(values1,window_len=smooth_int)
 values1_smooth = values1_smooth[(smooth_int-1)/2:-(smooth_int-1)/2]
 

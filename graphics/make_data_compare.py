@@ -257,8 +257,8 @@ Na     = 6.0221409e+23  # number/mol
 total_str = 2.1355E-05  # calculated from pinhole detector
 
 # final measurement
-measurement = [[],[],[],[],[],[],[]]
-f=open('/home/l_bergmann/Documents/nim-brightness/brightness_measurement_corrected.csv','r')
+measurement = [[],[],[]]#,[],[],[],[]]
+f=open('/home/l_bergmann/Documents/nim-brightness/brightness_measurement_corrected2.csv','r')
 for line in f:
 	nums = line.split(',')
 	try:
@@ -269,23 +269,25 @@ for line in f:
 		measurement[0].append(float(nums[0]))
 		measurement[1].append(float(nums[1]))
 		measurement[2].append(float(nums[2]))
-		measurement[3].append(float(nums[3]))
-		measurement[4].append(float(nums[4]))
-		measurement[5].append(float(nums[5]))
-		measurement[6].append(float(nums[6]))
+		#measurement[3].append(float(nums[3]))
+		#measurement[4].append(float(nums[4]))
+		#measurement[5].append(float(nums[5]))
+		#measurement[6].append(float(nums[6]))
 f.close()
 measurement[0] = numpy.array(measurement[0])
 measurement[1] = numpy.array(measurement[1])
 measurement[2] = numpy.array(measurement[2])
-measurement[3] = numpy.array(measurement[3])
-measurement[4] = numpy.array(measurement[4])
-measurement[5] = numpy.array(measurement[5])
-measurement[6] = numpy.array(measurement[6])
+#measurement[3] = numpy.array(measurement[3])
+#measurement[4] = numpy.array(measurement[4])
+#measurement[5] = numpy.array(measurement[5])
+#measurement[6] = numpy.array(measurement[6])
 
 #sa_measure     = 6.28E-4 #2.0*numpy.pi*(1.0-101./numpy.sqrt(101.0*101.0+1.5*1.5))
-sa_measure     = 0.000021363
+#sa_measure     = 0.000021363
 meas_edge      = numpy.array(measurement[0][:])
-meas_normed    = numpy.multiply(measurement[4][:],sa_measure/total_str)
+#meas_normed    = numpy.multiply(measurement[1][:],sa_measure/total_str)
+meas_normed    = measurement[1][:]
+meas_err    	= numpy.divide(measurement[2][:],measurement[1][:])
 
 # pstudy
 fracs=[0.99, 0.9, 0.8, 0.762, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0.01]
@@ -596,9 +598,9 @@ values4  = charge_per_milliamp*numpy.divide(this_tal4.tallies[tal_num].vals[dex]
 f=plt.figure()
 ax=f.add_subplot(111)
 # plot measurement
-ax.plot(      meas_edge    ,          meas_normed,     linewidth=2,label=r'Measurement, Smoothed 0.1 \AA',drawstyle='steps-mid')
+ax.plot(      meas_edge    ,          meas_normed,     linewidth=2,label=r'Measurement, Averaged 0.1 \AA',drawstyle='steps-mid')
 # plot error band for measurement
-ax.fill_between(meas_edge,numpy.multiply(meas_normed,1.0+numpy.array(measurement[6])),numpy.multiply(meas_normed,1.0-numpy.array(measurement[6])), facecolor='blue', linewidth=1.0, color='blue', alpha=0.25,label=r'Measurement 1-$\sigma$ Error')
+ax.fill_between(meas_edge,numpy.multiply(meas_normed,1.0+numpy.array(meas_err)),numpy.multiply(meas_normed,1.0-numpy.array(meas_err)), facecolor='blue', linewidth=1.0, color='blue', alpha=0.25,label=r'Measurement 1-$\sigma$ Error')
 # plot simulations
 make_steps(ax,wvl1,[0],values1,linewidth=2,color='r',label=r'MCNP 6.1, 98\% Density',options=['lin',smooth_string])
 #make_steps(ax,wvl2,[0],values2,linewidth=2,label=r'MCNP 6.1, 80\% Density',options=['lin',smooth_string])
@@ -630,7 +632,7 @@ total_param_err_calc=numpy.add(total_param_err_calc,dendat_err_max)
 total_err_calc = numpy.sum(numpy.multiply(values1,total_param_err_calc))/numpy.sum(values1)
 
 # err
-total_err_exp  = numpy.sum(numpy.multiply(meas_normed,numpy.array(measurement[6])))/numpy.sum(meas_normed)
+total_err_exp  = numpy.sum(numpy.multiply(meas_normed,numpy.array(meas_err)))/numpy.sum(meas_normed)
 
 #
 #

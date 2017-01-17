@@ -1,0 +1,191 @@
+0 CM
+
+
+   ========  
+PD total       3.0899E-09
+Pinhole mean   2.2492E-07
+Pinhole sum    3.2931E-03
+detector system limit 0.000692815838186  self limit  0.00125626019594
+detector system limit 1.84030236902  self limit  1.84030236902
+detector system limit 0.00197807975847  self limit  0.0200101951093
+detector system limit 3.31671997271e-05  self limit  0.0854894978662
+detector system limit 3.40158570072e-05  self limit  6.20465162604
+detector system limit 2.25967593833e-05  self limit  0.00271987455164
+detector system limit 2.07070883439e-05  self limit  0.000992663127182
+detector system limit 5.1292901897e-05  self limit  6.23765617422
+  HORIZONTAL ========  
+solid angle collimator     6.9282E-04
+solid angle cadmium        1.8403E+00
+solid angle sapphire       1.9781E-03
+solid angle steel          3.3167E-05
+solid angle aperture       3.4016E-05
+solid angle tube           2.2597E-05
+solid angle zapfen         2.0707E-05
+solid angle nozzle         5.1293E-05
+detector system limit 0.000692815838186  self limit  0.00125626019594
+detector system limit 1.84030236902  self limit  1.84030236902
+detector system limit 0.00197807975847  self limit  0.0200101951093
+detector system limit 3.31671997271e-05  self limit  0.0854894978662
+detector system limit 3.40158570072e-05  self limit  0.00885804102981
+detector system limit 2.25967593833e-05  self limit  0.00271987455164
+detector system limit 4.62079918863e-05  self limit  0.00722574577973
+detector system limit 5.1292901897e-05  self limit  6.23765617422
+  VERTICAL ========  
+solid angle collimator     6.9282E-04
+solid angle cadmium        1.8403E+00
+solid angle sapphire       1.9781E-03
+solid angle steel          3.3167E-05
+solid angle aperture       3.4016E-05
+solid angle tube           2.2597E-05
+solid angle zapfen         4.6208E-05
+solid angle nozzle         5.1293E-05
+detector system limit 0.000692815838186  self limit  0.00125626019594
+detector system limit 1.84030236902  self limit  1.84030236902
+detector system limit 0.00384485882892  self limit  0.0398304192153
+detector system limit 6.55741624929e-05  self limit  0.167581808628
+detector system limit 3.40158570072e-05  self limit  6.20465162604
+detector system limit 4.48670347145e-05  self limit  0.00543622000857
+detector system limit 6.65593967113e-05  self limit  0.00322443606397
+detector system limit 0.000102152692508  self limit  6.25099092591
+  DIAGONAL ========  
+solid angle collimator     6.9282E-04
+solid angle cadmium        1.8403E+00
+solid angle sapphire       3.8449E-03
+solid angle steel          6.5574E-05
+solid angle aperture       3.4016E-05
+solid angle tube           4.4867E-05
+solid angle zapfen         6.6559E-05
+solid angle nozzle         1.0215E-04
+
+
+
+
+
+
+
+
+
+PLUS 5 CM
+
+   ========  
+PD total       3.0899E-09
+Pinhole mean   2.2492E-07
+Pinhole sum    3.2931E-03
+detector system limit 0.000309989051724  self limit  0.00125626019594
+detector system limit 0.00120749214283  self limit  1.84030236902
+detector system limit 0.00157842425681  self limit  0.0200101951093
+detector system limit 3.27485879878e-05  self limit  0.0854894978662
+detector system limit 3.37411623145e-05  self limit  6.20465162604
+detector system limit 2.24478625945e-05  self limit  0.00271987455164
+detector system limit 2.05764452214e-05  self limit  0.000992663127182
+detector system limit 5.09959862976e-05  self limit  6.23765617422
+  HORIZONTAL ========  
+solid angle collimator     3.0999E-04
+solid angle cadmium        1.2075E-03
+solid angle sapphire       1.5784E-03
+solid angle steel          3.2749E-05
+solid angle aperture       3.3741E-05
+solid angle tube           2.2448E-05
+solid angle zapfen         2.0576E-05
+solid angle nozzle         5.0996E-05
+detector system limit 0.000309989051724  self limit  0.00125626019594
+detector system limit 0.00120749214283  self limit  1.84030236902
+detector system limit 0.00157842425681  self limit  0.0200101951093
+detector system limit 3.27485879878e-05  self limit  0.0854894978662
+detector system limit 3.37411623145e-05  self limit  0.00885804102981
+detector system limit 2.24478625945e-05  self limit  0.00271987455164
+detector system limit 4.59164627375e-05  self limit  0.00722574577973
+detector system limit 5.09959862976e-05  self limit  6.23765617422
+  VERTICAL ========  
+solid angle collimator     3.0999E-04
+solid angle cadmium        1.2075E-03
+solid angle sapphire       1.5784E-03
+solid angle steel          3.2749E-05
+solid angle aperture       3.3741E-05
+solid angle tube           2.2448E-05
+solid angle zapfen         4.5916E-05
+solid angle nozzle         5.0996E-05
+detector system limit 0.000309989051724  self limit  0.00125626019594
+detector system limit 0.00120749214283  self limit  1.84030236902
+detector system limit 0.00306831158813  self limit  0.0398304192153
+detector system limit 6.47465404829e-05  self limit  0.167581808628
+detector system limit 3.37411623145e-05  self limit  6.20465162604
+detector system limit 4.45713939972e-05  self limit  0.00543622000857
+detector system limit 6.61394712886e-05  self limit  0.00322443606397
+detector system limit 0.000101561375569  self limit  6.25099092591
+  DIAGONAL ========  
+solid angle collimator     3.0999E-04
+solid angle cadmium        1.2075E-03
+solid angle sapphire       3.0683E-03
+solid angle steel          6.4747E-05
+solid angle aperture       3.3741E-05
+solid angle tube           4.4571E-05
+solid angle zapfen         6.6139E-05
+solid angle nozzle         1.0156E-04
+
+
+
+
+
+
+
+
+
+
+MINUS 5 CM
+
+ ========  
+PD total       3.0899E-09
+Pinhole mean   2.2492E-07
+Pinhole sum    3.2931E-03
+detector system limit 0.00271587879867  self limit  0.00125626019594
+detector system limit 12.5650625712  self limit  1.84030236902
+detector system limit 0.00255118852089  self limit  0.0200101951093
+detector system limit 3.35938894585e-05  self limit  0.0854894978662
+detector system limit 3.42939199268e-05  self limit  6.20465162604
+detector system limit 2.27471425489e-05  self limit  0.00271987455164
+detector system limit 2.08389796371e-05  self limit  0.000992663127182
+detector system limit 5.15924181663e-05  self limit  6.23765617422
+  HORIZONTAL ========  
+solid angle collimator     1.2563E-03
+solid angle cadmium        1.8403E+00
+solid angle sapphire       2.5512E-03
+solid angle steel          3.3594E-05
+solid angle aperture       3.4294E-05
+solid angle tube           2.2747E-05
+solid angle zapfen         2.0839E-05
+solid angle nozzle         5.1592E-05
+detector system limit 0.00271587879867  self limit  0.00125626019594
+detector system limit 12.5650625712  self limit  1.84030236902
+detector system limit 0.00255118852089  self limit  0.0200101951093
+detector system limit 3.35938894585e-05  self limit  0.0854894978662
+detector system limit 3.42939199268e-05  self limit  0.00885804102981
+detector system limit 2.27471425489e-05  self limit  0.00271987455164
+detector system limit 4.65023062941e-05  self limit  0.00722574577973
+detector system limit 5.15924181663e-05  self limit  6.23765617422
+  VERTICAL ========  
+solid angle collimator     1.2563E-03
+solid angle cadmium        1.8403E+00
+solid angle sapphire       2.5512E-03
+solid angle steel          3.3594E-05
+solid angle aperture       3.4294E-05
+solid angle tube           2.2747E-05
+solid angle zapfen         4.6502E-05
+solid angle nozzle         5.1592E-05
+detector system limit 0.00271587879867  self limit  0.00125626019594
+detector system limit 12.5650625712  self limit  1.84030236902
+detector system limit 0.00495818893825  self limit  0.0398304192153
+detector system limit 6.6417755042e-05  self limit  0.167581808628
+detector system limit 3.42939199268e-05  self limit  6.20465162604
+detector system limit 4.51656266686e-05  self limit  0.00543622000857
+detector system limit 6.69833340631e-05  self limit  0.00322443606397
+detector system limit 0.000102749188681  self limit  6.25099092591
+  DIAGONAL ========  
+solid angle collimator     1.2563E-03
+solid angle cadmium        1.8403E+00
+solid angle sapphire       4.9582E-03
+solid angle steel          6.6418E-05
+solid angle aperture       3.4294E-05
+solid angle tube           4.5166E-05
+solid angle zapfen         6.6983E-05
+solid angle nozzle         1.0275E-04

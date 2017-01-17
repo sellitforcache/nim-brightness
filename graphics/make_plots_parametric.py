@@ -191,11 +191,15 @@ total_str = 2.1355E-05  # calculated from pinhole detector
 
 # final measurement
 measurement = [[],[]]
-f=open('/home/l_bergmann/Documents/nim-brightness/brightness_measurement.csv','r')
+f=open('/home/l_bergmann/Documents/nim-brightness/brightness_measurement_corrected2.csv','r')
+first=True
 for line in f:
-	nums = line.split(',')
-	measurement[0].append(float(nums[0]))
-	measurement[1].append(float(nums[1]))
+	if first:
+		first=False
+	else:
+		nums = line.split(',')
+		measurement[0].append(float(nums[0]))
+		measurement[1].append(float(nums[1]))
 f.close()
 
 #path = '/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/'

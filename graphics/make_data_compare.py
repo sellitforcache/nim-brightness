@@ -607,14 +607,14 @@ ax=f.add_subplot(111)
 # plot measurement
 ax.plot(      meas_edge    ,          meas_normed,     linewidth=2,label=r'Measurement, Averaged 0.1 \AA',drawstyle='steps-mid')
 # plot error band for measurement
-ax.fill_between(meas_edge,numpy.multiply(meas_normed,1.0+numpy.array(meas_err)),numpy.multiply(meas_normed,1.0-numpy.array(meas_err)), facecolor='blue', linewidth=1.0, color='blue', alpha=0.25,label=r'Measurement 1-$\sigma$ Error')
+ax.fill_between(meas_edge,numpy.multiply(meas_normed,1.0+numpy.array(meas_err)),numpy.multiply(meas_normed,1.0-numpy.array(meas_err)), facecolor='blue', linewidth=1.0, color='blue', alpha=0.25,label=r'Measurement Total Error (1-$\sigma$)')
 # plot simulations
 make_steps(ax,wvl1,[0],values1,linewidth=2,color='r',label=r'MCNP 6.1, 98\% Density',options=['lin',smooth_string])
 #make_steps(ax,wvl2,[0],values2,linewidth=2,label=r'MCNP 6.1, 80\% Density',options=['lin',smooth_string])
 #make_steps(ax,wvl3,[0],values3,linewidth=2,label=r'MCNP 6.1, 98\% density, new target',options=['lin',smooth_string])
 #make_steps(ax,wvl4,[0],values4,linewidth=2,label=r'MCNP 6.1, 80\% density, new target',options=['lin',smooth_string])
 # plot error band for best guess case
-ax.fill_between(avg1,   numpy.multiply(values1_smooth, (1.0+numpy.add(err1, op_err_pos) )),   numpy.multiply(values1_smooth, (1.0- numpy.add(err1,op_err_neg)))  , facecolor='red', linewidth=1.0, color='red', alpha=0.25,label=r'Simulation 1-$\sigma$ Error')
+ax.fill_between(avg1,   numpy.multiply(values1_smooth, (1.0+numpy.add(err1, op_err_pos) )),   numpy.multiply(values1_smooth, (1.0- numpy.add(err1,op_err_neg)))  , facecolor='red', linewidth=1.0, color='red', alpha=0.25,label=r'Simulation Total Error (1-$\sigma$)')
 #ax.set_title(r'24 K IKE, 0.762 o-D$_2$') #0.130 g/cm$^3$ D$_2$,
 ax.set_xlabel(r'Wavelength (\AA)')
 ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ str$^{-1}$)')

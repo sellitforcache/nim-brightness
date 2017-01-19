@@ -143,25 +143,26 @@
 %% \address[label1]{<address>}
 %% \address[label2]{<address>}
 
-\author[]{Ryan M. Bergmann\corref{cor1}}
+\author[gfa]{Ryan M. Bergmann\corref{cor1}}
 \ead{ryan.bergmann@psi.ch}
 
-\author[]{Masako Yamada\corref{cor2}}
+\author[num]{Masako Yamada\corref{cor2}}
 \ead{masako.yamada@psi.ch}
 
-\author[]{Uwe Filges}
+\author[num]{Uwe Filges}
 %\ead{uwe.filges@psi.ch}
 
-\author[]{Tibor Reiss}
+\author[gfa]{Tibor Reiss}
 %\ead{tibor.reiss@psi.ch}
 
-\author[]{Vadim Talanov}
+\author[gfa]{Vadim Talanov}
 %\ead{vadim.talanov@psi.ch}
 
-\author[]{Michael Wohlmuther}
+\author[gfa]{Michael Wohlmuther}
 %\ead{michael.wohlmuther@psi.ch}
 
-\address{Paul Scherrer Institut, Villigen, Switzerland}
+\address[gfa]{Division Large Research Facilities (GFA), Paul Scherrer Institut, Villigen, Switzerland}
+\address[num]{Division Research with Neutrons and Muons (NUM), Paul Scherrer Institut, Villigen, Switzerland}
 
 \cortext[cor1]{Primary corresponding author. Tel.: +41.56.310.56.12.}
 \cortext[cor2]{Corresponding author. Tel.: +41.56.310.50.64.}
@@ -228,7 +229,7 @@ The principle components in the neutron path, in order of increasing distance fr
   \item Iron pinhole collimator, 2 mm $\oslash$ hole, 100 mm long, immediately after the cadmium aperture, surrounded by heavy concrete, lead, and polyethylene shielding
   \item Sapphire crystals, 20x20 mm faces, 80 mm total thickness, within the heavy concrete, lead, and polyethylene shielding
   \item Three evacuated flight tubes with 1.0 mm thick aluminum windows, ~7410 mm total length, decreasing $\oslash$ of 41 cm, 30 cm, and 20 cm as distance to the source decreases. 
-  \item Neutron chopper, Al-clad Cd, 420 mm $\oslash$ wheel, 1.5 mm thick, 15 Hz rotation speed, 7452 mm from the $^3$He detector, 2 mm wide slit corresponding to a 16\% duty cycle
+  \item Neutron chopper, Al-clad Cd, 420 mm $\oslash$ wheel, 1.5 mm thick, 15 Hz rotation speed, 7452 mm from the $^3$He detector, 2 mm wide slit corresponding to a 0.16\% duty cycle
   \item Steel collimator, 50x50 mm aperture, 30 cm thick, 7548 mm from detector
 \end{enumerate}
 \begin{center}\underline{In-pile components}\end{center}
@@ -435,7 +436,7 @@ Some things on the measured spectrum... uncertainties etc.
      \caption{Measured and simulated cold neutron source brilliance at the ICON beamline.  IKE 24 K scattering data and a o-D$_2$ fraction of 0.762 was used. \label{fig:brilliance} }
 \end{figure}
 
-Figure \ref{fig:brilliance} also shows that the peaks of simulated spectra are shifted about 0.25 {\AA} shorter with respect to the peak of the measured spectrum.  This phenomenon has been document previously, and it is suspected that it arises from some inaccuracies in the liquid deuterium thermal scattering data \cite{giller_thesis}.  The uncertainty in the distance between the chopper and the detector is approximately 5 cm, which corresponds to an uncertainty in the wavelength calibration of $\pm$ 0.11 {\AA}.  This value was calculated by propagating the positioning uncertainty through height between the bottom/top at the beryllium cut off wavelength and the moving average (smoothing) wavelength width (all of which were included in the uncertainty of the measurement).  This 5 cm distance uncertainty also corresponds to a solid angle uncertainty of about 0.6\%.
+Figure \ref{fig:brilliance} also shows that the peaks of simulated spectra are shifted about 0.25 {\AA} shorter with respect to the peak of the measured spectrum.  This phenomenon has been document previously, and it is suspected that it arises from some inaccuracies in the liquid deuterium thermal scattering data \cite{giller_thesis}.  The uncertainty in the distance between the chopper and the detector is approximately 5 cm, which corresponds to an uncertainty in the solid angle of about 0.6\%.  The wavelength calibration has an uncertainty of $\pm$ 0.125 {\AA}, which comes from the width of the 4.0 {\AA} ``cut'' in the neutron spectrum transmitted through a beryllium filter.  Instead of there being a sharp cut in the measured flux which would determine the channel containing 4.0 {\AA}, there was a transition region about 0.25 {\AA} wide.
 
 %
 %

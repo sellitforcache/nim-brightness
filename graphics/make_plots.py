@@ -1,8 +1,8 @@
 #! /home/l_bergmann/anaconda/bin/python -W ignore
 
-from pyne import mcnp, ace
+#from pyne import mcnp, ace
 import math
-import pylab, numpy, sys, cPickle, progressbar, copy
+import pylab, numpy, sys, cPickle, copy
 import matplotlib.pyplot as plt
 from matplotlib import cm, gridspec, colors
 from MCNPtools.to_energy import to_energy

@@ -118,17 +118,21 @@ energies = tal.tallies[tally_number].energies[:-1]
 wvl=to_wavelength(energies)
 
 eff=numpy.divide(RR_dat,incoming_dat)
+eff_err=numpy.sqrt(  numpy.add(numpy.multiply(RR_err,RR_err) , numpy.multiply(incoming_err,incoming_err)))
 
 
 wvl=wvl[::-1]
 eff=eff[::-1]
+eff_err=eff_err[::-1]
 
 wvl=wvl[:-1]
 eff=eff[:-1]
+eff_err=eff_err[:-1]
 
 f=plt.figure()
 ax=f.add_subplot(111)
 make_steps(ax,wvl,[0],eff,options=['lin'])
+ax.errorbar((wvl[1:]+wvl[:-1])/2.,eff,yerr=numpy.multiply(eff_err,eff),color='r',linewidth=2)
 ax.grid(1)
 ax.set_xlabel(r'Wavelength (\AA)')
 ax.set_ylabel(r'Efficiency (n,p)/incoming')
@@ -138,12 +142,13 @@ ax.set_title(r'2.3 atm He3, 1.2 atm Kr')
 plt.show()
 
 f=open('2.3He3-1.2Kr_eff.dat','w')
-f.write('wavelength (AA) lower bin boundary,  wavelength (AA) upper bin boundary,  Efficiency\n')
+f.write('wavelength (AA) lower bin boundary,  wavelength (AA) upper bin boundary,  Efficiency, rel. err.\n')
 for i in range(0,len(wvl)-1):
 	effic=eff[i]
+	err=eff_err[i]
 	lower=wvl[i]
 	upper=wvl[i+1]
-	f.write("%10.8E, %10.8E, %10.8E\n"%(lower,upper,effic))
+	f.write("%10.8E, %10.8E, %10.8E, %10.8E\n"%(lower,upper,effic,err))
 f.close()
 
 

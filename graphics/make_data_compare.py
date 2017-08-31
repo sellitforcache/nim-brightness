@@ -1,8 +1,8 @@
 #! /home/l_bergmann/anaconda/bin/python -W ignore
 
-from pyne import mcnp, ace
+#from pyne import mcnp, ace
 import math, os
-import pylab, numpy, sys, cPickle, progressbar, copy
+import pylab, numpy, sys, cPickle, copy
 import matplotlib.pyplot as plt
 from matplotlib import cm, gridspec, colors
 from MCNPtools.to_energy import to_energy
@@ -222,14 +222,14 @@ def make_steps(ax,bins_in,avg_in,values_in,options=['log'],linewidth=1,color=Non
 	### plot with correct scale
 	if 'lin' in options:
 		if 'logy' in options:
-			ax.semilogy(x,y,color=color,label=label,linewidth=linewidth)
+			ax.semilogy(x[1:-1],y[1:-1],color=color,label=label,linewidth=linewidth)
 		else:
-			ax.plot(x,y,color=color,label=label,linewidth=linewidth)
+			ax.plot(x[1:-1],y[1:-1],color=color,label=label,linewidth=linewidth)
 	else:   #default to log if lin not present
 		if 'logy' in options:
-			ax.loglog(x,y,color=color,label=label,linewidth=linewidth)
+			ax.loglog(x[1:-1],y[1:-1],color=color,label=label,linewidth=linewidth)
 		else:
-			ax.semilogx(x,y,color=color,label=label,linewidth=linewidth)
+			ax.semilogx(x[1:-1],y[1:-1],color=color,label=label,linewidth=linewidth)
 
 
 def get_view_sa(a=0.05,b=0,l=0,thk=0):
@@ -259,7 +259,8 @@ sa_err = 0.006
 
 # final measurement
 measurement = [[],[],[]]#,[],[],[],[]]
-f=open('/home/l_bergmann/Documents/nim-brightness/brightness_measurement_corrected2.csv','r')
+#f=open('/home/l_bergmann/Documents/nim-brightness/brightness_measurement_corrected2.csv','r')
+f=open('/home/l_bergmann/Documents/nim-brightness/brightness_measurement_NEWEFF2.3.csv','r')
 for line in f:
 	nums = line.split(',')
 	try:
@@ -576,7 +577,7 @@ values1  = charge_per_milliamp*numpy.divide(this_tal1.tallies[tal_num].vals[dex]
 err1     =                     numpy.array( this_tal1.tallies[tal_num].vals[dex]['err' ][:-1])
 for i in range(0,len(err1)):
 	err1[i] = numpy.linalg.norm([sa_err,err1[i]])
-values1_smooth = smooth(values1,window_len=smooth_int)
+values1_smooth = smooth(values1[:-1],window_len=smooth_int)
 values1_smooth = values1_smooth[(smooth_int-1)/2:-(smooth_int-1)/2]
 
 
@@ -605,16 +606,18 @@ values4  = charge_per_milliamp*numpy.divide(this_tal4.tallies[tal_num].vals[dex]
 f=plt.figure()
 ax=f.add_subplot(111)
 # plot measurement
-ax.plot(      meas_edge    ,          meas_normed,     linewidth=2,label=r'Measurement, Averaged 0.1 \AA',drawstyle='steps-mid')
+ax.plot(      meas_edge[3:]    ,          meas_normed[3:],     linewidth=2,label=r'Measurement, Averaged 0.1 \AA',drawstyle='steps-mid')
 # plot error band for measurement
-ax.fill_between(meas_edge,numpy.multiply(meas_normed,1.0+numpy.array(meas_err)),numpy.multiply(meas_normed,1.0-numpy.array(meas_err)), facecolor='blue', linewidth=1.0, color='blue', alpha=0.25,label=r'Measurement Total Error (1-$\sigma$)')
+ax.fill_between(meas_edge[3:],numpy.multiply(meas_normed,1.0+numpy.array(meas_err))[3:],numpy.multiply(meas_normed,1.0-numpy.array(meas_err))[3:], facecolor='blue', linewidth=1.0, color='blue', alpha=0.25,label=r'Measurement Total Error (1-$\sigma$)')
 # plot simulations
-make_steps(ax,wvl1,[0],values1,linewidth=2,color='r',label=r'MCNP 6.1, 98\% Density',options=['lin',smooth_string])
+make_steps(ax,wvl1[:-1],[0],values1[:-1],linewidth=2,color='r',label=r'MCNP 6.1, 98\% Density',options=['lin',smooth_string])
 #make_steps(ax,wvl2,[0],values2,linewidth=2,label=r'MCNP 6.1, 80\% Density',options=['lin',smooth_string])
 #make_steps(ax,wvl3,[0],values3,linewidth=2,label=r'MCNP 6.1, 98\% density, new target',options=['lin',smooth_string])
 #make_steps(ax,wvl4,[0],values4,linewidth=2,label=r'MCNP 6.1, 80\% density, new target',options=['lin',smooth_string])
 # plot error band for best guess case
-ax.fill_between(avg1,   numpy.multiply(values1_smooth, (1.0+numpy.add(err1, op_err_pos) )),   numpy.multiply(values1_smooth, (1.0- numpy.add(err1,op_err_neg)))  , facecolor='red', linewidth=1.0, color='red', alpha=0.25,label=r'Simulation Total Error (1-$\sigma$)')
+ax.fill_between(avg1[:-1],   numpy.multiply(values1_smooth, (1.0+numpy.add(err1[:-1], op_err_pos[:-1]) )),   numpy.multiply(values1_smooth, (1.0- numpy.add(err1[:-1],op_err_neg[:-1])))  , facecolor='red', linewidth=1.0, color='red', alpha=0.25,label=r'Simulation Total Error (1-$\sigma$)')
+
+
 #ax.set_title(r'24 K IKE, 0.762 o-D$_2$') #0.130 g/cm$^3$ D$_2$,
 ax.set_xlabel(r'Wavelength (\AA)')
 ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ str$^{-1}$)')

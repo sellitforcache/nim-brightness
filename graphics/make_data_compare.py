@@ -1,4 +1,4 @@
-#! /home/l_bergmann/anaconda/bin/python -W ignore
+#! /home/l_bergmann/anaconda2/bin/python -W ignore
 
 #from pyne import mcnp, ace
 import math, os
@@ -348,6 +348,7 @@ ax.set_ylim([0,4e11])
 ax.set_xlim(xlims)
 ax.grid(1)
 plt.legend(loc=1)
+plt.tight_layout()
 plt.show()
 
 
@@ -405,6 +406,7 @@ ax.set_ylim([0,4e11])
 ax.set_xlim(xlims)
 ax.grid(1)
 plt.legend(loc=1)
+plt.tight_layout()
 plt.show()
 
 
@@ -458,6 +460,7 @@ ax.set_ylim([0,4e11])
 ax.set_xlim(xlims)
 ax.grid(1)
 plt.legend(loc=1)
+plt.tight_layout()
 plt.show()
 
 
@@ -535,6 +538,7 @@ ax.set_ylim([0,4e11])
 ax.set_xlim(xlims)
 ax.grid(1)
 plt.legend(loc=1)
+plt.tight_layout()
 plt.show()
 
 
@@ -629,6 +633,7 @@ handles, labels = ax.get_legend_handles_labels()
 #ax.legend([handles[0],handles[5],handles[1],handles[2],handles[3],handles[4]],[labels[0],labels[5],labels[1],labels[2],labels[3],labels[4]],loc=1,fontsize=14)
 #ax.legend([handles[0],handles[3],handles[1],handles[4],handles[2]],[labels[0],labels[3],labels[1],labels[4],labels[2]],loc=1,fontsize=14)
 ax.legend([handles[0],handles[2],handles[1],handles[3]],[labels[0],labels[2],labels[1],labels[3]],loc=1,fontsize=14)
+plt.tight_layout()
 
 plt.show()
 

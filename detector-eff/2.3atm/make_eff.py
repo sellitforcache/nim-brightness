@@ -16,7 +16,7 @@ tex=True
 if tex:
 	plt.rc('text', usetex=True)
 	plt.rc('font', family='serif')
-	plt.rc('font', size=12)
+	plt.rc('font', size=16)
 
 def make_steps(ax,bins_in,avg_in,values_in,options=['log'],color=None,label='',ylim=False,linewidth=1):
 	import numpy, re
@@ -70,15 +70,15 @@ def make_steps(ax,bins_in,avg_in,values_in,options=['log'],color=None,label='',y
 	### make rectangles
 	x=[]
 	y=[]
-	x.append(bins[0])
-	y.append(0.0)
+	#x.append(bins[0])
+	#y.append(0.0)
 	for n in range(len(values)):
 		x.append(bins[n])
 		x.append(bins[n+1])
 		y.append(values[n])
 		y.append(values[n])
-	x.append(bins[len(values)])
-	y.append(0.0)
+	#x.append(bins[len(values)])
+	#y.append(0.0)
 
 	### plot with correct scale
 	if 'lin' in options:
@@ -93,61 +93,92 @@ def make_steps(ax,bins_in,avg_in,values_in,options=['log'],color=None,label='',y
 			ax.semilogx(x,y,color=color,label=label,linewidth=linewidth)
 
 
-tal=mctal('mctal')
-
-tally_number = 34
-cos=0
-dex = tal.tallies[tally_number]._hash(cos=cos,obj=0,seg=0,mul=2)
-RR_dat=tal.tallies[tally_number].vals[dex]['data'][:-1]
-RR_err=tal.tallies[tally_number].vals[dex]['err' ][:-1]
 
 
-tally_number = 1
-cos=0
-dex = tal.tallies[tally_number]._hash(cos=cos,obj=0,seg=0)
-incoming_dat=tal.tallies[tally_number].vals[dex]['data'][:-1]
-incoming_err=tal.tallies[tally_number].vals[dex]['err' ][:-1]
+tals={}
+tals['specified.m']	= r'2.3 atm'
+tals['plus5pct.m' ]	= r'2.4 atm'
+tals['minus5pct.m']	= r'2.1 atm'
 
-tally_number = 1
-cos=1
-dex = tal.tallies[tally_number]._hash(cos=cos,obj=0,seg=0)
-outgoing_dat=tal.tallies[tally_number].vals[dex]['data'][:-1]
-outgoing_err=tal.tallies[tally_number].vals[dex]['err' ][:-1]
+wvl={}
+eff={}
+eff_err={}
 
-energies = tal.tallies[tally_number].energies[:-1]
-wvl=to_wavelength(energies)
+for talname in tals.keys():
 
-eff=numpy.divide(RR_dat,incoming_dat)
-eff_err=numpy.sqrt(  numpy.add(numpy.multiply(RR_err,RR_err) , numpy.multiply(incoming_err,incoming_err)))
+	tal=mctal(talname)
+	
+	tally_number = 34
+	cos=0
+	dex = tal.tallies[tally_number]._hash(cos=cos,obj=0,seg=0,mul=2)
+	RR_dat=tal.tallies[tally_number].vals[dex]['data'][:-1]
+	RR_err=tal.tallies[tally_number].vals[dex]['err' ][:-1]
+	
+	
+	tally_number = 1
+	cos=0
+	dex = tal.tallies[tally_number]._hash(cos=cos,obj=0,seg=0)
+	incoming_dat=tal.tallies[tally_number].vals[dex]['data'][:-1]
+	incoming_err=tal.tallies[tally_number].vals[dex]['err' ][:-1]
+	
+	tally_number = 1
+	cos=1
+	dex = tal.tallies[tally_number]._hash(cos=cos,obj=0,seg=0)
+	outgoing_dat=tal.tallies[tally_number].vals[dex]['data'][:-1]
+	outgoing_err=tal.tallies[tally_number].vals[dex]['err' ][:-1]
+	
+	energies = tal.tallies[tally_number].energies[:-1]
+	this_wvl=to_wavelength(energies)
+	
+	this_eff=numpy.divide(RR_dat,incoming_dat)
+	this_eff_err=numpy.sqrt(  numpy.add(numpy.multiply(RR_err,RR_err) , numpy.multiply(incoming_err,incoming_err)))
+	
+	
+	wvl[talname]=this_wvl[::-1]
+	eff[talname]=this_eff[::-1]
+	eff_err[talname]=this_eff_err[::-1]
+	
+	wvl[talname]=wvl[talname][:-1]
+	eff[talname]=eff[talname][:-1]
+	eff_err[talname]=eff_err[talname][:-1]
+	
 
 
-wvl=wvl[::-1]
-eff=eff[::-1]
-eff_err=eff_err[::-1]
 
-wvl=wvl[:-1]
-eff=eff[:-1]
-eff_err=eff_err[:-1]
+mean_wvl	= wvl['specified.m']
+mean_eff	= eff['specified.m']
+
+wvl_avg 	= (wvl['specified.m'][1:]+wvl['specified.m'][:-1])/2
+err_plus	= eff['plus5pct.m' ] + numpy.multiply(eff['plus5pct.m' ],eff_err['plus5pct.m' ]) + numpy.multiply(eff['specified.m'],eff_err['specified.m'])
+err_minus	= eff['minus5pct.m'] - numpy.multiply(eff['minus5pct.m'],eff_err['minus5pct.m']) - numpy.multiply(eff['specified.m'],eff_err['specified.m'])
+
+mean_err 	= numpy.divide(err_plus,mean_eff)
+
 
 f=plt.figure()
 ax=f.add_subplot(111)
-make_steps(ax,wvl,[0],eff,options=['lin'])
-ax.errorbar((wvl[1:]+wvl[:-1])/2.,eff,yerr=numpy.multiply(eff_err,eff),color='r',linewidth=2)
+ax.fill_between(wvl_avg,err_plus,err_minus, facecolor='red', linewidth=1.0, color='red', alpha=0.25,label=r'Statistical + Pressure Uncertainty')
+make_steps(ax,mean_wvl,[0],mean_eff,options=['lin'],linewidth=2)
+
+
 ax.grid(1)
 ax.set_xlabel(r'Wavelength (\AA)')
-ax.set_ylabel(r'Efficiency (n,p)/incoming')
+ax.set_ylabel(r'Efficiency')
 ax.set_ylim([0,1])
-ax.set_title(r'2.3 atm He3, 1.2 atm Kr')
-
+ax.set_xlim([0,12])
+#ax.set_title(r'2.3 atm $^3$He, 1.2 atm Kr')
+plt.legend(loc='best')
+plt.tight_layout()
+f.savefig('eff_2.3atm.pdf')
 plt.show()
 
 f=open('2.3He3-1.2Kr_eff.dat','w')
 f.write('wavelength (AA) lower bin boundary,  wavelength (AA) upper bin boundary,  Efficiency, rel. err.\n')
 for i in range(0,len(wvl)-1):
-	effic=eff[i]
-	err=eff_err[i]
-	lower=wvl[i]
-	upper=wvl[i+1]
+	effic 	=mean_eff[i]
+	err 	=mean_err[i]
+	lower 	=mean_wvl[i]
+	upper 	=mean_wvl[i+1]
 	f.write("%10.8E, %10.8E, %10.8E, %10.8E\n"%(lower,upper,effic,err))
 f.close()
 

@@ -260,7 +260,8 @@ sa_err = 0.006
 # final measurement
 measurement = [[],[],[]]#,[],[],[],[]]
 #f=open('/home/l_bergmann/Documents/nim-brightness/brightness_measurement_corrected2.csv','r')
-f=open('/home/l_bergmann/Documents/nim-brightness/brightness_measurement_NEWEFF2.3.csv','r')
+#f=open('/home/l_bergmann/Documents/nim-brightness/brightness_measurement_NEWEFF2.3.csv','r')
+f=open('/home/l_bergmann/Documents/nim-brightness/brightness_measurement_NEWEFF2.3_neweff.csv','r')
 for line in f:
 	nums = line.split(',')
 	try:

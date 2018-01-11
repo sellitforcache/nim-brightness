@@ -152,13 +152,42 @@ wvl_avg 	= (wvl['specified.m'][1:]+wvl['specified.m'][:-1])/2
 err_plus	= eff['plus5pct.m' ] + numpy.multiply(eff['plus5pct.m' ],eff_err['plus5pct.m' ]) + numpy.multiply(eff['specified.m'],eff_err['specified.m'])
 err_minus	= eff['minus5pct.m'] - numpy.multiply(eff['minus5pct.m'],eff_err['minus5pct.m']) - numpy.multiply(eff['specified.m'],eff_err['specified.m'])
 
-mean_err 	= numpy.divide(err_plus,mean_eff)
+mean_rel_err 	= numpy.divide((err_plus-mean_eff),mean_eff)
+
+# quad fits for error
+x=numpy.linspace(0,12,1000)
+z = numpy.polyfit(wvl_avg, mean_rel_err, 3)
+p = numpy.poly1d(z)
+print ""
+print "ax^3 + bx^2 + cx + d = err"
+print "a = % 6.4E"%z[0]
+print "b = % 6.4E"%z[1]
+print "c = % 6.4E"%z[2]
+print "d = % 6.4E"%z[3]
+print ""
+
+# function fit for eff
+def eff_func(x,a1,b1,a2,b2):
+	t1=3.2
+	t2=0.05
+	lambda1=a1*x+b1
+	lambda2=a2*x+b2
+	return (1-numpy.exp(-lambda1*t1))*(numpy.exp(-lambda2*t2))
+popt, pcov = curve_fit(eff_func, wvl_avg, mean_eff)
+print ""
+print "( 1-exp(-(a1*x+b1)*3.2) ) * exp(-(a2*x+b2)*0.05) = eff"
+print "a1 = % 6.4E"%popt[0]
+print "b1 = % 6.4E"%popt[1]
+print "a2 = % 6.4E"%popt[2]
+print "b2 = % 6.4E"%popt[3]
+print ""
 
 
 f=plt.figure()
 ax=f.add_subplot(111)
 ax.fill_between(wvl_avg,err_plus,err_minus, facecolor='red', linewidth=1.0, color='red', alpha=0.25,label=r'Statistical + Pressure Uncertainty')
 make_steps(ax,mean_wvl,[0],mean_eff,options=['lin'],linewidth=2)
+ax.plot(x,eff_func(x,*popt), linewidth=2.0, color='k', label='fit')
 
 
 ax.grid(1)
@@ -170,13 +199,27 @@ ax.set_xlim([0,12])
 plt.legend(loc='best')
 plt.tight_layout()
 f.savefig('eff_2.3atm.pdf')
+
+f=plt.figure()
+ax=f.add_subplot(111)
+ax.plot(x,p(x), linewidth=2.0, color='k',label='fit')
+make_steps(ax,mean_wvl,[0],mean_rel_err,options=['lin'],linewidth=2,color='g',label='rel.err. data')
+ax.grid(1)
+ax.set_xlabel(r'Wavelength (\AA)')
+ax.set_ylabel(r'Efficiency rel. err.')
+#ax.set_ylim([0,1])
+ax.set_xlim([0,12])
+plt.legend(loc='best')
+plt.tight_layout()
+f.savefig('relerr_2.3atm.pdf')
+
 plt.show()
 
 f=open('2.3He3-1.2Kr_eff.dat','w')
 f.write('wavelength (AA) lower bin boundary,  wavelength (AA) upper bin boundary,  Efficiency, rel. err.\n')
-for i in range(0,len(wvl)-1):
+for i in range(0,len(mean_eff)-1):
 	effic 	=mean_eff[i]
-	err 	=mean_err[i]
+	err 	=mean_rel_err[i]
 	lower 	=mean_wvl[i]
 	upper 	=mean_wvl[i+1]
 	f.write("%10.8E, %10.8E, %10.8E, %10.8E\n"%(lower,upper,effic,err))

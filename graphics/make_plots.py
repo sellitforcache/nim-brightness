@@ -488,7 +488,7 @@ make_steps(ax,wvl4,[0],tal4_normed,linewidth=2,label='MCNP - STIP,  SPHERICAL, 2
 make_steps(ax,wvl4,[0],tal5_normed,linewidth=2,label='MCNP - STIP,  SPHERICAL, 25K density',options=['lin'])
 make_steps(ax,wvl4,[0],tal6_normed,linewidth=2,label='MCNP - STIP,  SPHERICAL, 28K density',options=['lin'])
 ax.set_xlabel(r'Wavelength (\AA)')
-ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ str$^{-1}$)')
+ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ sterad$^{-1}$)')
 #ax.set_ylim([0,5e11])
 ax.set_xlim([0,12])
 ax.grid(1)

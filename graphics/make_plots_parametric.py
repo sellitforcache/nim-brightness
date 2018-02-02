@@ -252,7 +252,7 @@ for case in cases:
 		case_min = case
 	##
 	#ax.set_xlabel(r'Wavelength (\AA)')
-	#ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ str$^{-1}$)')
+	#ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ sterad$^{-1}$)')
 	#ax.set_ylim([0,5e11])
 	#ax.set_xlim([0,12])
 	#ax.grid(1)
@@ -273,7 +273,7 @@ ax=f.add_subplot(111)
 make_steps(ax,numpy.insert(meas_edge,0.0,0) , [0], meas_normed,     linewidth=2,label='Measurement',options=['lin'])
 make_steps(ax,bin_edges[case_min],[0],bin_values[case_min],linewidth=1,label=case_min[:-6],options=['lin'])
 ax.set_xlabel(r'Wavelength (\AA)')
-ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ str$^{-1}$)')
+ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ sterad$^{-1}$)')
 ax.set_ylim([0,5e11])
 ax.set_xlim([0,12])
 ax.grid(1)

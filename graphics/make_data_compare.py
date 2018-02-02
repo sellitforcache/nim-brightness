@@ -157,7 +157,7 @@ def coarsen(values,bins,bin_red=2):
 	return numpy.array(v_out),numpy.array(b_out)
 
 
-def make_steps(ax,bins_in,avg_in,values_in,options=['log'],linewidth=1,color=None,label='',ylim=False):
+def make_steps(ax,bins_in,avg_in,values_in,options=['log'],linewidth=1,color=None,label='',ylim=False,linestyle='-'):
 	import numpy, re
 	assert(len(bins_in)==len(values_in)+1)
 
@@ -222,14 +222,14 @@ def make_steps(ax,bins_in,avg_in,values_in,options=['log'],linewidth=1,color=Non
 	### plot with correct scale
 	if 'lin' in options:
 		if 'logy' in options:
-			ax.semilogy(x[1:-1],y[1:-1],color=color,label=label,linewidth=linewidth)
+			ax.semilogy(x[1:-1],y[1:-1],color=color,label=label,linewidth=linewidth,linestyle=linestyle)
 		else:
-			ax.plot(x[1:-1],y[1:-1],color=color,label=label,linewidth=linewidth)
+			ax.plot(x[1:-1],y[1:-1],color=color,label=label,linewidth=linewidth,linestyle=linestyle)
 	else:   #default to log if lin not present
 		if 'logy' in options:
-			ax.loglog(x[1:-1],y[1:-1],color=color,label=label,linewidth=linewidth)
+			ax.loglog(x[1:-1],y[1:-1],color=color,label=label,linewidth=linewidth,linestyle=linestyle)
 		else:
-			ax.semilogx(x[1:-1],y[1:-1],color=color,label=label,linewidth=linewidth)
+			ax.semilogx(x[1:-1],y[1:-1],color=color,label=label,linewidth=linewidth,linestyle=linestyle)
 
 
 def get_view_sa(a=0.05,b=0,l=0,thk=0):
@@ -307,14 +307,19 @@ densities=[0.162, 0.160, 0.1591, 0.1500, 0.140, 0.130, 0.120, 0.110, 0.100]
 bin_edges={}
 bin_values={}
 paths={}
+lines={}
 cases=[]
 cases.append('19 K, ENDF/B-VII.1')
+lines[cases[-1]]=[2,'-','r']
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case028.mctal'
 cases.append('19 K, CAB')
+lines[cases[-1]]=[2,'--','r']
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-bar/results/case028.mctal'
 cases.append('23 K, CAB')
+lines[cases[-1]]=[1,'-','b']
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-23K-bar/results/case028.mctal'
 cases.append('24 K, IKE')
+lines[cases[-1]]=[1,'--','b']
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-24K-ike/results/case028.mctal'
 
 # get index limits for sums
@@ -342,9 +347,9 @@ f=plt.figure()
 ax=f.add_subplot(111)
 #ax.plot(      meas_edge,          meas_normed,     linewidth=2,label='Measurement')
 for case in cases:
-	make_steps(ax,bin_edges[case],[0],bin_values[case],linewidth=2,label=case,options=['lin',smooth_string])
+	make_steps(ax,bin_edges[case],[0],bin_values[case],linewidth=lines[case][0],label=case,options=['lin',smooth_string],linestyle=lines[case][1],color=lines[case][2])
 ax.set_xlabel(r'Wavelength (\AA)')
-ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ str$^{-1}$)')
+ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ sterad$^{-1}$)')
 ax.set_ylim([0,4e11])
 ax.set_xlim(xlims)
 ax.grid(1)
@@ -382,8 +387,10 @@ bin_values={}
 paths={}
 cases=[]
 cases.append(r'ENDF/B-VII.1 D$_2$O')
+lines[cases[-1]]=[2,'-','r']
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case028.mctal'
 cases.append(r'CAB D$_2$O')
+lines[cases[-1]]=[1,'--','b']
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-std-d2o-granda/results/case028.mctal'
 
 for case in cases:
@@ -400,9 +407,9 @@ f=plt.figure()
 ax=f.add_subplot(111)
 #ax.plot(      meas_edge,          meas_normed,     linewidth=2,label='Measurement')
 for case in cases:
-	make_steps(ax,bin_edges[case],[0],bin_values[case],linewidth=2,label=case,options=['lin',smooth_string])
+	make_steps(ax,bin_edges[case],[0],bin_values[case],label=case,options=['lin',smooth_string],linewidth=lines[case][0],linestyle=lines[case][1],color=lines[case][2])
 ax.set_xlabel(r'Wavelength (\AA)')
-ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ str$^{-1}$)')
+ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ sterad$^{-1}$)')
 ax.set_ylim([0,4e11])
 ax.set_xlim(xlims)
 ax.grid(1)
@@ -421,16 +428,22 @@ paths={}
 cases=[]
 cnum=4
 cases.append(r'%3.0f\%% $\rho$'%(densities[0]/densities[0]*100))
+lines[cases[-1]]=[2,'-','r']
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case%03d.mctal'%(1+9*(cnum-1))
 cases.append(r'%3.0f\%% $\rho$'%(densities[1]/densities[0]*100))
+lines[cases[-1]]=[2,'--','r']
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case%03d.mctal'%(2+9*(cnum-1))
 cases.append(r'%3.0f\%% $\rho$'%(densities[2]/densities[0]*100))
+lines[cases[-1]]=[2,':','r']
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case%03d.mctal'%(3+9*(cnum-1))
 cases.append(r'%3.0f\%% $\rho$'%(densities[3]/densities[0]*100))
+lines[cases[-1]]=[1,'-','b']
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case%03d.mctal'%(4+9*(cnum-1))
 cases.append(r'%3.0f\%% $\rho$'%(densities[4]/densities[0]*100))
+lines[cases[-1]]=[1,'--','b']
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case%03d.mctal'%(5+9*(cnum-1))
 cases.append(r'%3.0f\%% $\rho$'%(densities[5]/densities[0]*100))
+lines[cases[-1]]=[1,':','b']
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case%03d.mctal'%(6+9*(cnum-1))
 #cases.append(r'%3.0f\%% $\rho$'%(densities[6]/densities[0]*100))
 #paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case%03d.mctal'%(7+9*(cnum-1))
@@ -453,10 +466,10 @@ f=plt.figure()
 ax=f.add_subplot(111)
 #make_steps(ax,numpy.insert(meas_edge,0.0,0) , [0], meas_normed,     linewidth=2,label='Measurement',options=['lin'])
 for case in cases:
-	make_steps(ax,bin_edges[case],[0],bin_values[case],linewidth=2,label=case,options=['lin',smooth_string])
+	make_steps(ax,bin_edges[case],[0],bin_values[case],label=case,options=['lin',smooth_string],linewidth=lines[case][0],linestyle=lines[case][1],color=lines[case][2])
 #ax.set_title(r'ENDF/B-VII.1, 19K, %4.3f o-D$_2$'%fracs[cnum-1])
 ax.set_xlabel(r'Wavelength (\AA)')
-ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ str$^{-1}$)')
+ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ sterad$^{-1}$)')
 ax.set_ylim([0,4e11])
 ax.set_xlim(xlims)
 ax.grid(1)
@@ -493,16 +506,22 @@ paths={}
 cases=[]
 cnum=1
 cases.append(r'%3.0f\%% o-D$_2$'%(fracs[0]*100))
+lines[cases[-1]]=[2,'-','r']
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case%03d.mctal'%(cnum+9*0)
 cases.append(r'%3.0f\%% o-D$_2$'%(fracs[1]*100))
+lines[cases[-1]]=[2,'--','r']
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case%03d.mctal'%(cnum+9*1)
 cases.append(r'%3.0f\%% o-D$_2$'%(fracs[2]*100))
+lines[cases[-1]]=[2,':','r']
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case%03d.mctal'%(cnum+9*2)
 cases.append(r'%3.0f\%% o-D$_2$'%(fracs[3]*100))
+lines[cases[-1]]=[1,'-','b']
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case%03d.mctal'%(cnum+9*3)
 cases.append(r'%3.0f\%% o-D$_2$'%(fracs[4]*100))
+lines[cases[-1]]=[1,'--','b']
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case%03d.mctal'%(cnum+9*4)
 cases.append(r'%3.0f\%% o-D$_2$'%(fracs[5]*100))
+lines[cases[-1]]=[1,':','b']
 paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case%03d.mctal'%(cnum+9*5)
 #cases.append(r'%3.0f\%% o-D$_2$'%(fracs[6]*100))
 #paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case%03d.mctal'%(cnum+9*6)
@@ -531,10 +550,10 @@ f=plt.figure()
 ax=f.add_subplot(111)
 #ax.plot(      meas_edge,          meas_normed,     linewidth=2,label='Measurement')
 for case in cases:
-	make_steps(ax,bin_edges[case],[0],bin_values[case],linewidth=2,label=case,options=['lin',smooth_string])
+	make_steps(ax,bin_edges[case],[0],bin_values[case],label=case,options=['lin',smooth_string],linewidth=lines[case][0],linestyle=lines[case][1],color=lines[case][2])
 #ax.set_title(r'ENDF/B-VII.1, 19K, D$_2$ Density %4.3f'%(densities[cnum-1]))
 ax.set_xlabel(r'Wavelength (\AA)')
-ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ str$^{-1}$)')
+ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ sterad$^{-1}$)')
 ax.set_ylim([0,4e11])
 ax.set_xlim(xlims)
 ax.grid(1)
@@ -615,7 +634,7 @@ ax.plot(      meas_edge[3:]    ,          meas_normed[3:],     linewidth=2,label
 # plot error band for measurement
 ax.fill_between(meas_edge[3:],numpy.multiply(meas_normed,1.0+numpy.array(meas_err))[3:],numpy.multiply(meas_normed,1.0-numpy.array(meas_err))[3:], facecolor='blue', linewidth=1.0, color='blue', alpha=0.25,label=r'Measurement Total Error (1-$\sigma$)')
 # plot simulations
-make_steps(ax,wvl1[:-1],[0],values1[:-1],linewidth=2,color='r',label=r'MCNP 6.1, 98\% Density',options=['lin',smooth_string])
+make_steps(ax,wvl1[:-1],[0],values1[:-1],linewidth=2,color='r',label=r'MCNP 6.1, 98\% Density',options=['lin',smooth_string],linestyle='--')
 #make_steps(ax,wvl2,[0],values2,linewidth=2,label=r'MCNP 6.1, 80\% Density',options=['lin',smooth_string])
 #make_steps(ax,wvl3,[0],values3,linewidth=2,label=r'MCNP 6.1, 98\% density, new target',options=['lin',smooth_string])
 #make_steps(ax,wvl4,[0],values4,linewidth=2,label=r'MCNP 6.1, 80\% density, new target',options=['lin',smooth_string])
@@ -625,7 +644,7 @@ ax.fill_between(avg1[:-1],   numpy.multiply(values1_smooth, (1.0+numpy.add(err1[
 
 #ax.set_title(r'24 K IKE, 0.762 o-D$_2$') #0.130 g/cm$^3$ D$_2$,
 ax.set_xlabel(r'Wavelength (\AA)')
-ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ str$^{-1}$)')
+ax.set_ylabel(r'Brilliance (n cm$^{-2}$ s$^{-1}$ mA$^{-1}$ \AA$^{-1}$ sterad$^{-1}$)')
 ax.set_ylim([0,4e11])
 ax.set_xlim(xlims)
 ax.grid(1)

@@ -1,0 +1,102 @@
+Ms. Ref. No.:  NIMA-D-18-00070
+Title: Neutron Brilliance of the Liquid Deuterium Cold Source as Measured from the ICON Beamline at the Swiss Spallation Neutron Source (SINQ) Nuclear Inst. and Methods in Physics Research, A
+
+Dear Dr. Bergmann,
+
+I have received the reviewers' comments on your paper that are appended below. They are advising that you revise your manuscript before it can be published.  If you are prepared to undertake the work required, I would be pleased to consider the revised submission.  
+ 
+If you decide to revise the work, please submit a list of changes or a rebuttal against each point raised when you submit the revised manuscript.
+
+The revision should be submitted by
+18 May 2018 
+
+Revisions that do not address reviewer comments point-by-point will not be considered.
+
+To submit a revision, please go to https://ees.elsevier.com/nima/ and click "login" underneath the journal title banner.  You may then type in your user name/password and click "Author Login." 
+
+Your username is: ryanmbergmann@gmail.com If you need to retrieve password details, please go to: 
+http://ees.elsevier.com/nima/automail_query.asp        
+
+On your Main Menu page is a folder entitled "Submissions Needing Revision".  You will find your submission record there.  Also, the reviewer(s) may have uploaded detailed comments on your manuscript. Click on the "Submissions Needing Revision" from your main menu, then click on "View Reviewer Attachments" to access any detailed comments from the reviewer(s) that may have been included. 
+
+Include interactive data visualizations in your publication and let your readers interact and engage more closely with your research. Follow the instructions here: https://www.elsevier.com/authors/author-services/data-visualization to find out about available data visualization options and how to include them with your article.
+
+With best regards,
+
+Robert Klanner, Dr.
+Editor
+Nuclear Inst. and Methods in Physics Research, A
+
+NOTE: While submitting the revised manuscript, please double check the author names provided in the submission so that authorship related changes are made in the revision stage. Any authorship-related change after acceptance will involve approval from co-authors and respective editor handling the submission and this may cause a significant delay in publishing your manuscript.
+
+Reviewers' comments:
+
+
+
+
+
+
+
+
+
+
+
+Reviewer #1: Review report									18.03.2018
+
+Manuscript number NIMA-D-18-00070
+Title: Neutron Brilliance of the Liquid Deuterium Cold Source as measured from the ICON beamline at the Swiss Spallation Neutron Source SINQ
+Authors: R.M. Bergmann, M. Yamada et al.
+
+The article describes in a highly detailed way the experimental setup for a brilliance measurement of the cold neutron beam emitted by SINQ's cold source at the ICON beamline. The neutron source and the beamline have been modelled by MCNP. Several variations of the model based on different nuclear interaction databases and on different spin states of the D2 molecules in the cold source volume are described and finally, a measurement is compared with the result of the simulations.
+The paper is very well readable with a high level of precision in formulations and a high level of description of the detailed simulation procedures leading to the final model derived at the end of section 4. 
+The model spectrum is based on geometrical considerations based on the complete description of neutron source, thermal and cold moderator, and beamline. In addition, the sensitivity of the detector used has been calculated on the basis of the materials used and the geometry applied in the construction of the detector. Some uncertainties due to inconsistent nuclear interaction libraries, the filling ratio of the cold source volume (i.e. the volume fraction of gas bubbles in the boiling liquid deuterium), and the ratio between ortho-D2 and para-D2 are described. Unfortunately, the final choice of the model parameter in all three cases is based on abstract considerations and is not derived by analysis of the measurement.
+
+---> the point of the study is to validate the simulation model with a measurement.  The final state of the parameters is *not* based on abstract considerations, but set to what they are known to be from other means (temperature measurements, pressure measurements!).  The uncertainty of the states are included in the final simulation uncertainty.  The mean is set to the case that best matches the the state of the source.  This is stated in section 5.
+
+In section 5, one single measurement with quite poor statistical quality is presented and compared to the simulation data. There is a significant mismatch between simulation and measurement, especially in the wavelength range between 1.5 and 2.5 Å. This mismatch has not been discussed with respect to the parameters discussed in the simulation section. 
+What has not been taken into account is the scattering of the neutron beam in the polycrystalline window materials along the beamline. As can be seen in the description of the beamline published in NIMA 659 (2011), 387, Figure 2, the Bragg edges of the windows in the beamline clearly affect the spectrum, indicated by the dips in the blue curve at about e.g. 2.4 Å or 3.7 Å. It is generally known, that Bragg scattering from polycrystalline material in the beam reduces the neutron flux of the transmitted beam more for short wavelengths than for long wavelengths. This, together with the influence of the filling ratio plotted in figure 11 of the manuscript under review might explain the discrepancy observed at least partly.
+
+--->  this is not true.  The thermal scattering cross sections of all components in the neutron path are used.  This is stated in the first paragraph of section 4.  There is a realatively thick single crystal sapphire in the neutron path near the detectors that dominates the transmission spectrum.  Since this material does not have a sharp bragg edge, it smears out the other bragg edges.  The final spectrum is also smoothed, so again sharp edges will not be present.  However, I see that it is labelled as polycrystalline in section 2, item 4.  This is an error and it has been fixed.
+
+
+Some details that I would like to comment:
+*	In section 2, a 14 position long list with the components between neutron source and detector is given. It would be good to indicate all these numbers in the figures 1, 2, and 3 and the following text to make it easier for the reader to understand, what component the author just writes about.  **** DONE
+
+*	In figure 3, there are neutrons passing through the hole in the Cd plate from the Zapfen opening onto the detector without passing through the crossing point. Therefore, the MCNP description of the neutrons passing through the crossing point does not completely describe the neutrons that experimentally arrive at the detector position.  **** the crossing point describes the penumbra, which is the largest extent that the neutrons can pass through without passing through Cd.  This value was only used to calculate the solid angle visible to the detector, not used as a simulation of reality.  I've added text stating so in section .
+
+*	For the Fe and Cd shielding of the CCD detector described in l. 147 f. , it is not clear to me if Fe and Cd work as a neutron to photon converter for the entire photon sensitive CCD detector area, or if the layers are shielding and there is a hole inside, where the detector is then neutron sensitive.
+
+*	For the background treatment described in l. 142-147, it would be nice to have a measured spectrum up to 11.4 Å plotted to be able to get a feeling of the signal/noise ratio in the measurement. Unfortunately, all spectra presented end at 6 Å wavelength.
+
+*	l. 154: Typo - cold, not could.
+*	l. 277: The precision of the area given is nonsense. According to l. 73, the diameter of the hole is 1% precise, the precision (i.e. number of digits) of the area should be presented accordingly.
+*	In all simulated spectra presented in the figures 7 to 11, the spectrum is constant below 1 Å wavelength. This is unphysical and certainly not a result of the MCNP calculations.
+*	Caption of figure 10: The description of the upper part of the figure is missing, e.g. … and ortho/para ratio of D2 in the cold source volume calculated from this.
+*	l. 409: Typo - come, not comes.
+*	l. 435: Typo - life, not live.
+
+In conclusion, I appreciate very much the quality of the presentation in this manuscript. 
+Nevertheless, the amount of measured data presented is very low compared to the excessive simulation work done, and the quality of this measured data is weak. The open parameters in the simulation work have not been fitted based on experimental data. The only high-quality work presented here is the parameter variation within the MCNP simulations.
+As the scope of NIMA according to Elsevier's website is "… design, manufacturing and performance of scientific instruments…", I don't find the design of the cold source nor a description or analysis of the performance as the key contents of this manuscript. For this reason, I recommend to reject this paper.
+
+---> I contend that the results here provide a baseline for the performance and a place to start designing instrumental improvements based on the the validated MCNP model.
+
+
+
+
+
+
+
+
+
+
+
+
+Reviewer #2: The manuscript reports on the simulation and flux measurements of the cold source at the Swiss Spallation Neutron Source SINQ. A state of the art MCNP simulation has been carried out in order to describe the performance of the cold source in view of future changes and upgrades. The calculations are accompanied by flux measurements at the imaging beam line ICON that provides a sufficient access to measure the neutron flux as well as the energy spectrum. Even though the motivation for this investigation is rather restricted to the PSI, the systematic investigation with MCNP and discussion of systematic errors make this manuscript very valuable for publication and by this it is recommended to be published in NIMA.
+
+The challenge performing such study is to analyse carefully the experimental and systematic errors in order to conclude on possible deviations. The MCNP calculations described in detail take into account geometry, all components at the corresponding temperature and the physics of the D2O moderator (ortho-para ratio). The experimental work relies on a calibrated 3He-detector and no reference is given to complementary gold foil activation measurements. Such comparisons normally lead to uncertainties in the order of 10% of the absolute neutron flux. In view of such more realistic error, the given uncertainties in the manuscript should be revised. In general, values like for example in line 423: 8.97 +- 1.7 do not make sense it should read 9.0 +- 1.7. Same holds true for the 1 mm pinhole to 7.85398+10^-3 cm^2 in line 277 which does not correspond to the uncertainty given in line 73. The overall analysis of the flux determination and measurement, as presented here, cannot be more precise than 5 to 10%, which should be reflected in the error analysis throughout the text. 
+
+The deviation from MCNP to measured values of the brilliance spectra in figure 12 could not be explained in detail. This can be accepted as experimental fact and shows the limits of such kind of analysis.
+
+The manuscript must be revised to fix typing errors. For example: Figure caption 3 "was placed"; revise sentence from line 315 to 320, at the end something like "were taken into account" is missing;  line 372 "The … was a relatively" a word is missing; line 409 ".. should comes.." should be "should come"; line 452 skip "could".
+

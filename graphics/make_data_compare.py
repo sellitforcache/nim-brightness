@@ -593,12 +593,12 @@ this_tal2 = mctal('/home/l_bergmann/repos/ICON-brightness-parametric-24K-ike/res
 this_tal3 = mctal('/home/l_bergmann/repos/ICON-brightness-FINAL/ICON-final.mctal')
 this_tal4 = mctal('/home/l_bergmann/repos/ICON-brightness-FINAL/ICON-final-0.8den.mctal')
 
-wvl1 = to_wavelength(numpy.array(this_tal1.tallies[tal_num].energies[:-1]))
+wvl1 = to_wavelength(numpy.array(this_tal3.tallies[tal_num].energies[:-1]))
 avg1 = (wvl1[1:]+wvl1[:-1])/2.0
 widths1 = -1.0*numpy.diff(wvl1)
-dex   = this_tal1.tallies[tal_num]._hash(obj=0,cos=0)
-values1  = charge_per_milliamp*numpy.divide(this_tal1.tallies[tal_num].vals[dex]['data'][:-1],widths1*total_str)
-err1     =                     numpy.array( this_tal1.tallies[tal_num].vals[dex]['err' ][:-1])
+dex   = this_tal3.tallies[tal_num]._hash(obj=0,cos=0)
+values1  = charge_per_milliamp*numpy.divide(this_tal3.tallies[tal_num].vals[dex]['data'][:-1],widths1*total_str)
+err1     =                     numpy.array( this_tal3.tallies[tal_num].vals[dex]['err' ][:-1])
 for i in range(0,len(err1)):
 	err1[i] = numpy.linalg.norm([sa_err,err1[i]])
 values1_smooth = smooth(values1[:-1],window_len=smooth_int)
@@ -606,10 +606,10 @@ values1_smooth = values1_smooth[(smooth_int-1)/2:-(smooth_int-1)/2]
 
 
 
-sigma1 = numpy.sum((numpy.multiply(this_tal1.tallies[tal_num].vals[dex]['data'][:-1],this_tal1.tallies[tal_num].vals[dex]['err'][:-1])))
+sigma1 = numpy.sum((numpy.multiply(this_tal3.tallies[tal_num].vals[dex]['data'][:-1],this_tal3.tallies[tal_num].vals[dex]['err'][:-1])))
 
-print 'calc total err',sigma1/this_tal1.tallies[tal_num].vals[dex]['data'][-1]
-print 'reported total err',this_tal1.tallies[tal_num].vals[dex]['err' ][-1]
+print 'calc total err',sigma1/this_tal3.tallies[tal_num].vals[dex]['data'][-1]
+print 'reported total err',this_tal3.tallies[tal_num].vals[dex]['err' ][-1]
 
 
 wvl2 = to_wavelength(numpy.array(this_tal2.tallies[tal_num].energies[:-1]))
@@ -634,7 +634,7 @@ ax.plot(      meas_edge[3:]    ,          meas_normed[3:],     linewidth=2,label
 # plot error band for measurement
 ax.fill_between(meas_edge[3:],numpy.multiply(meas_normed,1.0+numpy.array(meas_err))[3:],numpy.multiply(meas_normed,1.0-numpy.array(meas_err))[3:], facecolor='blue', linewidth=1.0, color='blue', alpha=0.25,label=r'Measurement Total Error (1-$\sigma$)')
 # plot simulations
-make_steps(ax,wvl1[:-1],[0],values1[:-1],linewidth=2,color='r',label=r'MCNP 6.1, 98\% Density',options=['lin',smooth_string],linestyle='--')
+make_steps(ax,wvl1[:-1],[0],values1[:-1],linewidth=2,color='r',label=r'MCNP 6.1, 98\% Density',options=['lin'],linestyle='--')
 #make_steps(ax,wvl2,[0],values2,linewidth=2,label=r'MCNP 6.1, 80\% Density',options=['lin',smooth_string])
 #make_steps(ax,wvl3,[0],values3,linewidth=2,label=r'MCNP 6.1, 98\% density, new target',options=['lin',smooth_string])
 #make_steps(ax,wvl4,[0],values4,linewidth=2,label=r'MCNP 6.1, 80\% density, new target',options=['lin',smooth_string])

@@ -71,9 +71,9 @@ Some details that I would like to comment:
 *	l. 154: Typo - cold, not could.  **** DONE
 *	l. 277: The precision of the area given is nonsense. According to l. 73, the diameter of the hole is 1% precise, the precision (i.e. number of digits) of the area should be presented accordingly.
 *	In all simulated spectra presented in the figures 7 to 11, the spectrum is constant below 1 Å wavelength. This is unphysical and certainly not a result of the MCNP calculations.  *** YES, fixed
-*	Caption of figure 10: The description of the upper part of the figure is missing, e.g. … and ortho/para ratio of D2 in the cold source volume calculated from this.
-*	l. 409: Typo - come, not comes.
-*	l. 435: Typo - life, not live.
+*	Caption of figure 10: The description of the upper part of the figure is missing, e.g. … and ortho/para ratio of D2 in the cold source volume calculated from this. *** DONE
+*	l. 409: Typo - come, not comes. *** DONE
+*	l. 435: Typo - life, not live.  *** DONE
 
 In conclusion, I appreciate very much the quality of the presentation in this manuscript. 
 Nevertheless, the amount of measured data presented is very low compared to the excessive simulation work done, and the quality of this measured data is weak. The open parameters in the simulation work have not been fitted based on experimental data. The only high-quality work presented here is the parameter variation within the MCNP simulations.
@@ -98,5 +98,11 @@ The challenge performing such study is to analyse carefully the experimental and
 
 The deviation from MCNP to measured values of the brilliance spectra in figure 12 could not be explained in detail. This can be accepted as experimental fact and shows the limits of such kind of analysis.
 
-The manuscript must be revised to fix typing errors. For example: Figure caption 3 "was placed"; revise sentence from line 315 to 320, at the end something like "were taken into account" is missing;  line 372 "The … was a relatively" a word is missing; line 409 ".. should comes.." should be "should come"; line 452 skip "could".
+The manuscript must be revised to fix typing errors. For example: 
+
+Figure caption 3 "was placed";  *** DONE
+revise sentence from line 315 to 320, at the end something like "were taken into account" is missing;  *** DONE
+line 372 "The … was a relatively" a word is missing; *** DONE
+line 409 ".. should comes.." should be "should come";  *** DONE
+line 452 skip "could".  *** DONE
 

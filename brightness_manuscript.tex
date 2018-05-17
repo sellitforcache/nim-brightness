@@ -208,7 +208,7 @@ The layout of the experiment is shown in Figure \ref{fig:geom} as a horizontal c
 
 \begin{figure*}[ht!] 
   \centering
-    \includegraphics[width=0.9\textwidth]{graphics/geom_bw_labels-eps-converted-to.pdf}
+    \includegraphics[width=0.9\textwidth]{graphics/geom_bw_labels.eps}
      \caption{A horizontal cut through the MCNP simulation geometry showing the major items in the neutron path. \label{fig:geom} }
 \end{figure*}
 
@@ -216,7 +216,7 @@ Figure \ref{fig:det} shows a photograph of the $^3$He detector used in the TOF m
 
 \begin{figure}[h!] 
   \centering
-    \includegraphics[width=\columnwidth]{graphics/det-eps-converted-to.pdf}
+    \includegraphics[width=\columnwidth]{graphics/det.eps}
      \caption{$^3$He detector with iron collimator. \label{fig:det}}
 \end{figure}
 
@@ -247,7 +247,7 @@ Since brilliance was the goal of the measurement, the solid angle seen by the de
 
 \begin{figure}[h!] 
   \centering
-    \includegraphics[width=\columnwidth]{graphics/solid_angle-eps-converted-to.pdf}
+    \includegraphics[width=\columnwidth]{graphics/solid_angle.eps}
      \caption{The limiting collimation system in the measurement in the horizontal plane (not to scale), and the crossing point where the radiography tally was placed in the MCNP simulations to calculate the solid angle. \label{fig:solid_angle}}
 \end{figure}
 
@@ -317,19 +317,19 @@ In order to calculate the spectrum from the TOF data, the response curve, or eff
 \begin{figure}[h!] 
   \centering
     \includegraphics[width=\columnwidth]{graphics/{eff_2.3atm}.pdf}
-     \caption{The calculated efficiency curve. \label{fig:eff} }
+     \caption{The calculated efficiency curve for the $^3$He detector. \label{fig:eff} }
 \end{figure}
 
 
 \section{Monte Carlo Simulations}
 \label{sec:sim}
 
-Simulations were done with MCNP6.1 and with ENDF/B-VII.1 data.  Thermal scattering data for the room temperature sapphire crystals were used \cite{sapp}, as were 77 K thermal scattering data for beryllium, various data for ortho-/para-deuterium, 273 K data for heavy water, 273 K data for light water \cite{mcnp6}, and 293 K data for aluminum, and 25 K data for zirconium \cite{IKE}.  The aluminum and zirconium data are important for accurately simulating the transmission through the various hulls surrounding the deuterium in the cold source.  The overall model geometry has already been shown in Figure \ref{fig:geom}, and was created to be as true-to-life as possible with very high levels of detail in the cold source and cannelloni target.  The detailed plot of the cold source geometry is shown on the right side of Figure \ref{fig:target}.  The cannelloni target in use during the measurement was ``target 10'', which is shown in left side of Figure \ref{fig:target}. This target had a hemispherical beam entrance window and ``SINQ Target Irradiation Program'' (STIP) material irradiation samples within the target.  Both of these features reduce the neutron flux compared to the highest performing target and were modelled in the MCNP simulation.
+Simulations were done with MCNP6.1 and with ENDF/B-VII.1 data.  Thermal scattering data for the room temperature sapphire single crystals were used \cite{sapp}, as were 77 K thermal scattering data for beryllium, various data for ortho-/para-deuterium, 273 K data for heavy water, 273 K data for light water \cite{mcnp6}, and 293 K data for aluminum, and 25 K data for zirconium \cite{IKE}.  The aluminum and zirconium data are important for accurately simulating the transmission through the various hulls surrounding the deuterium in the cold source.  The overall model geometry has already been shown in Figure \ref{fig:geom}, and was created to be as true-to-life as possible with very high levels of detail in the cold source and cannelloni target.  The detailed plot of the cold source geometry is shown on the right side of Figure \ref{fig:target}.  The cannelloni target in use during the measurement was ``target 10'', which is shown in left side of Figure \ref{fig:target}. This target had a hemispherical beam entrance window and ``SINQ Target Irradiation Program'' (STIP) material irradiation samples within the target.  Both of these features reduce the neutron flux compared to the highest performing target and were modelled in the MCNP simulation.
 
 \begin{figure}[h!] 
   \centering
-    \includegraphics[width=0.25\columnwidth,trim={5cm 1cm 5cm 0cm},clip]{graphics/target-eps-converted-to.pdf}
-    \includegraphics[width=0.63\columnwidth,trim={0cm 0cm 0cm 0cm},clip]{graphics/cs_xy-eps-converted-to.pdf}
+    \includegraphics[width=0.25\columnwidth,trim={5cm 1cm 5cm 0cm},clip]{graphics/target.eps}
+    \includegraphics[width=0.63\columnwidth,trim={0cm 0cm 0cm 0cm},clip]{graphics/cs_xy.eps}
      \caption{LEFT: Vertical cross section of the cannelloni target geometry.  RIGHT:  Horizontal cross section of the cold source geometry of the MCNP model. The STIP samples are visible in the target model as brown, yellow, and blue rods.  The magenta colored rods in the target are filled with lead. \label{fig:target}}
 \end{figure}
 
@@ -346,11 +346,11 @@ Since the detector is very far away from the neutron source, special methods had
 
 Using a point detector would be a reasonable solution if only the calculated flux was desired, but the brilliance also depends on the viewable solid angle of the detector system.   The physical system responds to a view limited by the beamline components and cadmium aperture, and a regular point detector would integrate all visible contributions and wouldn't report any angular information needed for calculating the brilliance.  In order to calculate the solid angle visible to the $^3$He detector, a ``pinhole radiography tally'' was used in MCNP.  This tally calculates contributions the same way as a point detector, but it projects the contributions through the pinhole point onto a pre-defined image plane.  If such a pinhole detector is placed behind all the items which limit the detector view, the solid angle visible to the $^3$He detector can be calculated by summing the individual solid angle values each pixel of the pinhole image corresponds to.
 
-Figure \ref{fig:pinhole_image} shows a pinhole radiography tally image generated at the upstream surface of the cadmium sheet with the pinhole placed at the horizontal collimation crossing point.  The Zapfen limits the view on the horizontal plane, so the hole in the cadmium (grey) lines up with projection of the Zapfen (magenta).  The other limiting objects are also projected onto the image plane in Figure \ref{fig:pinhole_image} to show the areas where they limit the detector view. The projections from the limiting objects are shown as dashed colored lines.   
+Figure \ref{fig:pinhole_image} shows a pinhole radiography tally image generated at the upstream surface of the cadmium sheet with the pinhole placed at the horizontal collimation crossing point.  The Zapfen limits the view on the horizontal plane, so the hole in the cadmium (grey) lines up with projection of the Zapfen (magenta).  The other limiting objects are also projected onto the image plane in Figure \ref{fig:pinhole_image} to show the areas where they limit the detector view. The projections from the limiting objects are shown as dashed colored lines.   A tally at the crossing point was used to calculated the visible solid angle only.  The flux was calculated with the point detector in the center of the hole in the cadmium sheet.
 
 \begin{figure}[h!] 
   \centering
-    \includegraphics[width=\columnwidth]{graphics/pinhole-eps-converted-to.pdf}
+    \includegraphics[width=\columnwidth]{graphics/pinhole.eps}
      \caption{The flux image created by a pinhole radiography tally in MCNP at the horizontal collimation crossing point.  The image plane is at upstream surface of the cadmium sheet.  The outlines show the projections of the limiting geometry through the pinhole: Grey=cadmium hole, blue=beam port, magenta=Zapfen, yellow=Gd aperture.  Note, the flux values shown are those resulting from a pinhole-limited view (not the real, full view).  \label{fig:pinhole_image}}
 \end{figure}
 
@@ -371,7 +371,7 @@ To calculate an accurate neutron spectrum emitted from the liquid deuterium in t
 
 \begin{figure}[h!] 
   \centering
-    \includegraphics[width=\columnwidth]{graphics/data_compare_d2_reduced-eps-converted-to.pdf}
+    \includegraphics[width=\columnwidth]{graphics/data_compare_d2_reduced.eps}
      \caption{Simulated neutron spectra emitted from liquid deuterium cold source using various S($\alpha$,$\beta$) scattering data for D$_2$. \label{fig:data_compare_d2}}
 \end{figure}  
 
@@ -379,7 +379,7 @@ Bariloche also released improved thermal scattering data for light and heavy wat
 
 \begin{figure}[h!] 
   \centering
-    \includegraphics[width=\columnwidth]{graphics/data_compare_d2o_reduced-eps-converted-to.pdf}
+    \includegraphics[width=\columnwidth]{graphics/data_compare_d2o_reduced.eps}
      \caption{Simulated neutron spectra emitted from liquid deuterium cold source using the standard ENDF/B-VII.1 and the new Bariloche S($\alpha$,$\beta$) scattering data for the D$_2$O moderator.   \label{fig:data_compare_d2o}}
 \end{figure}
 
@@ -396,7 +396,7 @@ Other than the data themselves, the spectrum emitted from the cold source is als
 
 \begin{figure}[h!] 
   \centering
-    \includegraphics[width=\columnwidth]{graphics/density_compare_reduced-eps-converted-to.pdf}
+    \includegraphics[width=\columnwidth]{graphics/density_compare_reduced.eps}
      \caption{Simulated neutron spectra emitted from liquid deuterium cold source at various D$_2$ densities. ENDFB/VII.1 19 K scattering data and a o-D$_2$ fraction of 0.762 was used.   \label{fig:density_compare}}
 \end{figure}
 
@@ -406,7 +406,7 @@ With no other influences, the thermodynamic equilibrium fraction of ortho-D$_2$ 
 
 \begin{figure}[h!] 
   \centering
-    \includegraphics[width=\columnwidth]{graphics/p_current-eps-converted-to.pdf}
+    \includegraphics[width=\columnwidth]{graphics/p_current.eps}
      \caption{[TOP] The calculated ortho/para fraction of the cold source. [BOTTOM] The proton current history for SINQ in the weeks leading up to the measurement time. \label{fig:p_current}}
 \end{figure}
 
@@ -414,7 +414,7 @@ There is some uncertainty in this value, however, and Figure \ref{fig:op_compare
 
 \begin{figure}[h!] 
   \centering
-    \includegraphics[width=\columnwidth]{graphics/op_compare_reduced-eps-converted-to.pdf}
+    \includegraphics[width=\columnwidth]{graphics/op_compare_reduced.eps}
      \caption{Simulated neutron spectra emitted from liquid deuterium cold source at various ortho/para-D$_2$ ratios. ENDFB/VII.1 19 K scattering data and a D$_2$ density of 0.162 was used.   \label{fig:op_compare}}
 \end{figure}
 

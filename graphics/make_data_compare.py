@@ -185,7 +185,8 @@ def make_steps(ax,bins_in,avg_in,values_in,options=['log'],linewidth=1,color=Non
 			print "smoothing %d bins..."%wlen
 			#label = label + ' SMOOTHED %d BINS'%wlen
 			values = smooth(numpy.array(values),window_len=wlen)
-			values = values[(wlen-1)/2:-(wlen-1)/2]   # trim to original length
+			if wlen>1:
+				values = values[(wlen-1)/2:-(wlen-1)/2]   # trim to original length
 
 	### coarsen data?  parse format
 	for opt in options:
@@ -330,7 +331,7 @@ wvl = to_wavelength(numpy.array(this_tal.tallies[tal_num].energies[:-1]))
 index_xlims = numpy.multiply( wvl >= xlims[0] , wvl <= xlims[1] )
 
 
-smooth_int=11
+smooth_int=1
 smooth_string='smooth=%d'%smooth_int
 
 for case in cases:
@@ -602,7 +603,8 @@ err1     =                     numpy.array( this_tal3.tallies[tal_num].vals[dex]
 for i in range(0,len(err1)):
 	err1[i] = numpy.linalg.norm([sa_err,err1[i]])
 values1_smooth = smooth(values1[:-1],window_len=smooth_int)
-values1_smooth = values1_smooth[(smooth_int-1)/2:-(smooth_int-1)/2]
+if smooth_int>1:
+	values1_smooth = values1_smooth[(smooth_int-1)/2:-(smooth_int-1)/2]
 
 
 

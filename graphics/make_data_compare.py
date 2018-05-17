@@ -325,7 +325,7 @@ paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-24K-ike/resu
 
 # get index limits for sums
 tal_num = 5
-xlims = [0.75,11]
+xlims = [0.75,12]
 this_tal = mctal('/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case028.mctal')
 wvl = to_wavelength(numpy.array(this_tal.tallies[tal_num].energies[:-1]))
 index_xlims = numpy.multiply( wvl >= xlims[0] , wvl <= xlims[1] )

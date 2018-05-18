@@ -621,6 +621,21 @@ calc_err_neg = numpy.add(calc_err_neg,     op_err_neg[:-1])
 calc_err_neg = numpy.add(calc_err_neg, dendat_err_neg[:-1])
 calc_err_neg = numpy.add(calc_err_neg,  d2dat_err_neg[:-1])
 
+op_err_avg     = numpy.add(op_err_pos,op_err_neg)/2.
+dendat_err_avg = numpy.add(dendat_err_pos,dendat_err_neg)/2.
+d2dat_err_avg  = numpy.add(d2dat_err_pos,d2dat_err_neg)/2.
+
+
+calc_err_avg = err1[:-1]
+calc_err_avg = numpy.add(calc_err_avg,     op_err_avg[:-1])
+calc_err_avg = numpy.add(calc_err_avg, dendat_err_avg[:-1])
+calc_err_avg = numpy.add(calc_err_avg,  d2dat_err_avg[:-1])
+
+
+
+
+
+
 #
 #
 #
@@ -685,7 +700,11 @@ plt.show()
 total_param_err_calc=numpy.add(op_err_max, err1)
 total_param_err_calc=numpy.add(total_param_err_calc,d2dat_err_max)
 total_param_err_calc=numpy.add(total_param_err_calc,dendat_err_max)
-total_err_calc = numpy.sum(numpy.multiply(values1,total_param_err_calc))/numpy.sum(values1)
+#total_err_calc = numpy.sum(numpy.multiply(values1,total_param_err_calc))/numpy.sum(values1)
+total_err_calc = numpy.sum(numpy.multiply(values1[1:],calc_err_avg))/numpy.sum(values1[1:])
+
+
+
 
 # err
 total_err_exp  = numpy.sum(numpy.multiply(meas_normed,numpy.array(meas_err)))/numpy.sum(meas_normed)

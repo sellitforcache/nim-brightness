@@ -1,15 +1,14 @@
-#! /home/l_bergmann/anaconda2/bin/python -W ignore
+#! /usr/bin/env python
 
 #from pyne import mcnp, ace
 import math, os
 import pylab, numpy, sys, cPickle, copy
 import matplotlib.pyplot as plt
 from matplotlib import cm, gridspec, colors
-from MCNPtools.to_energy import to_energy
-from MCNPtools.to_temperature import to_temperature
-from MCNPtools.to_wavelength import to_wavelength
-from MCNPtools.mctal import mctal
-from MCNPtools.plot import plot
+from MCNPtools.to_energy		import to_energy
+from MCNPtools.to_temperature	import to_temperature
+from MCNPtools.to_wavelength	import to_wavelength
+from MCNPtools.mctal			import mctal
 import scipy.special
 import numpy.linalg
 import matplotlib.ticker as ticker
@@ -262,7 +261,7 @@ sa_err = 0.006
 measurement = [[],[],[]]#,[],[],[],[]]
 #f=open('/home/l_bergmann/Documents/nim-brightness/brightness_measurement_corrected2.csv','r')
 #f=open('/home/l_bergmann/Documents/nim-brightness/brightness_measurement_NEWEFF2.3.csv','r')
-f=open('/home/l_bergmann/Documents/nim-brightness/brightness_measurement_NEWEFF2.3_neweff.csv','r')
+f=open('../brightness_measurement_NEWEFF2.3_neweff.csv','r')
 for line in f:
 	nums = line.split(',')
 	try:
@@ -312,21 +311,21 @@ lines={}
 cases=[]
 cases.append('19 K, ENDF/B-VII.1')
 lines[cases[-1]]=[2,'-','r']
-paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case028.mctal'
+paths[cases[-1]]='./ICON-brightness-parametric-19K-std/results/case028.mctal'
 cases.append('19 K, CAB')
 lines[cases[-1]]=[2,'--','r']
-paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-bar/results/case028.mctal'
+paths[cases[-1]]='./ICON-brightness-parametric-19K-bar/results/case028.mctal'
 cases.append('23 K, CAB')
 lines[cases[-1]]=[1,'-','b']
-paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-23K-bar/results/case028.mctal'
+paths[cases[-1]]='./ICON-brightness-parametric-23K-bar/results/case028.mctal'
 cases.append('24 K, IKE')
 lines[cases[-1]]=[1,'--','b']
-paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-24K-ike/results/case028.mctal'
+paths[cases[-1]]='./ICON-brightness-parametric-24K-ike/results/case028.mctal'
 
 # get index limits for sums
 tal_num = 5
 xlims = [0.75,12]
-this_tal = mctal('/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case028.mctal')
+this_tal = mctal('./ICON-brightness-parametric-19K-std/results/case028.mctal')
 wvl = to_wavelength(numpy.array(this_tal.tallies[tal_num].energies[:-1]))
 index_xlims = numpy.multiply( wvl >= xlims[0] , wvl <= xlims[1] )
 
@@ -580,7 +579,21 @@ for i in range(0,len(b1)):
 	op_err_neg.append(abs(min( err_1 ,      err_2 )))
 	op_err_max.append(max( abs(err_1) , abs(err_2) ))
 
+#
+#
+# calculate the error bands from all sources
+#
+#
 
+calc_err_pos = err1[:-1]
+calc_err_pos = numpy.add(calc_err_pos,     op_err_pos[:-1])
+calc_err_pos = numpy.add(calc_err_pos, dendat_err_pos[:-1])
+calc_err_pos = numpy.add(calc_err_pos,  d2dat_err_pos[:-1])
+
+calc_err_neg = err1[:-1]
+calc_err_neg = numpy.add(calc_err_neg,     op_err_neg[:-1])
+calc_err_neg = numpy.add(calc_err_neg, dendat_err_neg[:-1])
+calc_err_neg = numpy.add(calc_err_neg,  d2dat_err_neg[:-1])
 
 #
 #
@@ -641,7 +654,7 @@ make_steps(ax,wvl1[:-1],[0],values1[:-1],linewidth=2,color='r',label=r'MCNP 6.1,
 #make_steps(ax,wvl3,[0],values3,linewidth=2,label=r'MCNP 6.1, 98\% density, new target',options=['lin',smooth_string])
 #make_steps(ax,wvl4,[0],values4,linewidth=2,label=r'MCNP 6.1, 80\% density, new target',options=['lin',smooth_string])
 # plot error band for best guess case
-ax.fill_between(avg1[:-1],   numpy.multiply(values1_smooth, (1.0+numpy.add(err1[:-1], op_err_pos[:-1]) )),   numpy.multiply(values1_smooth, (1.0- numpy.add(err1[:-1],op_err_neg[:-1])))  , facecolor='red', linewidth=1.0, color='red', alpha=0.25,label=r'Simulation Total Error (1-$\sigma$)')
+ax.fill_between(avg1[:-1],   numpy.multiply(values1_smooth, (1.0+calc_err_pos )),   numpy.multiply(values1_smooth, (1.0- calc_err_pos ))  , facecolor='red', linewidth=1.0, color='red', alpha=0.25,label=r'Simulation Total Error (1-$\sigma$)')
 
 
 #ax.set_title(r'24 K IKE, 0.762 o-D$_2$') #0.130 g/cm$^3$ D$_2$,

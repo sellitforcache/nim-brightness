@@ -580,21 +580,6 @@ for i in range(0,len(b1)):
 	op_err_neg.append(abs(min( err_1 ,      err_2 )))
 	op_err_max.append(max( abs(err_1) , abs(err_2) ))
 
-#
-#
-# calculate the error bands from all sources
-#
-#
-
-calc_err_pos = err1[:-1]
-calc_err_pos = numpy.add(calc_err_pos,     op_err_pos[:-1])
-calc_err_pos = numpy.add(calc_err_pos, dendat_err_pos[:-1])
-calc_err_pos = numpy.add(calc_err_pos,  d2dat_err_pos[:-1])
-
-calc_err_neg = err1[:-1]
-calc_err_neg = numpy.add(calc_err_neg,     op_err_neg[:-1])
-calc_err_neg = numpy.add(calc_err_neg, dendat_err_neg[:-1])
-calc_err_neg = numpy.add(calc_err_neg,  d2dat_err_neg[:-1])
 
 #
 #
@@ -620,12 +605,32 @@ values1_smooth = smooth(values1[:-1],window_len=smooth_int)
 if smooth_int>1:
 	values1_smooth = values1_smooth[(smooth_int-1)/2:-(smooth_int-1)/2]
 
+#
+#
+# calculate the error bands from all sources
+#
+#
 
+calc_err_pos = err1[:-1]
+calc_err_pos = numpy.add(calc_err_pos,     op_err_pos[:-1])
+calc_err_pos = numpy.add(calc_err_pos, dendat_err_pos[:-1])
+calc_err_pos = numpy.add(calc_err_pos,  d2dat_err_pos[:-1])
+
+calc_err_neg = err1[:-1]
+calc_err_neg = numpy.add(calc_err_neg,     op_err_neg[:-1])
+calc_err_neg = numpy.add(calc_err_neg, dendat_err_neg[:-1])
+calc_err_neg = numpy.add(calc_err_neg,  d2dat_err_neg[:-1])
+
+#
+#
+#
+#
 
 sigma1 = numpy.sum((numpy.multiply(this_tal3.tallies[tal_num].vals[dex]['data'][:-1],this_tal3.tallies[tal_num].vals[dex]['err'][:-1])))
 
-print 'calc total err',sigma1/this_tal3.tallies[tal_num].vals[dex]['data'][-1]
+print 'calc total statistical err',sigma1/this_tal3.tallies[tal_num].vals[dex]['data'][-1]
 print 'reported total err',this_tal3.tallies[tal_num].vals[dex]['err' ][-1]
+
 
 
 wvl2 = to_wavelength(numpy.array(this_tal2.tallies[tal_num].energies[:-1]))

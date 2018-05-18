@@ -614,12 +614,12 @@ if smooth_int>1:
 calc_err_pos = err1[:-1]
 calc_err_pos = numpy.add(calc_err_pos,     op_err_pos[:-1])
 calc_err_pos = numpy.add(calc_err_pos, dendat_err_pos[:-1])
-calc_err_pos = numpy.add(calc_err_pos,  d2dat_err_pos[:-1])
+#calc_err_pos = numpy.add(calc_err_pos,  d2dat_err_pos[:-1])
 
 calc_err_neg = err1[:-1]
 calc_err_neg = numpy.add(calc_err_neg,     op_err_neg[:-1])
 calc_err_neg = numpy.add(calc_err_neg, dendat_err_neg[:-1])
-calc_err_neg = numpy.add(calc_err_neg,  d2dat_err_neg[:-1])
+#calc_err_neg = numpy.add(calc_err_neg,  d2dat_err_neg[:-1])
 
 op_err_avg     = numpy.add(op_err_pos,op_err_neg)/2.
 dendat_err_avg = numpy.add(dendat_err_pos,dendat_err_neg)/2.

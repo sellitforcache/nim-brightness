@@ -5,10 +5,11 @@ import math, os
 import pylab, numpy, sys, cPickle, copy
 import matplotlib.pyplot as plt
 from matplotlib import cm, gridspec, colors
-from MCNPtools.to_energy		import to_energy
-from MCNPtools.to_temperature	import to_temperature
-from MCNPtools.to_wavelength	import to_wavelength
-from MCNPtools.mctal			import mctal
+from MCNPtools.to_energy import to_energy
+from MCNPtools.to_temperature import to_temperature
+from MCNPtools.to_wavelength import to_wavelength
+from MCNPtools.mctal import mctal
+from MCNPtools.plot import plot
 import scipy.special
 import numpy.linalg
 import matplotlib.ticker as ticker
@@ -261,7 +262,7 @@ sa_err = 0.006
 measurement = [[],[],[]]#,[],[],[],[]]
 #f=open('/home/l_bergmann/Documents/nim-brightness/brightness_measurement_corrected2.csv','r')
 #f=open('/home/l_bergmann/Documents/nim-brightness/brightness_measurement_NEWEFF2.3.csv','r')
-f=open('../brightness_measurement_NEWEFF2.3_neweff.csv','r')
+f=open('/home/l_bergmann/Documents/nim-brightness/brightness_measurement_NEWEFF2.3_neweff.csv','r')
 for line in f:
 	nums = line.split(',')
 	try:
@@ -311,21 +312,21 @@ lines={}
 cases=[]
 cases.append('19 K, ENDF/B-VII.1')
 lines[cases[-1]]=[2,'-','r']
-paths[cases[-1]]='./ICON-brightness-parametric-19K-std/results/case028.mctal'
+paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case028.mctal'
 cases.append('19 K, CAB')
 lines[cases[-1]]=[2,'--','r']
-paths[cases[-1]]='./ICON-brightness-parametric-19K-bar/results/case028.mctal'
+paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-19K-bar/results/case028.mctal'
 cases.append('23 K, CAB')
 lines[cases[-1]]=[1,'-','b']
-paths[cases[-1]]='./ICON-brightness-parametric-23K-bar/results/case028.mctal'
+paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-23K-bar/results/case028.mctal'
 cases.append('24 K, IKE')
 lines[cases[-1]]=[1,'--','b']
-paths[cases[-1]]='./ICON-brightness-parametric-24K-ike/results/case028.mctal'
+paths[cases[-1]]='/home/l_bergmann/repos/ICON-brightness-parametric-24K-ike/results/case028.mctal'
 
 # get index limits for sums
 tal_num = 5
 xlims = [0.75,12]
-this_tal = mctal('./ICON-brightness-parametric-19K-std/results/case028.mctal')
+this_tal = mctal('/home/l_bergmann/repos/ICON-brightness-parametric-19K-std/results/case028.mctal')
 wvl = to_wavelength(numpy.array(this_tal.tallies[tal_num].energies[:-1]))
 index_xlims = numpy.multiply( wvl >= xlims[0] , wvl <= xlims[1] )
 
